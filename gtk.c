@@ -134,6 +134,8 @@ int main (int argc, char *argv[]) {
 
   // Set GTK backend to Mir
   setenv("GDK_BACKEND", "mir", 1);
+  // MIR_SOCKET=/run/user/32011/mir_socket
+  setenv("MIR_SOCKET", "/run/user/32011/wayland-0", 1);
 
   // Show GTK debugging messages
   setenv("GTK_DEBUG", "actions,builder,geometry,icontheme,keybindings,misc,modules,plugsocket,pixel-cache,printing,size-request,text,tree", 1);
