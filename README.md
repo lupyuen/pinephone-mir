@@ -5,13 +5,34 @@ Experiments with Wayland and Mir display server on PinePhone with Ubuntu Touch
 
 Assume that we have built the `gtk` app by running [`gtk.sh`](gtk.sh)
 
+We shall replace the File Manager app by `strace gtk` because it has no AppArmor restrictions (i.e. the app is Unconfined)...
+
+From `/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.apparmor`
+
+```
+{
+    "policy_version": 16.04,
+    "template": "unconfined",
+    "policy_groups": []
+}
+```
+
+Here are the steps...
+
 ```bash
 sudo bash
+
+mount -o remount,rw /
+
 cd /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+
+# Back up the desktop file
+cp com.ubuntu.filemanager.desktop com.ubuntu.filemanager.desktop.old
+
 nano com.ubuntu.filemanager.desktop 
 ```
 
-Change the `Exec` line to:
+Change the `Exec` line to...
 
 ```
 Exec=./run.sh
@@ -24,11 +45,13 @@ Create `run.sh`:
 ./strace ./gtk
 ```
 
-Copy `strace`, `gtk` and set permissions:
+Copy `strace`, `gtk` and set ownership...
 
 ```bash
 cp /usr/bin/strace .
+
 cp /home/phablet/pinephone-mir/gtk .
+
 chown clickpkg:clickpkg strace gtk run.sh
 ```
 
