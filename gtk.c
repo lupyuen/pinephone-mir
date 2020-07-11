@@ -130,11 +130,12 @@ int main (int argc, char *argv[]) {
   setenv("DCONF_PROFILE", "/tmp/camera-dconf", 1);
 
   // Set GTK backend to Wayland
+  // Default GTK socket: /run/user/32011/wayland-0
   // setenv("GDK_BACKEND", "wayland", 1);
 
   // Set GTK backend to Mir
-  setenv("GDK_BACKEND", "mir", 1);
   // Default Mir socket: /run/user/32011/mir_socket
+  // setenv("GDK_BACKEND", "mir", 1);
   // setenv("MIR_SOCKET", "/run/user/32011/mir_socket", 1);
 
   // Show GTK debugging messages
