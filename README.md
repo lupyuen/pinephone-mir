@@ -1,5 +1,5 @@
 # pinephone-mir
-Experiments with Mir display server on PinePhone with UbuntuTouch
+Experiments with Wayland and Mir display server on PinePhone with Ubuntu Touch
 
 ## How to run `strace` on the `gtk` app
 
@@ -34,4 +34,6 @@ Tap on File Manager icon on PinePhone.
 
 Check Logview for the `strace` log.
 
-Or look at /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+Or look at:
+
+`/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
