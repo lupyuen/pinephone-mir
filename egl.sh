@@ -5,7 +5,9 @@ gcc \
     -lwayland-client \
     -lwayland-server \
     -lwayland-egl \
-    -L/usr/lib/aarch64-linux-gnu/mesa-egl -lEGL \
+    -L/usr/lib/aarch64-linux-gnu/mesa-egl \
+    -lEGL \
+    -lGLESv2 \
     -Wl,-Map=egl.map
 
 sudo mount -o remount,rw /
