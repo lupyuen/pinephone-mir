@@ -7,7 +7,7 @@
 #include <wayland-client-protocol.h>
 #include <wayland-egl.h>
 #include <EGL/egl.h>
-// #include <GLES2/gl2.h>
+//  #include <GLES2/gl2.h>
 
 struct wl_display *display = NULL;
 struct wl_compositor *compositor = NULL;
@@ -83,11 +83,9 @@ create_window() {
 	fprintf(stderr, "Made current failed\n");
     }
 
-    /*
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glFlush();
-    */
 
     if (eglSwapBuffers(egl_display, egl_surface)) {
 	fprintf(stderr, "Swapped buffers\n");
