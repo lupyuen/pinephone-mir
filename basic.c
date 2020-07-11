@@ -95,7 +95,7 @@ int demo_client(const char* server, int buffer_swap_count)
 
     ///\internal [connect_tag]
     // Call mir_connect and wait for callback to complete.
-    mir_wait_for(mir_connect(server, "com.ubuntu.camera_camera_3.1.3", connection_callback, &mcd));
+    mir_wait_for(mir_connect(server, "com.ubuntu.camera_camera", connection_callback, &mcd));
     puts("Connected");
     ///\internal [connect_tag]
 
