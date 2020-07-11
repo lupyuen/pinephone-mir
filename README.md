@@ -15,7 +15,7 @@ We shall replace the File Manager app by `strace gtk` because it has no AppArmor
 }
 ```
 
-Here are the steps...
+Connect to PinePhone over SSH and run these commands...
 
 ```bash
 sudo bash
