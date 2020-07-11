@@ -5,9 +5,7 @@ Experiments with Wayland and Mir display server on PinePhone with Ubuntu Touch
 
 Assume that we have built the `gtk` app by running [`gtk.sh`](gtk.sh)
 
-We shall replace the File Manager app by `strace gtk` because it has no AppArmor restrictions (i.e. the app is Unconfined)...
-
-From `/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.apparmor`
+We shall replace the File Manager app by `strace gtk` because it has no AppArmor restrictions (Unconfined) according to `/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.apparmor`...
 
 ```
 {
@@ -38,7 +36,9 @@ Change the `Exec` line to...
 Exec=./run.sh
 ```
 
-Create `run.sh`:
+Save and exit `nano`
+
+Create `run.sh` with `nano`, containing:
 
 ```bash
 #!/bin/bash
@@ -55,9 +55,9 @@ cp /home/phablet/pinephone-mir/gtk .
 chown clickpkg:clickpkg strace gtk run.sh
 ```
 
-Tap on File Manager icon on PinePhone.
+Tap on File Manager icon on PinePhone to start the `strace`
 
-Check Logview for the `strace` log.
+Check the `strace` log in Logviewer under `v0.7.5 filemanager`
 
 Or look at:
 
