@@ -198,7 +198,8 @@ int demo_client(const char* server, int buffer_swap_count)
 int main(int argc, char* argv[])
 {
     // Some variables for holding command line options
-    char const *server = NULL;
+    // MIR_SERVER_NAME=session-0
+    char const *server = "session-0";
     int buffer_swap_count = 0;
 
     // Parse the command line
