@@ -133,7 +133,7 @@ int main (int argc, char *argv[]) {
   // setenv("GDK_BACKEND", "wayland", 1);
 
   // Set GTK backend to Mir
-  // setenv("GDK_BACKEND", "mir", 1);
+  setenv("GDK_BACKEND", "mir", 1);
 
   // Show GTK debugging messages
   setenv("GTK_DEBUG", "actions,builder,geometry,icontheme,keybindings,misc,modules,plugsocket,pixel-cache,printing,size-request,text,tree", 1);
