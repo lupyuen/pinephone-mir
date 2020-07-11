@@ -1,4 +1,31 @@
-//  Based on https://jan.newmarch.name/Wayland/EGL/
+/* Simple EGL Wayland App that draws a yellow square on PinePhone with Ubuntu Touch
+To build and run:
+
+gcc \
+    -o egl \
+    egl.c \
+    -lwayland-client \
+    -lwayland-server \
+    -lwayland-egl \
+    -L/usr/lib/aarch64-linux-gnu/mesa-egl \
+    -lEGL \
+    /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 \
+    -Wl,-Map=egl.map
+
+sudo mount -o remount,rw /
+sudo cp egl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
+ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
+
+echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
+tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
+
+Press Ctrl-C to stop the log.
+
+To kill the app:
+pkill camera-app
+
+Based on https://jan.newmarch.name/Wayland/EGL/
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -84,6 +111,7 @@ create_window() {
 	fprintf(stderr, "Made current failed\n");
     }
 
+    // Draw a yellow square
     glClearColor(1.0, 1.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glFlush();
