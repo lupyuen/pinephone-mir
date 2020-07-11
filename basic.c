@@ -230,3 +230,8 @@ int main(int argc, char* argv[])
 
     return demo_client(server, buffer_swap_count);
 }
+
+/* Output:
++++ pkg-config --libs --cflags mirclient
+++ gcc -o basic -pthread -I/usr/include/mirclient -I/usr/include/mircookie -I/usr/include/mircore -lmirclient -lmircore basic.c
+*/

@@ -1,2 +1,7 @@
 set -e -x
-gcc -o basic `pkg-config --libs --cflags mirclient` basic.c
+
+gcc \
+    -g \
+    -o basic \
+    basic.c \
+    `pkg-config --libs --cflags mirclient`
