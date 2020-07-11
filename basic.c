@@ -65,18 +65,21 @@ typedef struct MirDemoState
 // Callback to update MirDemoState on connection
 static void connection_callback(MirConnection *new_connection, void *context)
 {
+    puts("Connect callback");
     ((MirDemoState*)context)->connection = new_connection;
 }
 
 // Callback to update MirDemoState on surface_create
 static void surface_create_callback(MirSurface *new_surface, void *context)
 {
+    puts("Surface create callback");
     ((MirDemoState*)context)->surface = new_surface;
 }
 
 // Callback to update MirDemoState on surface_release
 static void surface_release_callback(MirSurface *old_surface, void *context)
 {
+    puts("Surface release callback");
     (void)old_surface;
     ((MirDemoState*)context)->surface = 0;
 }
@@ -92,7 +95,7 @@ int demo_client(const char* server, int buffer_swap_count)
 
     ///\internal [connect_tag]
     // Call mir_connect and wait for callback to complete.
-    mir_wait_for(mir_connect(server, __FILE__, connection_callback, &mcd));
+    mir_wait_for(mir_connect(server, "com.ubuntu.camera_camera_3.1.3", connection_callback, &mcd));
     puts("Connected");
     ///\internal [connect_tag]
 
