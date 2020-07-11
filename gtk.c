@@ -1,4 +1,4 @@
-/* Simple GTK3 App for Ubuntu Touch on PinePhone
+/* Simple GTK3 App for Ubuntu Touch on PinePhone (Not working yet)
 (1) Make a copy of the camera app:
 
 cp /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app $HOME
