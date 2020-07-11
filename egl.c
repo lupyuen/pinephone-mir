@@ -1,3 +1,4 @@
+//  Based on https://jan.newmarch.name/Wayland/EGL/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
