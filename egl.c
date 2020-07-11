@@ -1,6 +1,10 @@
 /* Simple EGL Wayland App that draws a yellow square on PinePhone with Ubuntu Touch
 To build and run on PinePhone via SSH:
 
+# Make a copy of the camera app
+cp /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app $HOME
+
+# Build the Wayland app
 gcc \
     -o egl \
     egl.c \
@@ -12,10 +16,12 @@ gcc \
     /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 \
     -Wl,-Map=egl.map
 
+# Replace the camera app
 sudo mount -o remount,rw /
 sudo cp egl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
 ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
 
+# Monitor the log
 echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
 tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
 
