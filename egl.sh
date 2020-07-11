@@ -5,7 +5,7 @@ gcc \
     -lwayland-client \
     -lwayland-server \
     -lwayland-egl \
-    -Lmesa-egl -lEGL \
+    -Lmesa-egl -lmesa-egl/EGL \
     -Wl,-Map=egl.map
 
 sudo mount -o remount,rw /
