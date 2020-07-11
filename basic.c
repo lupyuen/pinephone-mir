@@ -204,8 +204,7 @@ int main(int argc, char* argv[])
     // MIR_SERVER_WAYLAND_HOST=/tmp/wayland-root
     // MIR_SERVER_NAME=session-0
     // MIR_SOCKET=/run/user/32011/mir_socket
-    // char const *server = "/run/user/32011/wayland-0";
-    char const *server = "/tmp/wayland-root";
+    char const *server = "/run/user/32011/wayland-0";
     int buffer_swap_count = 0;
 
     // Parse the command line
