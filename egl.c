@@ -1,5 +1,5 @@
 /* Simple EGL Wayland App that draws a yellow square on PinePhone with Ubuntu Touch
-To build and run:
+To build and run on PinePhone via SSH:
 
 gcc \
     -o egl \
@@ -18,6 +18,8 @@ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-a
 
 echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
 tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
+
+Tap the Camera icon on PinePhone to launch the app.
 
 Press Ctrl-C to stop the log.
 
@@ -237,3 +239,36 @@ int main(int argc, char **argv) {
     
     exit(0);
 }
+
+/* Output:
+++ gcc -o egl egl.c -lwayland-client -lwayland-server -lwayland-egl -L/usr/lib/aarch64-linux-gnu/mesa-egl -lEGL /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 -Wl,-Map=egl.map
+++ sudo mount -o remount,rw /
+++ sudo cp egl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
+++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
+-rwxr-xr-x 1 clickpkg clickpkg 20568 Jul 12 03:27 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
+++ echo
+++ tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
+
+connected to display
+Got a registry event for wl_drm id 1
+Got a registry event for qt_windowmanager id 2
+Got a registry event for wl_compositor id 3
+Got a registry event for wl_subcompositor id 4
+Got a registry event for wl_seat id 5
+Got a registry event for wl_output id 6
+Got a registry event for wl_data_device_manager id 7
+Got a registry event for wl_shell id 8
+Got a registry event for zxdg_shell_v6 id 9
+Got a registry event for xdg_wm_base id 10
+Got a registry event for wl_shm id 11
+Found compositor and shell
+Created surface
+Created egl display
+EGL major: 1, minor 4
+EGL has 14 configs
+Buffer size for config 0 is 24
+Red size for config 0 is 8
+Created egl window
+Made current
+Swapped buffers
+*/
