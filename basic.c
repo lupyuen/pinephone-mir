@@ -198,8 +198,10 @@ int demo_client(const char* server, int buffer_swap_count)
 int main(int argc, char* argv[])
 {
     // Some variables for holding command line options
+    // MIR_SERVER_WAYLAND_HOST=/tmp/wayland-root
     // MIR_SERVER_NAME=session-0
-    char const *server = "session-0";
+    // MIR_SOCKET=/run/user/32011/mir_socket
+    char const *server = "/run/user/32011/mir_socket";
     int buffer_swap_count = 0;
 
     // Parse the command line
