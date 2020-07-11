@@ -1,7 +1,7 @@
 # pinephone-mir
 Experiments with Mir display server on PinePhone with UbuntuTouch
 
-## How to run `strace` on apps
+## How to run `strace` on the `gtk` app
 
 ```bash
 sudo bash
