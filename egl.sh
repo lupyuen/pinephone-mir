@@ -7,7 +7,7 @@ gcc \
     -lwayland-egl \
     -L/usr/lib/aarch64-linux-gnu/mesa-egl \
     -lEGL \
-    -lGLESv2 \
+    -lGLESv2.so.2 \
     -Wl,-Map=egl.map
 
 sudo mount -o remount,rw /
