@@ -359,7 +359,7 @@ recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\31\0\0\0\0\0\10\0\27\0\0\0\0\0\f\0\
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
 ```
 
-## `unity-system-compositor`
+## Wayland Compositor for Ubuntu Touch: `unity-system-compositor`
 
 TODO
 
