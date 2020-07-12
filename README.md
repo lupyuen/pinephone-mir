@@ -77,7 +77,7 @@ Or look in:
 
     - [`strace` Log](logs/gtk-strace.log)
 
-    - Crashes with a Segmentation Fault. Now investigating.
+    - Crashes with a Segmentation Fault. Now investigating with GDB. (See next section)
 
 1. File Manager App
 
