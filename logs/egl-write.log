@@ -1,0 +1,22 @@
+write(1, "connected to display\n", 21connected to display
+write(1, "Got a registry event for wl_drm id 1\n", 37Got a registry event for wl_drm id 1
+write(1, "Got a registry event for qt_windowmanager id 2\n", 47Got a registry event for qt_windowmanager id 2
+write(1, "Got a registry event for wl_compositor id 3\n", 44Got a registry event for wl_compositor id 3
+write(1, "Got a registry event for wl_subcompositor id 4\n", 47Got a registry event for wl_subcompositor id 4
+write(1, "Got a registry event for wl_seat id 5\n", 38Got a registry event for wl_seat id 5
+write(1, "Got a registry event for wl_output id 6\n", 40Got a registry event for wl_output id 6
+write(1, "Got a registry event for wl_data_device_manager id 7\n", 53Got a registry event for wl_data_device_manager id 7
+write(1, "Got a registry event for wl_shell id 8\n", 39Got a registry event for wl_shell id 8
+write(1, "Got a registry event for zxdg_shell_v6 id 9\n", 44Got a registry event for zxdg_shell_v6 id 9
+write(1, "Got a registry event for xdg_wm_base id 10\n", 43Got a registry event for xdg_wm_base id 10
+write(1, "Got a registry event for wl_shm id 11\n", 38Got a registry event for wl_shm id 11
+write(2, "Found compositor and shell\n", 27Found compositor and shell
+write(2, "Created surface\n", 16Created surface
+write(2, "Created egl display\n", 20Created egl display
+write(1, "EGL major: 1, minor 4\n", 22EGL major: 1, minor 4
+write(1, "EGL has 14 configs\n", 19EGL has 14 configs
+write(1, "Buffer size for config 0 is 24\n", 31Buffer size for config 0 is 24
+write(1, "Red size for config 0 is 8\n", 27Red size for config 0 is 8
+write(2, "Created egl window\n", 19Created egl window
+write(2, "Made current\n", 13Made current
+write(2, "Swapped buffers\n", 16Swapped buffers
