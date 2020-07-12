@@ -219,7 +219,7 @@ wl_shm\0\0\1\0\0\0\3\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\3\0\0\0", 4096}],
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 400
 ```
 
-Wayland Server returns a list of Registry Objects defined in the server: `wl_drm`, `qt_windowmanager`, ..., `wl_shm`
+Wayland Server returns a list of Registry Objects defined in the server: `wl_drm`, `qt_windowmanager`, `wl_compositor`, `wl_subcompositor`, `wl_seat`, `wl_output`, `wl_data_device_manager`, `wl_shell`, `zxdg_shell_v6`, `xdg_wm_base` and `wl_shm`
 
 ```
 sendmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0(\0\3\0\0\0\16\0\0\0
@@ -244,7 +244,9 @@ seat0\0\0\0\r\0\0\0\0\0\f\0
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 220
 ```
 
-Wayland Server returns `Fake manufacturer` and `Fake model`
+Wayland Server returns `Fake manufacturer`, `Fake model` and `seat0`
+
+The `gtk` app crashes shortly after this.
 
 ## Wayland Messages for `egl` App
 
@@ -286,11 +288,19 @@ zxdg_shell_v6\0\0\0\1\0\0\0\10\0\0\0\0\0 \0\n\0\0\0\f\0\0\0
 xdg_wm_base\0\1\0\0\0\10\0\0\0\0\0\34\0\v\0\0\0\7\0\0\0
 wl_shm\0\0\1\0\0\0\t\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3696}, {"", 400}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 400
+```
 
+Wayland Server returns the list of Registry Objects defined in the server (same as above)
+
+```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\10\0\0\0\0\0 \0\1\0\0\0\7\0\0\0
 wl_drm\0\0\2\0\0\0\n\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0", 44}], 
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 44
+```
 
+`egl` app connects to `wl_drm`, the Wayland Direct Rendering Manager.
+
+```
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\n\0\0\0\0\0\34\0\17\0\0\0
 /dev/dri/card1\0\0\n\0\0\0\1\0\f\0
 AR24\n\0\0\0\1\0\f\0
@@ -305,7 +315,11 @@ NV12\n\0\0\0\1\0\f\0
 NV16\n\0\0\0\1\0\f\0
 YUYV\n\0\0\0\3\0\f\0\1\0\0\0\t\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3296}, {"", 800}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 196
+```
 
+Wayland Server returns the Linux Display Device `/dev/dri/card1` and the supported colour encoding schemes.
+
+```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\n\0\0\0\0\0\f\0\4\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0", 24}], 
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
 
@@ -344,13 +358,21 @@ wl_output\0\0\0\2\0\0\0\10\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0\2\0\0\0\0\0000\0\7\0\0\
 wl_data_device_manager\0\0\1\0\0\0\n\0\0\0\n\0\0\0\1\0\20\0\v\0\0\0\7\0\0\0\2\0\0\0\0\0 \0\v\0\0\0\7\0\0\0
 wl_shm\0\0\1\0\0\0\f\0\0\0", 304}], 
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 304
+```
 
+File Manager connects to `qt_windowmanager` (because it's a Qt app), `wl_compositor`, `wl_subcompositor`, `wl_seat`, `wl_output`, `wl_data_device_manager` and `wl_shm`
+
+```
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\7\0\0\0\0\0\f\0\7\0\0\0\7\0\0\0\1\0\24\0\6\0\0\0
 seat0\0\0\0\10\0\0\0\0\0H\0\0\0\0\0\0\0\0\0D\0\0\0\210\0\0\0\0\0\0\0\22\0\0\0
 Fake manufacturer\0\0\0\v\0\0\0
 Fake model\0\0\0\0\0\0\10\0\0\0\1\0\30\0\3\0\0\0\320\2\0\0\240\5\0\0)\2\0\0\10\0\0\0\3\0\f\0\1\0\0\0\10\0\0\0\2\0\10\0\t\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0\f\0\0\0\0\0\f\0\0\0\0\0\f\0\0\0\0\0\f\0\1\0\0\0", 3696}, {"", 400}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 196
+```
 
+Wayland Server also returns `seat0`, `Fake manufacturer`, `Fake model` to File Manager.
+
+```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\7\0\0\0\1\0\f\0\3\0\0\0\7\0\0\0\0\0\f\0\r\0\0\0\5\0\0\0\0\0\f\0\16\0\0\0\7\0\0\0\2\0\f\0\17\0\0\0\f\0\0\0\0\0\20\0\t\0\0\0\0\20\0\0\t\0\0\0\2\0\f\0\0000\0\0\t\0\0\0\2\0\f\0\0p\0\0\t\0\0\0\2\0\f\0\0\360\0\0\t\0\0\0\2\0\f\0\0\360\1\0\t\0\0\0\2\0\f\0\0\360\3\0\t\0\0\0\2\0\f\0\0\360\7\0\t\0\0\0\2\0\f\0\0\360\17\0\1\0\0\0\1\0\f\0\20\0\0\0\1\0\0\0\0\0\f\0\21\0\0\0", 172}], 
 msg_controllen=20, [{cmsg_len=20, cmsg_level=SOL_SOCKET, cmsg_type=SCM_RIGHTS, [5]}], msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 172
 
@@ -367,11 +389,19 @@ zxdg_shell_v6\0\0\0\1\0\0\0\20\0\0\0\0\0 \0\n\0\0\0\f\0\0\0
 xdg_wm_base\0\1\0\0\0\20\0\0\0\0\0\34\0\v\0\0\0\7\0\0\0
 wl_shm\0\0\1\0\0\0\21\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\21\0\0\0", 3500}, {"", 596}], 
 msg_controllen=24, [{cmsg_len=20, cmsg_level=SOL_SOCKET, cmsg_type=SCM_RIGHTS, [5]}], msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 432
+```
 
+Wayland Server returns the list of Registry Objects defined in the server (same as above)
+
+```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\20\0\0\0\0\0 \0\1\0\0\0\7\0\0\0
 wl_drm\0\0\2\0\0\0\22\0\0\0\1\0\0\0\0\0\f\0\21\0\0\0", 44}], 
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 44
+```
 
+File Manager app connects to `wl_drm`, the Wayland Direct Rendering Manager.
+
+```
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\22\0\0\0\0\0\34\0\17\0\0\0
 /dev/dri/card1\0\0\22\0\0\0\1\0\f\0
 AR24\22\0\0\0\1\0\f\0
@@ -386,7 +416,11 @@ NV12\22\0\0\0\1\0\f\0
 NV16\22\0\0\0\1\0\f\0
 YUYV\22\0\0\0\3\0\f\0\1\0\0\0\21\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\21\0\0\0", 3068}, {"", 1028}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 196
+```
 
+Wayland Server returns the Linux Display Device `/dev/dri/card1` and the supported colour encoding schemes.
+
+```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\22\0\0\0\0\0\f\0\4\0\0\0\1\0\0\0\0\0\f\0\21\0\0\0", 24}], 
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
 
