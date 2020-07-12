@@ -48,7 +48,9 @@ Create `run.sh` with `nano`, containing:
 
 ```bash
 #!/bin/bash
-./strace ./gtk
+./strace \
+    -s 1024 \
+    ./gtk
 ```
 
 Copy `strace`, `gtk` and set ownership...
