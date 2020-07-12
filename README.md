@@ -30,7 +30,13 @@ cp com.ubuntu.filemanager.desktop com.ubuntu.filemanager.desktop.old
 nano com.ubuntu.filemanager.desktop 
 ```
 
-Change the `Exec` line to...
+Change the `Exec` line from...
+
+```
+Exec=filemanager
+```
+
+To...
 
 ```
 Exec=./run.sh
@@ -59,10 +65,20 @@ Tap on File Manager icon on PinePhone to start the `strace`
 
 Check the `strace` log in Logviewer under `v0.7.5 filemanager`
 
-Or look at:
+Or look in:
 
 `/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
 
-Sample `strace` log for `gtk` app:
+## `strace` Logs
 
-https://github.com/lupyuen/pinephone-mir/blob/master/logs/gtk-strace.log
+1. `gtk` App
+
+    - [Source Code](gtk.c)
+
+    - [`strace` Log](logs/gtk-strace.log)
+
+1. File Manager App
+
+    - [Source Code](https://gitlab.com/ubports/apps/filemanager-app/-/tree/master)
+
+    - [`strace` Log](logs/filemanager-strace.log)
