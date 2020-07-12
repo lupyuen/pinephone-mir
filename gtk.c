@@ -117,6 +117,9 @@ int main (int argc, char *argv[]) {
   // Disable accessibility
   setenv("NO_AT_BRIDGE", "1", 1);
 
+  // Disable client-side decorations
+  setenv("GTK_CSD", "0", 1);
+
   // Set GTK backend to Wayland
   // Default GTK socket: /run/user/32011/wayland-0
   // setenv("GDK_BACKEND", "wayland", 1);
