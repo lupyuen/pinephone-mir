@@ -89,3 +89,18 @@ Or look in:
         #!/bin/bash
         ./strace filemanager
         ```
+
+## `unity-system-compositor`
+
+TODO
+
+```
+unity-system-compositor \
+    --enable-num-framebuffers-quirk=true \
+    --disable-overlays=false \
+    --console-provider=vt \
+    --spinner=/usr/bin/unity-system-compositor-spinner \
+    --file /run/mir_socket \
+    --from-dm-fd 11 \
+    --to-dm-fd 14 --vt 1
+```
