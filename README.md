@@ -192,7 +192,7 @@ grep "msg(" gtk-strace.log >gtk-msg.log
 grep "msg(" egl-strace.log >egl-msg.log
 ```
 
-Here are the Wayland Messages for `gtk` in [gtk-msg.log](gtk-msg.log):
+Here are the Wayland Messages for `gtk` in [`logs/gtk-msg.log`](logs/gtk-msg.log):
 
 ```
 sendmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\1\0\0\0\1\0\f\0\2\0\0\0\1\0\0\0\0\0\f\0\3\0\0\0", 24}], 
@@ -244,7 +244,7 @@ msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 
 
 But Wayland Server returns `Fake manufacturer` and `Fake model`. So the requested registry objects were not valid.
 
-Compare with the Wayland Messages for `egl` in [egl-msg.log](egl-msg.log):
+Compare with the Wayland Messages for `egl` in [`logs/egl-msg.log`](logs/egl-msg.log):
 
 ```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0(\0\3\0\0\0\16\0\0\0
