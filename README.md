@@ -82,3 +82,10 @@ Or look in:
     - [Source Code](https://gitlab.com/ubports/apps/filemanager-app/-/tree/master)
 
     - [`strace` Log](logs/filemanager-strace.log)
+
+    - `strace` Log was captured by changing `run.sh` to 
+
+        ```
+        #!/bin/bash
+        ./strace filemanager
+        ```

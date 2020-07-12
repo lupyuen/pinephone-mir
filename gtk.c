@@ -3,21 +3,6 @@
 
 cp /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app $HOME
 
-TODO:
-sudo apt install software-properties-gtk
-sudo software-properties-gtk
-
-TODO:
-root@ubuntu-phablet:/usr/share/click/preinstalled/com.ubuntu.camera/3.1.3# diff *desktop*
-258c258
-< X-Ubuntu-Single-Instance=false
----
-> X-Ubuntu-Single-Instance=true
-260,261c260
-< X-Ubuntu-Rotates-Window-Contents=false
----
-> X-Ubuntu-Rotates-Window-Contents=true
-
 (2) Build the GTK app:
 
 gcc \
