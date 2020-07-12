@@ -114,6 +114,9 @@ int main (int argc, char *argv[]) {
   // Set DCONF profile, because the default profile folder is blocked by AppArmor: run/user/32011/dconf/
   setenv("DCONF_PROFILE", "/tmp/camera-dconf", 1);
 
+  // Disable accessibility
+  setenv("NO_AT_BRIDGE", "1", 1);
+
   // Set GTK backend to Wayland
   // Default GTK socket: /run/user/32011/wayland-0
   // setenv("GDK_BACKEND", "wayland", 1);
