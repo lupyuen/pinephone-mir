@@ -183,7 +183,7 @@ So our simple `gtk` app crashed in `wl_proxy_marshal_constructor()` (from `libwa
 
 Interesting.
 
-## Compare `gtk` vs `egl` logs
+## Wayland Messages for `gtk` App
 
 Why does `egl` render OK but not `gtk`?
 
@@ -246,6 +246,8 @@ msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 
 
 Wayland Server returns `Fake manufacturer` and `Fake model`
 
+## Wayland Messages for `egl` App
+
 Compare with the Wayland Messages for `egl` in [`logs/egl-msg.log`](logs/egl-msg.log):
 
 ```
@@ -263,9 +265,64 @@ recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\5\0\0\0\0\0\f\0
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 24
 ```
 
-Wayland Server seems to return a valid response.
+Wayland Server seems to return a valid response to `egl`.
 
-## File Manager Wayland Messages
+Followed by these Wayland Messages, which will render the yellow rectangle ([See the source code](egl.c))
+
+```
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\3\0\0\0\0\0\f\0\5\0\0\0\4\0\0\0\0\0\20\0\6\0\0\0\5\0\0\0\6\0\0\0\3\0\10\0\3\0\0\0\1\0\f\0\7\0\0\0\7\0\0\0\1\0\30\0\0\0\0\0\0\0\0\0\340\1\0\0h\1\0\0\5\0\0\0\4\0\f\0\7\0\0\0\1\0\0\0\1\0\f\0\10\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0", 108}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 108
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\10\0\0\0\0\0\34\0\1\0\0\0\7\0\0\0
+wl_drm\0\0\2\0\0\0\10\0\0\0\0\0(\0\2\0\0\0\21\0\0\0
+qt_windowmanager\0\0\0\0\1\0\0\0\10\0\0\0\0\0$\0\3\0\0\0\16\0\0\0
+wl_compositor\0\0\0\4\0\0\0\10\0\0\0\0\0(\0\4\0\0\0\21\0\0\0
+wl_subcompositor\0\0\0\0\1\0\0\0\10\0\0\0\0\0\34\0\5\0\0\0\10\0\0\0
+wl_seat\0\6\0\0\0\10\0\0\0\0\0 \0\6\0\0\0\n\0\0\0
+wl_output\0\0\0\3\0\0\0\10\0\0\0\0\0,\0\7\0\0\0\27\0\0\0
+wl_data_device_manager\0\0\3\0\0\0\10\0\0\0\0\0 \0\10\0\0\0\t\0\0\0
+wl_shell\0\0\0\0\1\0\0\0\10\0\0\0\0\0$\0\t\0\0\0\16\0\0\0
+zxdg_shell_v6\0\0\0\1\0\0\0\10\0\0\0\0\0 \0\n\0\0\0\f\0\0\0
+xdg_wm_base\0\1\0\0\0\10\0\0\0\0\0\34\0\v\0\0\0\7\0\0\0
+wl_shm\0\0\1\0\0\0\t\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3696}, {"", 400}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 400
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\10\0\0\0\0\0 \0\1\0\0\0\7\0\0\0
+wl_drm\0\0\2\0\0\0\n\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0", 44}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 44
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\n\0\0\0\0\0\34\0\17\0\0\0
+/dev/dri/card1\0\0\n\0\0\0\1\0\f\0
+AR24\n\0\0\0\1\0\f\0
+XR24\n\0\0\0\1\0\f\0
+RG16\n\0\0\0\1\0\f\0
+YUV9\n\0\0\0\1\0\f\0
+YU11\n\0\0\0\1\0\f\0
+YU12\n\0\0\0\1\0\f\0
+YU16\n\0\0\0\1\0\f\0
+YU24\n\0\0\0\1\0\f\0
+NV12\n\0\0\0\1\0\f\0
+NV16\n\0\0\0\1\0\f\0
+YUYV\n\0\0\0\3\0\f\0\1\0\0\0\t\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3296}, {"", 800}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 196
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\n\0\0\0\0\0\f\0\4\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0", 24}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\n\0\0\0\2\0\10\0\t\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3100}, {"", 996}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\5\0\0\0\3\0\f\0\t\0\0\0\n\0\0\0\3\0000\0\v\0\0\0\340\1\0\0h\1\0\0XR24\0\0\0\0\200\7\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\1\0\24\0\v\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\2\0\30\0\0\0\0\0\0\0\0\0\377\377\377\177\377\377\377\177\5\0\0\0\6\0\10\0", 112}], 
+msg_controllen=20, [{cmsg_len=20, cmsg_level=SOL_SOCKET, cmsg_type=SCM_RIGHTS, [9]}], msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 112
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\6\0\0\0\1\0\24\0\0\0\0\0\320\2\0\0v\5\0\0", 3068}, {"", 1028}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 20
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\t\0\0\0\0\0\f\0\0\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3048}, {"", 1048}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 24
+```
+
+## Wayland Messages for File Manager
 
 Filter Wayland Messages for File Manager...
 
@@ -273,7 +330,9 @@ Filter Wayland Messages for File Manager...
 grep "msg(" filemanager-strace.log >filemanager-msg.log
 ```
 
-Wayland Messages for File Manager: [`logs/filemanager-msg.log`](logs/filemanager-msg.log)
+Wayland Messages for File Manager seem to be similar to `egl` above. It's a Qt app, so it connects to `qt_windowmanager` as well.
+
+Here are the Wayland Messages for File Manager: [`logs/filemanager-msg.log`](logs/filemanager-msg.log)
 
 ```
 sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0,\0\2\0\0\0\21\0\0\0
