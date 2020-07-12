@@ -326,9 +326,14 @@ msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\n\0\0\0\2\0\10\0\t\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0", 3100}, {"", 996}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
 
-sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\5\0\0\0\3\0\f\0\t\0\0\0\n\0\0\0\3\0000\0\v\0\0\0\340\1\0\0h\1\0\0XR24\0\0\0\0\200\7\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\1\0\24\0\v\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\2\0\30\0\0\0\0\0\0\0\0\0\377\377\377\177\377\377\377\177\5\0\0\0\6\0\10\0", 112}], 
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\5\0\0\0\3\0\f\0\t\0\0\0\n\0\0\0\3\0000\0\v\0\0\0\340\1\0\0h\1\0\0
+XR24\0\0\0\0\200\7\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\1\0\24\0\v\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\2\0\30\0\0\0\0\0\0\0\0\0\377\377\377\177\377\377\377\177\5\0\0\0\6\0\10\0", 112}], 
 msg_controllen=20, [{cmsg_len=20, cmsg_level=SOL_SOCKET, cmsg_type=SCM_RIGHTS, [9]}], msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 112
+```
 
+`egl` app selects the `XR24` colour encoding.
+
+```
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\6\0\0\0\1\0\24\0\0\0\0\0\320\2\0\0v\5\0\0", 3068}, {"", 1028}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 20
 
@@ -432,7 +437,11 @@ zxdg_shell_v6\0\0\0\1\0\0\0\23\0\0\0\23\0\0\0\2\0\20\0\24\0\0\0\21\0\0\0\24\0\0\
 com.ubuntu.filemanager\0\0\25\0\0\0\3\0000\0#\0\0\0
 filemanager.ubuntu.com.filemanager\0\0\21\0\0\0\10\0\f\0\1\0\0\0\21\0\0\0\7\0\f\0\0\0\0\0\21\0\0\0\6\0\10\0", 196}], 
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 196
+```
 
+File Manager connects to `zxdg_shell_v6`
+
+```
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\25\0\0\0\0\0\24\0\0\0\0\0\0\0\0\0\0\0\0\0\24\0\0\0\0\0\f\0@\0\0\0\21\0\0\0\0\0\f\0\10\0\0\0\3\0\0\0\1\0\24\0A\0\0\0\21\0\0\0\0\0\0\0\25\0\0\0\0\0\30\0\0\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0\24\0\0\0\0\0\f\0B\0\0\0", 2840}, {"", 1256}], 
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 100
 
