@@ -92,7 +92,7 @@ Or look in:
         ./strace filemanager
         ```
 
-## GDB
+## Debug `gtk` app with GDB
 
 To debug `gtk` app with GDB...
 
@@ -110,10 +110,13 @@ Change `run.sh` to...
 
 ```
 #!/bin/bash
-gdb -ex=r --args ./gtk
+gdb \
+    -ex=r \
+    -ex=bt \
+    --args ./gtk
 ```
 
-Log shows...
+Log shows exception and backtrace...
 
 ```
 ...
@@ -124,10 +127,15 @@ gtk_widget_set_clip:          GtkHeaderBar 26 23 200 18
 Thread 1 "gtk" received signal SIGSEGV, Segmentation fault.
 0x0000fffff6d21f8c in wl_proxy_marshal_constructor ()
    from /usr/lib/aarch64-linux-gnu/libwayland-client.so.0
+#0  0x0000fffff6d21f8c in wl_proxy_marshal_constructor ()
+   from /usr/lib/aarch64-linux-gnu/libwayland-client.so.0
+#1  0x0000fffff75c2d44 in ?? () from /usr/lib/aarch64-linux-gnu/libgdk-3.so.0
+---Type <return> to continue, or q <return> to quit---#2  0x000000000045d450 in ?? ()
+Backtrace stopped: previous frame inner to this frame (corrupt stack?)
 (gdb) quit
 A debugging session is active.
 
-        Inferior 1 [process 26339] will be killed.
+        Inferior 1 [process 30537] will be killed.
 
 Quit anyway? (y or n) [answered Y; input not from terminal]
 ```
