@@ -63,9 +63,7 @@ chown clickpkg:clickpkg strace gtk run.sh
 
 Tap on File Manager icon on PinePhone to start the `strace`
 
-Check the `strace` log in Logviewer under `v0.7.5 filemanager`
-
-Or look in:
+Check the `strace` log in...
 
 `/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
 
@@ -116,7 +114,11 @@ gdb \
     --args ./gtk
 ```
 
+Tap on File Manager icon on PinePhone to start `gdb` debugger on `gtk` app.
+
 Log shows exception and backtrace...
+
+`/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
 
 ```
 ...
