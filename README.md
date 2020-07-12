@@ -163,6 +163,10 @@ A debugging session is active.
 Quit anyway? (y or n) [answered Y; input not from terminal]
 ```
 
+So our simple `gtk` app crashed in `wl_proxy_marshal_constructor()` (from `libwayland-client.so.0`), which is called by `libgdk-3.so.0`
+
+Interesting.
+
 ## `unity-system-compositor`
 
 TODO
