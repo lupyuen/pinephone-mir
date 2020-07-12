@@ -181,6 +181,88 @@ So our simple `gtk` app crashed in `wl_proxy_marshal_constructor()` (from `libwa
 
 Interesting.
 
+## Compare `gtk` vs `egl` logs
+
+Why does `egl` render OK but not `gtk`?
+
+We compare `gtk` and `egl` logs by filtering for Wayland Messages...
+
+```bash
+grep "msg(" gtk-strace.log >gtk-msg.log
+grep "msg(" egl-strace.log >egl-msg.log
+```
+
+Here are the Wayland Messages for `gtk` in [gtk-msg.log](gtk-msg.log):
+
+```
+sendmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\1\0\0\0\1\0\f\0\2\0\0\0\1\0\0\0\0\0\f\0\3\0\0\0", 24}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
+```
+
+`gtk` app connects to the Wayland Server socket.
+
+```
+recvmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0\34\0\1\0\0\0\7\0\0\0
+wl_drm\0\0\2\0\0\0\2\0\0\0\0\0(\0\2\0\0\0\21\0\0\0
+qt_windowmanager\0\0\0\0\1\0\0\0\2\0\0\0\0\0$\0\3\0\0\0\16\0\0\0
+wl_compositor\0\0\0\4\0\0\0\2\0\0\0\0\0(\0\4\0\0\0\21\0\0\0
+wl_subcompositor\0\0\0\0\1\0\0\0\2\0\0\0\0\0\34\0\5\0\0\0\10\0\0\0
+wl_seat\0\6\0\0\0\2\0\0\0\0\0 \0\6\0\0\0\n\0\0\0
+wl_output\0\0\0\3\0\0\0\2\0\0\0\0\0,\0\7\0\0\0\27\0\0\0
+wl_data_device_manager\0\0\3\0\0\0\2\0\0\0\0\0 \0\10\0\0\0\t\0\0\0
+wl_shell\0\0\0\0\1\0\0\0\2\0\0\0\0\0$\0\t\0\0\0\16\0\0\0
+zxdg_shell_v6\0\0\0\1\0\0\0\2\0\0\0\0\0 \0\n\0\0\0\f\0\0\0
+xdg_wm_base\0\1\0\0\0\2\0\0\0\0\0\34\0\v\0\0\0\7\0\0\0
+wl_shm\0\0\1\0\0\0\3\0\0\0\0\0\f\0009\0\0\0\1\0\0\0\1\0\f\0\3\0\0\0", 4096}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 400
+```
+
+Wayland Server returns a list of Registry Objects defined in the server: `wl_drm`, `qt_windowmanager`, ..., `wl_shm`
+
+```
+sendmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0(\0\3\0\0\0\16\0\0\0
+wl_compositor\0\0\0\3\0\0\0\4\0\0\0\2\0\0\0\0\0,\0\4\0\0\0\21\0\0\0
+wl_subcompositor\0\0\0\0\1\0\0\0\5\0\0\0\2\0\0\0\0\0$\0\6\0\0\0\n\0\0\0
+wl_output\0\0\0\2\0\0\0\6\0\0\0\1\0\0\0\0\0\f\0\7\0\0\0\2\0\0\0\0\0000\0\7\0\0\0\27\0\0\0
+wl_data_device_manager\0\0\1\0\0\0\10\0\0\0\2\0\0\0\0\0 \0\5\0\0\0\10\0\0\0
+wl_seat\0\4\0\0\0\t\0\0\0\4\0\0\0\0\0\f\0\n\0\0\0\n\0\0\0\4\0\f\0\0\0\0\0\n\0\0\0\5\0\f\0\0\0\0\0\10\0\0\0\1\0\20\0\v\0\0\0\t\0\0\0\4\0\0\0\0\0\f\0\f\0\0\0\1\0\0\0\0\0\f\0\r\0\0\0\2\0\0\0\0\0 \0\v\0\0\0\7\0\0\0
+wl_shm\0\0\1\0\0\0\16\0\0\0", 320}],
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 320
+```
+
+`gtk` app attempts to connect to the Registry Objects `wl_compositor`, `wl_subcompositor`, `wl_output`, `wl_data_device_manager`, `wl_seat` and `wl_shm`
+
+```
+recvmsg(7, {msg_name(0)=NULL, msg_iov(2)=[{"\6\0\0\0\0\0H\0\0\0\0\0\0\0\0\0D\0\0\0\210\0\0\0\0\0\0\0\22\0\0\0
+Fake manufacturer\0\0\0\v\0\0\0
+Fake model\0\0\0\0\0\0\6\0\0\0\1\0\30\0\3\0\0\0\320\2\0\0\240\5\0\0)\2\0\0\6\0\0\0\3\0\f\0\1\0\0\0\6\0\0\0\2\0\10\0\7\0\0\0\0\0\f\0
+009\0\0\0\1\0\0\0\1\0\f\0\7\0\0\0\t\0\0\0\0\0\f\0\7\0\0\0\t\0\0\0\1\0\24\0\6\0\0\0
+seat0\0\0\0\r\0\0\0\0\0\f\0
+009\0\0\0\1\0\0\0\1\0\f\0\r\0\0\0\16\0\0\0\0\0\f\0\0\0\0\0\16\0\0\0\0\0\f\0\1\0\0\0", 3696}, {"", 400}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 220
+```
+
+But Wayland Server returns `Fake manufacturer` and `Fake model`. So the requested registry objects were not valid.
+
+Compare with the Wayland Messages for `egl` in [egl-msg.log](egl-msg.log):
+
+```
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0(\0\3\0\0\0\16\0\0\0
+wl_compositor\0\0\0\1\0\0\0\3\0\0\0\2\0\0\0\0\0$\0\10\0\0\0\t\0\0\0
+wl_shell\0\0\0\0\1\0\0\0\4\0\0\0\1\0\0\0\0\0\f\0\5\0\0\0", 88}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 88
+```
+
+`egl` app attempts to connect to the Registry Objects `wl_compositor` and `wl_shell`
+
+```
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\5\0\0\0\0\0\f\0
+009\0\0\0\1\0\0\0\1\0\f\0\5\0\0\0", 3720}, {"", 376}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 24
+```
+
+Wayland Server seems to return a valid response. No `Fake` response.
+
 ## `unity-system-compositor`
 
 TODO
