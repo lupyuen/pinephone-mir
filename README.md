@@ -122,7 +122,9 @@ Check the `strace` log in...
 
         ```
         #!/bin/bash
-        ./strace filemanager
+        ./strace \
+            -s 1024 \
+            filemanager
         ```
 
 ## Debug `gtk` app with GDB
@@ -242,7 +244,7 @@ seat0\0\0\0\r\0\0\0\0\0\f\0
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 220
 ```
 
-But Wayland Server returns `Fake manufacturer` and `Fake model`. So the requested registry objects were not valid.
+Wayland Server returns `Fake manufacturer` and `Fake model`
 
 Compare with the Wayland Messages for `egl` in [`logs/egl-msg.log`](logs/egl-msg.log):
 
@@ -261,13 +263,102 @@ recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\5\0\0\0\0\0\f\0
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 24
 ```
 
-Wayland Server seems to return a valid response. No `Fake` response.
+Wayland Server seems to return a valid response.
+
+## File Manager Wayland Messages
+
+Wayland Messages for File Manager: [`logs/filemanager-msg.log`](logs/filemanager-msg.log)
+
+```
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0,\0\2\0\0\0\21\0\0\0
+qt_windowmanager\0\0\0\0\1\0\0\0\4\0\0\0\2\0\0\0\0\0(\0\3\0\0\0\16\0\0\0
+wl_compositor\0\0\0\3\0\0\0\5\0\0\0\2\0\0\0\0\0,\0\4\0\0\0\21\0\0\0
+wl_subcompositor\0\0\0\0\1\0\0\0\6\0\0\0\2\0\0\0\0\0 \0\5\0\0\0\10\0\0\0
+wl_seat\0\4\0\0\0\7\0\0\0\2\0\0\0\0\0$\0\6\0\0\0\n\0\0\0
+wl_output\0\0\0\2\0\0\0\10\0\0\0\1\0\0\0\0\0\f\0\t\0\0\0\2\0\0\0\0\0000\0\7\0\0\0\27\0\0\0
+wl_data_device_manager\0\0\1\0\0\0\n\0\0\0\n\0\0\0\1\0\20\0\v\0\0\0\7\0\0\0\2\0\0\0\0\0 \0\v\0\0\0\7\0\0\0
+wl_shm\0\0\1\0\0\0\f\0\0\0", 304}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 304
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\7\0\0\0\0\0\f\0\7\0\0\0\7\0\0\0\1\0\24\0\6\0\0\0
+seat0\0\0\0\10\0\0\0\0\0H\0\0\0\0\0\0\0\0\0D\0\0\0\210\0\0\0\0\0\0\0\22\0\0\0
+Fake manufacturer\0\0\0\v\0\0\0
+Fake model\0\0\0\0\0\0\10\0\0\0\1\0\30\0\3\0\0\0\320\2\0\0\240\5\0\0)\2\0\0\10\0\0\0\3\0\f\0\1\0\0\0\10\0\0\0\2\0\10\0\t\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\t\0\0\0\f\0\0\0\0\0\f\0\0\0\0\0\f\0\0\0\0\0\f\0\1\0\0\0", 3696}, {"", 400}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 196
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\7\0\0\0\1\0\f\0\3\0\0\0\7\0\0\0\0\0\f\0\r\0\0\0\5\0\0\0\0\0\f\0\16\0\0\0\7\0\0\0\2\0\f\0\17\0\0\0\f\0\0\0\0\0\20\0\t\0\0\0\0\20\0\0\t\0\0\0\2\0\f\0\0000\0\0\t\0\0\0\2\0\f\0\0p\0\0\t\0\0\0\2\0\f\0\0\360\0\0\t\0\0\0\2\0\f\0\0\360\1\0\t\0\0\0\2\0\f\0\0\360\3\0\t\0\0\0\2\0\f\0\0\360\7\0\t\0\0\0\2\0\f\0\0\360\17\0\1\0\0\0\1\0\f\0\20\0\0\0\1\0\0\0\0\0\f\0\21\0\0\0", 172}], 
+msg_controllen=20, [{cmsg_len=20, cmsg_level=SOL_SOCKET, cmsg_type=SCM_RIGHTS, [5]}], msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 172
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\3\0\0\0\0\0\20\0\1\0\0\0%\260\0\0\3\0\0\0\5\0\20\0\36\0\0\0\310\0\0\0\20\0\0\0\0\0\34\0\1\0\0\0\7\0\0\0
+wl_drm\0\0\2\0\0\0\20\0\0\0\0\0(\0\2\0\0\0\21\0\0\0
+qt_windowmanager\0\0\0\0\1\0\0\0\20\0\0\0\0\0$\0\3\0\0\0\16\0\0\0
+wl_compositor\0\0\0\4\0\0\0\20\0\0\0\0\0(\0\4\0\0\0\21\0\0\0
+wl_subcompositor\0\0\0\0\1\0\0\0\20\0\0\0\0\0\34\0\5\0\0\0\10\0\0\0
+wl_seat\0\6\0\0\0\20\0\0\0\0\0 \0\6\0\0\0\n\0\0\0
+wl_output\0\0\0\3\0\0\0\20\0\0\0\0\0,\0\7\0\0\0\27\0\0\0
+wl_data_device_manager\0\0\3\0\0\0\20\0\0\0\0\0 \0\10\0\0\0\t\0\0\0
+wl_shell\0\0\0\0\1\0\0\0\20\0\0\0\0\0$\0\t\0\0\0\16\0\0\0
+zxdg_shell_v6\0\0\0\1\0\0\0\20\0\0\0\0\0 \0\n\0\0\0\f\0\0\0
+xdg_wm_base\0\1\0\0\0\20\0\0\0\0\0\34\0\v\0\0\0\7\0\0\0
+wl_shm\0\0\1\0\0\0\21\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\21\0\0\0", 3500}, {"", 596}], 
+msg_controllen=24, [{cmsg_len=20, cmsg_level=SOL_SOCKET, cmsg_type=SCM_RIGHTS, [5]}], msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 432
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\20\0\0\0\0\0 \0\1\0\0\0\7\0\0\0
+wl_drm\0\0\2\0\0\0\22\0\0\0\1\0\0\0\0\0\f\0\21\0\0\0", 44}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 44
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\22\0\0\0\0\0\34\0\17\0\0\0
+/dev/dri/card1\0\0\22\0\0\0\1\0\f\0
+AR24\22\0\0\0\1\0\f\0
+XR24\22\0\0\0\1\0\f\0
+RG16\22\0\0\0\1\0\f\0
+YUV9\22\0\0\0\1\0\f\0
+YU11\22\0\0\0\1\0\f\0
+YU12\22\0\0\0\1\0\f\0
+YU16\22\0\0\0\1\0\f\0
+YU24\22\0\0\0\1\0\f\0
+NV12\22\0\0\0\1\0\f\0
+NV16\22\0\0\0\1\0\f\0
+YUYV\22\0\0\0\3\0\f\0\1\0\0\0\21\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\21\0\0\0", 3068}, {"", 1028}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 196
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\22\0\0\0\0\0\f\0\4\0\0\0\1\0\0\0\0\0\f\0\21\0\0\0", 24}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\22\0\0\0\2\0\10\0\21\0\0\0\0\0\f\0?\0\0\0\1\0\0\0\1\0\f\0\21\0\0\0", 2872}, {"", 1224}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\5\0\0\0\0\0\f\0\21\0\0\0\2\0\0\0\0\0(\0\t\0\0\0\16\0\0\0
+zxdg_shell_v6\0\0\0\1\0\0\0\23\0\0\0\23\0\0\0\2\0\20\0\24\0\0\0\21\0\0\0\24\0\0\0\1\0\f\0\25\0\0\0\25\0\0\0\2\0$\0\27\0\0\0
+com.ubuntu.filemanager\0\0\25\0\0\0\3\0000\0#\0\0\0
+filemanager.ubuntu.com.filemanager\0\0\21\0\0\0\10\0\f\0\1\0\0\0\21\0\0\0\7\0\f\0\0\0\0\0\21\0\0\0\6\0\10\0", 196}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 196
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\25\0\0\0\0\0\24\0\0\0\0\0\0\0\0\0\0\0\0\0\24\0\0\0\0\0\f\0@\0\0\0\21\0\0\0\0\0\f\0\10\0\0\0\3\0\0\0\1\0\24\0A\0\0\0\21\0\0\0\0\0\0\0\25\0\0\0\0\0\30\0\0\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0\24\0\0\0\0\0\f\0B\0\0\0", 2840}, {"", 1256}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 100
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\24\0\0\0\4\0\f\0@\0\0\0\1\0\0\0\0\0\f\0\26\0\0\0\24\0\0\0\4\0\f\0B\0\0\0", 36}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 36
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\26\0\0\0\0\0\f\0B\0\0\0\1\0\0\0\1\0\f\0\26\0\0\0\25\0\0\0\0\0\30\0\320\2\0\0v\5\0\0\4\0\0\0\4\0\0\0\24\0\0\0\0\0\f\0C\0\0\0", 2740}, {"", 1356}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 60
+
+sendmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\24\0\0\0\4\0\f\0C\0\0\0", 12}], 
+msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 12
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\1\0\0\0\1\0\f\0\30\0\0\0\26\0\0\0\0\0\10\0\27\0\0\0\0\0\f\0\0\0\0\0\1\0\0\0\1\0\f\0\27\0\0\0", 2596}, {"", 1500}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 44
+
+recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\31\0\0\0\0\0\10\0\27\0\0\0\0\0\f\0\0\0\0\0\1\0\0\0\1\0\f\0\27\0\0\0", 2552}, {"", 1544}], 
+msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
+```
 
 ## `unity-system-compositor`
 
 TODO
 
 ```
+$ ps -aux
 unity-system-compositor \
     --enable-num-framebuffers-quirk=true \
     --disable-overlays=false \
