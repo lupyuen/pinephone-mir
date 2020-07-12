@@ -92,11 +92,23 @@ Check the `strace` log in...
 
 ## `strace` Logs
 
-1. `gtk` App
+1. `gtk` App: Simple GTK App (not working)
 
     - [Source Code](gtk.c)
 
+    - [Build Script](gtk.sh)
+
     - [`strace` Log](logs/gtk-strace.log)
+
+    - Crashes with a Segmentation Fault. Now investigating with GDB. (See next section)
+
+1. `egl` App: Wayland EGL App (draws a yellow rectangle)
+
+    - [Source Code](egl.c)
+
+    - [Build Script](egl.sh)
+
+    - [`strace` Log](logs/egl-strace.log)
 
     - Crashes with a Segmentation Fault. Now investigating with GDB. (See next section)
 
