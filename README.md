@@ -77,18 +77,60 @@ Or look in:
 
     - [`strace` Log](logs/gtk-strace.log)
 
+    - Crashes with a Segmentation Fault. Now investigating.
+
 1. File Manager App
 
     - [Source Code](https://gitlab.com/ubports/apps/filemanager-app/-/tree/master)
 
     - [`strace` Log](logs/filemanager-strace.log)
 
-    - `strace` Log was captured by changing `run.sh` to 
+    - `strace` Log was captured by changing `run.sh` to...
 
         ```
         #!/bin/bash
         ./strace filemanager
         ```
+
+## GDB
+
+To debug `gtk` app with GDB...
+
+```bash
+sudo bash
+
+apt install gdb
+
+mount -o remount,rw /
+
+cd /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+```
+
+Change `run.sh` to...
+
+```
+#!/bin/bash
+gdb -ex=r --args ./gtk
+```
+
+Log shows...
+
+```
+...
+gtk_widget_set_clip:              GtkLabel 89 23 74 18
+gtk_widget_set_clip:            GtkBox 89 23 74 18
+gtk_widget_set_clip:          GtkHeaderBar 26 23 200 18
+
+Thread 1 "gtk" received signal SIGSEGV, Segmentation fault.
+0x0000fffff6d21f8c in wl_proxy_marshal_constructor ()
+   from /usr/lib/aarch64-linux-gnu/libwayland-client.so.0
+(gdb) quit
+A debugging session is active.
+
+        Inferior 1 [process 26339] will be killed.
+
+Quit anyway? (y or n) [answered Y; input not from terminal]
+```
 
 ## `unity-system-compositor`
 
