@@ -59,6 +59,27 @@ cp /usr/bin/strace .
 cp /home/phablet/pinephone-mir/gtk .
 
 chown clickpkg:clickpkg strace gtk run.sh
+
+chmod a+x run.sh
+```
+
+We should see the files with permissions set as follows...
+
+```bash
+$ ls -l
+total 784
+-rw-r--r--  1 clickpkg clickpkg   3004 Jul 12 04:22 com.ubuntu.filemanager.desktop
+-rw-r--r--  1 root     root       3007 Jul 12 04:16 com.ubuntu.filemanager.desktop.old
+-rw-r--r--  1 clickpkg clickpkg    235 Jan 16 06:00 content-hub.json
+-rw-r--r--  1 clickpkg clickpkg     87 Jan 16 06:00 filemanager.apparmor
+-rw-r--r--  1 clickpkg clickpkg    874 Jan 16 06:00 filemanager.svg
+-rwxr-xr-x  1 clickpkg clickpkg  17664 Jul 12 04:20 gtk
+drwxr-xr-x  3 clickpkg clickpkg   4096 May  6 02:04 lib
+drwxr-xr-x 11 clickpkg clickpkg   4096 May  6 02:04 qml
+-rwxr-xr-x  1 clickpkg clickpkg    103 Jul 12 12:42 run.sh
+drwxr-xr-x  3 clickpkg clickpkg   4096 May  6 02:04 share
+-rwxr-xr-x  1 clickpkg clickpkg 739488 Jul 12 04:19 strace
+drwxr-xr-x  3 clickpkg clickpkg   4096 May  6 02:04 usr
 ```
 
 Tap on File Manager icon on PinePhone to start the `strace`
