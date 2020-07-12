@@ -439,7 +439,11 @@ filemanager.ubuntu.com.filemanager\0\0\21\0\0\0\10\0\f\0\1\0\0\0\21\0\0\0\7\0\f\
 msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 196
 ```
 
-File Manager connects to `zxdg_shell_v6`
+File Manager connects to `zxdg_shell_v6`. More about this...
+
+1. [`xdg-shell` in "Writing Wayland Clients"](https://bugaevc.gitbooks.io/writing-wayland-clients/beyond-the-black-square/xdg-shell.html)
+
+1. [`xdg-shell` in "The Wayland Book"](https://wayland-book.com/xdg-shell-in-depth.html)
 
 ```
 recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\25\0\0\0\0\0\24\0\0\0\0\0\0\0\0\0\0\0\0\0\24\0\0\0\0\0\f\0@\0\0\0\21\0\0\0\0\0\f\0\10\0\0\0\3\0\0\0\1\0\24\0A\0\0\0\21\0\0\0\0\0\0\0\25\0\0\0\0\0\30\0\0\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0\24\0\0\0\0\0\f\0B\0\0\0", 2840}, {"", 1256}], 
