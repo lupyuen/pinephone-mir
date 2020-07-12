@@ -1,0 +1,191 @@
+write(1, "argv[0]=./gtk\n", 14argv[0]=./gtk
+write(1, "SHELL=/bin/bash\n", 16SHELL=/bin/bash
+write(1, "UBUNTU_APPLICATION_ISOLATION=1\n", 31UBUNTU_APPLICATION_ISOLATION=1
+write(1, "GRID_UNIT_PX=14\n", 16GRID_UNIT_PX=14
+write(1, "XDG_CONFIG_DIRS=/etc/xdg/xdg-ubu"..., 77XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu-touch:/etc/xdg/xdg-ubuntu-touch:/etc/xdg
+write(1, "XDG_SESSION_PATH=/org/freedeskto"..., 58XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+write(1, "GTK_IM_MODULE=Maliit\n", 21GTK_IM_MODULE=Maliit
+write(1, "PULSE_PROP=media.role=multimedia"..., 33PULSE_PROP=media.role=multimedia
+write(1, "GNOME_KEYRING_CONTROL=\n", 23GNOME_KEYRING_CONTROL=
+write(1, "MIR_SERVER_PROMPT_FILE=1\n", 25MIR_SERVER_PROMPT_FILE=1
+write(1, "QT_WAYLAND_DISABLE_WINDOWDECORAT"..., 38QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+write(1, "HOSTNAME=android\n", 17HOSTNAME=android
+write(1, "LANGUAGE=en_US:en\n", 18LANGUAGE=en_US:en
+write(1, "APP_ID=com.ubuntu.filemanager_fi"..., 48APP_ID=com.ubuntu.filemanager_filemanager_0.7.5
+write(1, "SSH_AUTH_SOCK=/tmp/ssh-NzlcAiW1X"..., 47SSH_AUTH_SOCK=/tmp/ssh-NzlcAiW1XvRI/agent.2854
+write(1, "XDG_DATA_HOME=/home/phablet/.loc"..., 41XDG_DATA_HOME=/home/phablet/.local/share
+write(1, "__GL_SHADER_DISK_CACHE_PATH=/hom"..., 72__GL_SHADER_DISK_CACHE_PATH=/home/phablet/.cache/com.ubuntu.filemanager
+write(1, "UBUNTU_APP_LAUNCH_ARCH=aarch64-l"..., 41UBUNTU_APP_LAUNCH_ARCH=aarch64-linux-gnu
+write(1, "XDG_CONFIG_HOME=/home/phablet/.c"..., 38XDG_CONFIG_HOME=/home/phablet/.config
+write(1, "ANDROID_BOOTLOGO=1\n", 19ANDROID_BOOTLOGO=1
+write(1, "DESKTOP_SESSION=ubuntu-touch\n", 29DESKTOP_SESSION=ubuntu-touch
+write(1, "SSH_AGENT_PID=2908\n", 19SSH_AGENT_PID=2908
+write(1, "XDG_SEAT=seat0\n", 15XDG_SEAT=seat0
+write(1, "APP_EXEC=./run.sh\n", 18APP_EXEC=./run.sh
+write(1, "PWD=/usr/share/click/preinstalle"..., 63PWD=/usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5
+write(1, "XDG_SESSION_DESKTOP=ubuntu-touch"..., 33XDG_SESSION_DESKTOP=ubuntu-touch
+write(1, "LOGNAME=phablet\n", 16LOGNAME=phablet
+write(1, "QT_QPA_PLATFORMTHEME=ubuntuappme"..., 35QT_QPA_PLATFORMTHEME=ubuntuappmenu
+write(1, "XDG_SESSION_TYPE=mir\n", 21XDG_SESSION_TYPE=mir
+write(1, "APP_XMIR_ENABLE=0\n", 18APP_XMIR_ENABLE=0
+write(1, "APP_LAUNCHER_PID=3487\n", 22APP_LAUNCHER_PID=3487
+write(1, "XDG_GREETER_DATA_DIR=/var/lib/li"..., 51XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/phablet
+write(1, "PULSE_SCRIPT=/etc/pulse/touch.pa"..., 33PULSE_SCRIPT=/etc/pulse/touch.pa
+write(1, "EXTERNAL_STORAGE=/mnt/sdcard\n", 29EXTERNAL_STORAGE=/mnt/sdcard
+write(1, "GDM_LANG=en_US\n", 15GDM_LANG=en_US
+write(1, "UBUNTU_PLATFORM_API_BACKEND=desk"..., 46UBUNTU_PLATFORM_API_BACKEND=desktop_mirclient
+write(1, "HOME=/home/phablet\n", 19HOME=/home/phablet
+write(1, "LANG=en_US.UTF-8\n", 17LANG=en_US.UTF-8
+write(1, "QV4_ENABLE_JIT_CACHE=1\n", 23QV4_ENABLE_JIT_CACHE=1
+write(1, "XDG_CURRENT_DESKTOP=Unity\n", 26XDG_CURRENT_DESKTOP=Unity
+write(1, "UPSTART_SESSION=unix:abstract=/c"..., 69UPSTART_SESSION=unix:abstract=/com/ubuntu/upstart-session/32011/2854
+write(1, "QT_EXCLUDE_GENERIC_BEARER=1\n", 28QT_EXCLUDE_GENERIC_BEARER=1
+write(1, "TMPDIR=/run/user/32011/confined/"..., 55TMPDIR=/run/user/32011/confined/com.ubuntu.filemanager
+write(1, "XDG_SEAT_PATH=/org/freedesktop/D"..., 52XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+write(1, "PULSE_CLIENTCONFIG=/etc/pulse/to"..., 48PULSE_CLIENTCONFIG=/etc/pulse/touch-client.conf
+write(1, "GOROOT=\n", 8GOROOT=
+write(1, "ANDROID_CACHE=/cache\n", 21ANDROID_CACHE=/cache
+write(1, "APP_DESKTOP_FILE_PATH=/usr/share"..., 124APP_DESKTOP_FILE_PATH=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/com.ubuntu.filemanager.desktop
+write(1, "QT_QPA_PLATFORM=wayland\n", 24QT_QPA_PLATFORM=wayland
+write(1, "XDG_CACHE_HOME=/home/phablet/.ca"..., 36XDG_CACHE_HOME=/home/phablet/.cache
+write(1, "FLASH_KERNEL_SKIP=true\n", 23FLASH_KERNEL_SKIP=true
+write(1, "ANDROID_DATA=/data\n", 19ANDROID_DATA=/data
+write(1, "QT_ENABLE_GLYPH_CACHE_WORKAROUND"..., 35QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
+write(1, "PULSE_PLAYBACK_CORK_STALLED=1\n", 30PULSE_PLAYBACK_CORK_STALLED=1
+write(1, "TERM=linux\n", 11TERM=linux
+write(1, "MIR_SERVER_WAYLAND_HOST=/tmp/way"..., 42MIR_SERVER_WAYLAND_HOST=/tmp/wayland-root
+write(1, "USER=phablet\n", 13USER=phablet
+write(1, "UPSTART_INSTANCE=com.ubuntu.file"..., 58UPSTART_INSTANCE=com.ubuntu.filemanager_filemanager_0.7.5
+write(1, "MIR_SOCKET=/run/user/32011/mir_s"..., 38MIR_SOCKET=/run/user/32011/mir_socket
+write(1, "ASEC_MOUNTPOINT=/mnt/asec\n", 26ASEC_MOUNTPOINT=/mnt/asec
+write(1, "QT_WAYLAND_FORCE_DPI=96\n", 24QT_WAYLAND_FORCE_DPI=96
+write(1, "SHLVL=2\n", 8SHLVL=2
+write(1, "APP_DIR=/usr/share/click/preinst"..., 79APP_DIR=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+write(1, "QT_IM_MODULE=maliitphablet\n", 27QT_IM_MODULE=maliitphablet
+write(1, "XDG_VTNR=1\n", 11XDG_VTNR=1
+write(1, "ANDROID_ROOT=/system\n", 21ANDROID_ROOT=/system
+write(1, "XDG_SESSION_ID=c1\n", 18XDG_SESSION_ID=c1
+write(1, "QT_FILE_SELECTORS=ubuntu-touch\n", 31QT_FILE_SELECTORS=ubuntu-touch
+write(1, "QML2_IMPORT_PATH=/usr/lib/aarch6"..., 149QML2_IMPORT_PATH=/usr/lib/aarch64-linux-gnu/qt5/imports:/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib/aarch64-linux-gnu
+write(1, "LD_LIBRARY_PATH=/usr/share/click"..., 184LD_LIBRARY_PATH=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib/aarch64-linux-gnu:/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib
+write(1, "QML_NO_TOUCH_COMPRESSION=1\n", 27QML_NO_TOUCH_COMPRESSION=1
+write(1, "XDG_RUNTIME_DIR=/run/user/32011\n", 32XDG_RUNTIME_DIR=/run/user/32011
+write(1, "LOOP_MOUNTPOINT=/mnt/obb\n", 25LOOP_MOUNTPOINT=/mnt/obb
+write(1, "NATIVE_ORIENTATION=Portrait\n", 28NATIVE_ORIENTATION=Portrait
+write(1, "MIR_SERVER_NAME=session-0\n", 26MIR_SERVER_NAME=session-0
+write(1, "GNOME_KEYRING_PID=\n", 19GNOME_KEYRING_PID=
+write(1, "XDG_DATA_DIRS=/usr/share/click/p"..., 182XDG_DATA_DIRS=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager:/usr/share/ubuntu-touch:/usr/share/ubuntu-touch:/usr/local/share/:/usr/share/:/custom/usr/share/
+write(1, "PATH=/usr/share/click/preinstall"..., 356PATH=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib/aarch64-linux-gnu/bin:/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager:/home/phablet/go-1.14.4/bin:/home/phablet/go-1.13.6/bin:/usr/lib/go-1.13.6/bin:/home/phablet/bin:/home/phablet/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+write(1, "ANDROID_PROPERTY_WORKSPACE=8,491"..., 35ANDROID_PROPERTY_WORKSPACE=8,49152
+write(1, "MKSH=/system/bin/sh\n", 20MKSH=/system/bin/sh
+write(1, "GDMSESSION=ubuntu-touch\n", 24GDMSESSION=ubuntu-touch
+write(1, "DBUS_SESSION_BUS_ADDRESS=unix:ab"..., 60DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-tnjwyFSHl2
+write(1, "LIMA_DEBUG=notiling\n", 20LIMA_DEBUG=notiling
+write(1, "UPSTART_JOB=application-click\n", 30UPSTART_JOB=application-click
+write(1, "QT_SELECT=qt5\n", 14QT_SELECT=qt5
+write(1, "ANDROID_ASSETS=/system/app\n", 27ANDROID_ASSETS=/system/app
+write(1, "QTWEBKIT_DPR=1\n", 15QTWEBKIT_DPR=1
+write(1, "UBUNTU_APP_LAUNCH_XMIR_PATH=/usr"..., 52UBUNTU_APP_LAUNCH_XMIR_PATH=/usr/bin/libertine-xmir
+write(1, "_=./strace\n", 11_=./strace
+write(1, "DCONF_PROFILE=/tmp/camera-dconf\n", 32DCONF_PROFILE=/tmp/camera-dconf
+write(1, "GTK_DEBUG=actions,builder,geomet"..., 125GTK_DEBUG=actions,builder,geometry,icontheme,keybindings,misc,modules,plugsocket,pixel-cache,printing,size-request,text,tree
+write(1, "Create app...\n", 14Create app...
+write(1, "Connect app...\n", 15Connect app...
+write(1, "Run app...\n", 11Run app...
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(5, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(5, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(7, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(7, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "\n(gtk:11798): dconf-WARNING **: "..., 112
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "\n** (gtk:11798): WARNING **: Err"..., 177
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(9, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(9, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(1, "App activated\n", 14App activated
+write(1, "Create window...\n", 17Create window...
+write(1, "gtk-modules setting changed to: "..., 39gtk-modules setting changed to: (null)
+write(1, "Show window...\n", 15Show window...
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	height for width: -1 is minimum 52 and natural: 252) = 85
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	width for height: -1 is minimum 52 and natural: 200) = 85
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	width for height: -1 is minimum 52 and natural: 200) = 85
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	height for width: -1 is minimum 52 and natural: 252) = 85
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "gtk_widget_size_allocate:   GtkA"..., 60gtk_widget_size_allocate:   GtkApplicationWindow 0 0 200 252) = 60
+write(1, "\n", 1
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	height for width: -1 is minimum 52 and natural: 252) = 85
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	width for height: -1 is minimum 52 and natural: 200) = 85
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d124170] GtkLabel\theight for"..., 72[0x3d124170] GtkLabel	height for width: -1 is minimum 18 and natural: 18) = 72
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d092190] GtkBox\theight for w"..., 70[0x3d092190] GtkBox	height for width: -1 is minimum 18 and natural: 18) = 70
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d0a8190] GtkHeaderBar\theight"..., 76[0x3d0a8190] GtkHeaderBar	height for width: -1 is minimum 18 and natural: 18) = 76
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	height for width: -1 is minimum 70 and natural: 270) = 85
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d124170] GtkLabel\twidth for "..., 72[0x3d124170] GtkLabel	width for height: -1 is minimum 50 and natural: 50) = 72
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d092190] GtkBox\twidth for he"..., 70[0x3d092190] GtkBox	width for height: -1 is minimum 50 and natural: 50) = 70
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d0a8190] GtkHeaderBar\twidth "..., 76[0x3d0a8190] GtkHeaderBar	width for height: -1 is minimum 64 and natural: 64) = 76
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 86[0x3d04a260] GtkApplicationWindow	width for height: -1 is minimum 116 and natural: 200) = 86
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 86[0x3d04a260] GtkApplicationWindow	width for height: -1 is minimum 116 and natural: 200) = 86
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	height for width: -1 is minimum 70 and natural: 270) = 85
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "gtk_widget_size_allocate:   GtkA"..., 60gtk_widget_size_allocate:   GtkApplicationWindow 0 0 252 304) = 60
+write(1, "\n", 1
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 85[0x3d04a260] GtkApplicationWindow	height for width: -1 is minimum 70 and natural: 270) = 85
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d04a260] GtkApplicationWindo"..., 86[0x3d04a260] GtkApplicationWindow	width for height: -1 is minimum 116 and natural: 200) = 86
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d0a8190] GtkHeaderBar\theight"..., 76[0x3d0a8190] GtkHeaderBar	height for width: -1 is minimum 18 and natural: 18) = 76
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "gtk_widget_size_allocate:     Gt"..., 55gtk_widget_size_allocate:     GtkHeaderBar 26 23 200 18) = 55
+write(1, "\n", 1
+write(1, "[0x3d0a8190] GtkHeaderBar\theight"..., 76[0x3d0a8190] GtkHeaderBar	height for width: -1 is minimum 18 and natural: 18) = 76
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d0a8190] GtkHeaderBar\twidth "..., 76[0x3d0a8190] GtkHeaderBar	width for height: -1 is minimum 64 and natural: 64) = 76
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d124490] GtkLabel\twidth for "..., 72[0x3d124490] GtkLabel	width for height: -1 is minimum 74 and natural: 74) = 72
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d0922d0] GtkBox\twidth for he"..., 70[0x3d0922d0] GtkBox	width for height: -1 is minimum 74 and natural: 74) = 70
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "gtk_widget_size_allocate:       "..., 50gtk_widget_size_allocate:       GtkBox 89 23 74 18) = 50
+write(1, "\n", 1
+write(1, "[0x3d124490] GtkLabel\theight for"..., 72[0x3d124490] GtkLabel	height for width: -1 is minimum 18 and natural: 18) = 72
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d0922d0] GtkBox\theight for w"..., 70[0x3d0922d0] GtkBox	height for width: -1 is minimum 18 and natural: 18) = 70
+write(1, " (hit cache: no)\n", 17 (hit cache: no)
+write(1, "[0x3d0922d0] GtkBox\twidth for he"..., 70[0x3d0922d0] GtkBox	width for height: -1 is minimum 74 and natural: 74) = 70
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d124490] GtkLabel\theight for"..., 72[0x3d124490] GtkLabel	height for width: -1 is minimum 18 and natural: 18) = 72
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "gtk_widget_size_allocate:       "..., 54gtk_widget_size_allocate:         GtkLabel 89 23 74 18) = 54
+write(1, "\n", 1
+write(1, "[0x3d124490] GtkLabel\theight for"..., 72[0x3d124490] GtkLabel	height for width: -1 is minimum 18 and natural: 18) = 72
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "[0x3d124490] GtkLabel\twidth for "..., 72[0x3d124490] GtkLabel	width for height: -1 is minimum 74 and natural: 74) = 72
+write(1, " (hit cache: yes)\n", 18 (hit cache: yes)
+write(1, "gtk_widget_set_clip:            "..., 55gtk_widget_set_clip:              GtkLabel 89 23 74 18
+write(1, "gtk_widget_set_clip:            "..., 51gtk_widget_set_clip:            GtkBox 89 23 74 18
+write(1, "gtk_widget_set_clip:          Gt"..., 56gtk_widget_set_clip:          GtkHeaderBar 26 23 200 18
+write(3, "\1\0\0\0\0\0\0\0", 8)         = 8

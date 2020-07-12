@@ -1,0 +1,251 @@
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "Using Wayland-EGL\n", 18Using Wayland-EGL
+write(2, "int main(int, char**) Running on"..., 90int main(int, char**) Running on non-MIR desktop, not requiring authentication by default
+write(2, "Trying to load QML from: \"/usr/s"..., 132Trying to load QML from: "/usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/lib/aarch64-linux-gnu/bin/qml/filemanager.qml"
+write(2, "Trying to load QML from: \"/usr/s"..., 106Trying to load QML from: "/usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/filemanager.qml"
+write(2, "using main qml file from: \"/usr/"..., 107using main qml file from: "/usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/filemanager.qml"
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(2, "bool PamAuthentication::requireA"..., 84bool PamAuthentication::requireAuthentication() Querying if authentication required
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(2, "bool PamAuthentication::requireA"..., 67bool PamAuthentication::requireAuthentication() Return value false
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "inotify_add_watch(\"/media/phable"..., 72inotify_add_watch("/media/phablet") failed: "No such file or directory"
+write(2, "void PlacesModel::initNewUserMou"..., 114void PlacesModel::initNewUserMountsWatcher() Start watching mtab file for new mounts, using: ("/etc/mtab") and ()
+write(2, "void PlacesModel::rescanMtab() r"..., 59void PlacesModel::rescanMtab() rescanning mtab "/etc/mtab"
+write(2, "void PlacesModel::rescanMtab() C"..., 85void PlacesModel::rescanMtab() Considering fsName: "sysfs" dir: "/sys" type: "sysfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 84void PlacesModel::rescanMtab() Considering fsName: "proc" dir: "/proc" type: "proc"
+write(2, "void PlacesModel::rescanMtab() C"..., 87void PlacesModel::rescanMtab() Considering fsName: "udev" dir: "/dev" type: "devtmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 91void PlacesModel::rescanMtab() Considering fsName: "devpts" dir: "/dev/pts" type: "devpts"
+write(2, "void PlacesModel::rescanMtab() C"..., 85void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/run" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 99void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/userdata" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 90void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p9" dir: "/" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 88void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/android" type: "tmpfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 103void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/android/data" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 85void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/run" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 91void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/etc/fstab" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 117void PlacesModel::rescanMtab() Considering fsName: "/dev/disk/by-partlabel/cache" dir: "/android/cache" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 117void PlacesModel::rescanMtab() Considering fsName: "/dev/disk/by-partlabel/boot_a" dir: "/android/boot" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 121void PlacesModel::rescanMtab() Considering fsName: "/dev/disk/by-partlabel/persist" dir: "/android/persist" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 116void PlacesModel::rescanMtab() Considering fsName: "/dev/disk/by-partlabel/boot_a" dir: "/lib/modules" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 109void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/ureadahead" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 94void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/sys/fs/cgroup" type: "tmpfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 99void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/sys/kernel/debug" type: "debugfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 105void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/sys/kernel/security" type: "securityfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 85void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/tmp" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 89void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/run/lock" type: "tmpfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 88void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/run/shm" type: "tmpfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 89void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/run/user" type: "tmpfs"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 95void PlacesModel::rescanMtab() Considering fsName: "none" dir: "/sys/fs/pstore" type: "pstore"
+write(2, "bool PlacesModel::isMtabEntryUse"..., 108bool PlacesModel::isMtabEntryUserMount(const QMtabEntry&) const Ignoring mounts with filesystem name 'none'
+write(2, "void PlacesModel::rescanMtab() C"..., 128void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/NetworkManager/system-connections" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 95void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/home" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 87void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/media" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 98void PlacesModel::rescanMtab() Considering fsName: "cgmfs" dir: "/run/cgmanager/fs" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 104void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/cpuset" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 111void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/opt/click.ubuntu.com" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 120void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/AccountsService/users" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 101void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/cpu" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 109void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/aethercast" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 105void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/cpuacct" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 103void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/dbus" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 109void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/extrausers" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 103void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/blkio" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 104void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/memory" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 108void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/logrotate" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 113void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/NetworkManager" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 105void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/devices" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 104void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/ofono" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 108void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/var/lib/openvpn/chroot/tmp" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 105void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/freezer" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 109void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/PackageKit" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 108void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/bluetooth" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 108void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/perf_event" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 106void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/lightdm" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 111void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/lightdm-data" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 105void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/hugetlb" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 94void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/var/lib/sudo" type: "tmpfs"
+write(2, "void PlacesModel::rescanMtab() C"..., 111void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/system-image" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 102void PlacesModel::rescanMtab() Considering fsName: "cgroup" dir: "/sys/fs/cgroup/pids" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 111void PlacesModel::rescanMtab() Considering fsName: "name=systemd" dir: "/sys/fs/cgroup/systemd" type: "cgroup"
+write(2, "void PlacesModel::rescanMtab() C"..., 106void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/systemd" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 105void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/upower" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 110void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/usermetrics" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 122void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/ubuntu-location-service" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 98void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/log" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 106void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/default/ufw" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 98void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/ufw" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 111void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/apparmor.d/cache" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 109void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/cache/apparmor" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 107void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/apparmor" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 98void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/ssh" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 112void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/init/ssh.override" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 103void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/writable" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 106void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/urfkill" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 103void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/var/lib/misc" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 110void PlacesModel::rescanMtab() Considering fsName: "/dev/mmcblk2p10" dir: "/etc/network/if-up.d" type: "ext4"
+write(2, "void PlacesModel::rescanMtab() C"..., 96void PlacesModel::rescanMtab() Considering fsName: "tmpfs" dir: "/run/user/32011" type: "tmpfs"
+write(2, "Location:  \"/home/phablet\"\n", 27Location:  "/home/phablet"
+write(2, "Location:  \"/home/phablet/Docume"..., 37Location:  "/home/phablet/Documents"
+write(2, "Location:  \"/home/phablet/Downlo"..., 37Location:  "/home/phablet/Downloads"
+write(2, "Location:  \"/home/phablet/Music\""..., 33Location:  "/home/phablet/Music"
+write(2, "Location:  \"/home/phablet/Pictur"..., 36Location:  "/home/phablet/Pictures"
+write(2, "Location:  \"/home/phablet/Videos"..., 34Location:  "/home/phablet/Videos"
+write(2, "Location:  \"smb://\"\n", 20Location:  "smb://"
+write(2, "Location:  \"/\"\n", 15Location:  "/"
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "file:///usr/share/click/preinsta"..., 175file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/components/SidebarPageLayout.qml:26:5: QML ResizeableSidebar: Binding loop detected for property "width"
+write(2, "void DirModel::setPath(const QSt"..., 156void DirModel::setPath(const QString&, const QString&, const QString&, bool) DirModel_QML_75(0x2c6e2c30) Ignoring path change request, QML is not ready yet
+write(2, "file:///usr/share/click/preinsta"..., 198file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/ui/FolderListPageSelectionHeader.qml:24:37: QML FolderDelegateActions: Binding loop detected for property "fileOperationDialog"
+write(2, "file:///usr/share/click/preinsta"..., 190file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/ui/FolderListPageSelectionHeader.qml:24:37: QML FolderDelegateActions: Binding loop detected for property "openDefault"
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(11, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "qml: [SidebarPageLayout] Sidebar"..., 40qml: [SidebarPageLayout] Sidebar loaded
+write(19, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(19, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(19, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(2, "file:///usr/share/click/preinsta"..., 147file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/views/FolderDelegateActions.qml:147:22: Unable to assign [undefined] to bool
+write(2, "file:///usr/share/click/preinsta"..., 144file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/views/FolderDelegateActions.qml:152: ReferenceError: model is not defined
+write(2, "file:///usr/share/click/preinsta"..., 144file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/views/FolderDelegateActions.qml:210: ReferenceError: model is not defined
+write(2, "Using the 'xdg-shell-v6' shell i"..., 43Using the 'xdg-shell-v6' shell integration
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(2, "file:///usr/share/click/preinsta"..., 155file:///usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/qml/components/EmptyState.qml:40:5: QML Item: Binding loop detected for property "width"
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(25, "8182\ncom.ubuntu.filemanager\nubun"..., 43) = 43
+write(26, "[General]\ncollapsedSidebar=false"..., 149) = 149
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(14, "\1\0\0\0\0\0\0\0", 8)        = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8
+write(6, "\1\0\0\0\0\0\0\0", 8)         = 8

@@ -1,0 +1,11 @@
+sendmsg(4, {msg_name(0)=NULL, msg_iov(1)=[{"\0", 1}], msg_controllen=32, [{cmsg_len=28, cmsg_level=SOL_SOCKET, cmsg_type=SCM_CREDENTIALS, {pid=11798, uid=32011, gid=32011}}], msg_flags=0}, MSG_NOSIGNAL) = 1
+sendmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\1\0\0\0\1\0\f\0\2\0\0\0\1\0\0\0\0\0\f\0\3\0\0\0", 24}], msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 24
+recvmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0\34\0\1\0\0\0\7\0\0\0wl_drm\0\0\2\0\0\0\2\0\0\0"..., 4096}], msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 400
+sendmsg(7, {msg_name(0)=NULL, msg_iov(1)=[{"\2\0\0\0\0\0(\0\3\0\0\0\16\0\0\0wl_compositor\0\0\0"..., 320}], msg_controllen=0, msg_flags=0}, MSG_DONTWAIT|MSG_NOSIGNAL) = 320
+recvmsg(7, {msg_name(0)=NULL, msg_iov(2)=[{"\6\0\0\0\0\0H\0\0\0\0\0\0\0\0\0D\0\0\0\210\0\0\0\0\0\0\0\22\0\0\0"..., 3696}, {"", 400}], msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 220
+sendmsg(8, {msg_name(0)=NULL, msg_iov(2)=[{"l\1\0\1\0\0\0\0\1\0\0\0n\0\0\0\1\1o\0\25\0\0\0/org/fre"..., 128}, {"", 0}], msg_controllen=0, msg_flags=0}, MSG_NOSIGNAL) = 128
+recvmsg(8, {msg_name(0)=NULL, msg_iov(1)=[{"l\2\1\1\v\0\0\0\1\0\0\0=\0\0\0\6\1s\0\6\0\0\0:1.111\0\0"..., 2048}], msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_CMSG_CLOEXEC) = 262
+recvmsg(8, 0xffffe44fd7e0, MSG_CMSG_CLOEXEC) = -1 EAGAIN (Resource temporarily unavailable)
+sendmsg(8, {msg_name(0)=NULL, msg_iov(2)=[{"l\1\0\1\0\0\0\0\2\0\0\0[\0\0\0\1\1o\0\r\0\0\0/org/a11"..., 112}, {"", 0}], msg_controllen=0, msg_flags=0}, MSG_NOSIGNAL) = 112
+recvmsg(8, {msg_name(0)=NULL, msg_iov(1)=[{"l\3\1\1A\0\0\0\3\0\0\0u\0\0\0\6\1s\0\6\0\0\0:1.111\0\0"..., 2048}], msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_CMSG_CLOEXEC) = 201
+recvmsg(8, 0xffffe44fd8e0, MSG_CMSG_CLOEXEC) = -1 EAGAIN (Resource temporarily unavailable)
