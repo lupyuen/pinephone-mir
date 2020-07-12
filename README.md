@@ -267,6 +267,12 @@ Wayland Server seems to return a valid response.
 
 ## File Manager Wayland Messages
 
+Filter Wayland Messages for File Manager...
+
+```bash
+grep "msg(" filemanager-strace.log >filemanager-msg.log
+```
+
 Wayland Messages for File Manager: [`logs/filemanager-msg.log`](logs/filemanager-msg.log)
 
 ```
