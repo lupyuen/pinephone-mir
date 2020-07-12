@@ -110,7 +110,7 @@ Check the `strace` log in...
 
     - [`strace` Log](logs/egl-strace.log)
 
-    - Crashes with a Segmentation Fault. Now investigating with GDB. (See next section)
+    - Runs OK, renders a yellow rectangle
 
 1. File Manager App
 
