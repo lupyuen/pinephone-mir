@@ -467,6 +467,12 @@ msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 
 
 ## Build GTK Toolkit Library on PinePhone with Ubuntu Touch
 
+_Why build GTK Library?_
+
+Because according to `gdb`, our GTK App crashed in `libgdk-3.so`, a GTK Shared Library which has no debug symbols.
+
+So by building GTK Library ourselves and linking our app to the GTK Static Library, we might find out why it crashed.
+
 ```bash
 # Install gobject-introspection Library. Must be installed before pip3 because it messes up Python.
 sudo apt install libgirepository1.0-dev
