@@ -483,7 +483,7 @@ sudo apt install libgirepository1.0-dev
 # Remove outdated glib-compile-resources, it fails the sassc build with error: The "dependencies" argument of gnome.compile_resources() can not be used with the current version of glib-compile-resources due to <https://bugzilla.gnome.org/show_bug.cgi?id=774368>"
 sudo mv /usr/bin/glib-compile-resources /usr/bin/glib-compile-resources-old
 
-# Fix python3 as default for python
+# Fix python3 as default for python. Needed by meson and ninja.
 sudo mv /usr/bin/python /usr/bin/python.old
 sudo ln -s /usr/bin/python3 /usr/bin/python
 python --version
