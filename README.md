@@ -474,8 +474,14 @@ Because according to `gdb`, our GTK App crashed in `libgdk-3.so`, a GTK Shared L
 So by building GTK Library ourselves and linking our app to the GTK Static Library, we might find out why it crashed.
 
 ```bash
+# Make system folders writeable
+sudo mount -o remount,rw /
+
 # Install gobject-introspection Library. Must be installed before pip3 because it messes up Python.
 sudo apt install libgirepository1.0-dev
+
+# Remove outdated glib-compile-resources, it fails the sassc build with error: The "dependencies" argument of gnome.compile_resources() can not be used with the current version of glib-compile-resources due to <https://bugzilla.gnome.org/show_bug.cgi?id=774368>"
+sudo mv /usr/bin/glib-compile-resources /usr/bin/glib-compile-resources-old
 
 # Fix python3 as default for python
 sudo mv /usr/bin/python /usr/bin/python.old
@@ -498,6 +504,13 @@ git clone https://github.com/ninja-build/ninja
 cd ninja
 ./configure.py --bootstrap
 sudo cp ninja /usr/bin
+
+# Build GLib (to update glib-compile-resources)
+cd ~
+git clone https://gitlab.gnome.org/GNOME/glib
+cd glib
+meson _build
+ninja -C _build
 
 # Build GTK
 cd ~
