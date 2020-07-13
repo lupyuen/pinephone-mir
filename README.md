@@ -465,6 +465,44 @@ recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\31\0\0\0\0\0\10\0\27\0\0\0\0\0\f\0\
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
 ```
 
+## Build GTK Toolkit Library on PinePhone
+
+```bash
+# Install gobject-introspection Library. Must be installed before pip3 because it messes up Python.
+sudo apt install libgirepository1.0-dev
+
+# Fix python3 as default for python
+sudo mv /usr/bin/python /usr/bin/python.old
+sudo ln -s /usr/bin/python3 /usr/bin/python
+python --version
+# Should show "Python 3.5.2"
+
+# Install pip3
+cd ~
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+sudo -H python get-pip.py
+
+# Install Meson
+sudo -H pip3 install meson
+sudo ln -s /usr/local/bin/meson /usr/bin
+
+# Install Ninja
+cd ~
+git clone https://github.com/ninja-build/ninja
+cd ninja
+./configure.py --bootstrap
+sudo cp ninja /usr/bin
+
+# Build GTK
+cd ~
+git clone https://gitlab.gnome.org/GNOME/gtk.git
+cd gtk
+meson wrap promote subprojects/glib/subprojects/libffi.wrap
+meson wrap promote subprojects/pango/subprojects/fribidi.wrap
+meson wrap promote subprojects/pango/subprojects/harfbuzz.wrap
+meson _build .
+```
+
 ## Wayland Compositor for Ubuntu Touch: `unity-system-compositor`
 
 TODO
