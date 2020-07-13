@@ -2,6 +2,9 @@
 
 set -e -x
 
+# Update source files
+git pull
+
 # Build app
 gcc \
     -g \
@@ -18,7 +21,10 @@ sudo cp gtk /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanag
 sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/gtk
 ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/gtk
 
-# Start the File Manager
+# Copy run script to File Manager folder
+sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/gtk
+
+# Start the File Manager manually
 echo "*** Tap on File Manager icon on PinePhone"
 
 # Monitor the log file

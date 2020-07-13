@@ -134,9 +134,9 @@ To debug `gtk` app with GDB...
 ```bash
 sudo bash
 
-apt install gdb
-
 mount -o remount,rw /
+
+apt install gdb
 
 cd /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ```
@@ -147,7 +147,13 @@ Change `run.sh` to...
 #!/bin/bash
 gdb \
     -ex=r \
-    -ex=bt \
+    -ex="show auto-solib-add" \
+    -ex="info sharedlibrary" \
+    -ex="info sources" \
+    -ex="bt" \
+    -ex="frame" \
+    -ex="info locals" \
+    -ex="info args" \
     --args ./gtk
 ```
 
