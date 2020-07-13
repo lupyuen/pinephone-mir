@@ -22,7 +22,7 @@ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com
 ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/gtk
 
 # Copy run script to File Manager folder
-sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/gtk
+sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 
 # Start the File Manager manually
 echo "*** Tap on File Manager icon on PinePhone"
