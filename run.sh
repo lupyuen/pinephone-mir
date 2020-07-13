@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Debug gtk app
 gdb \
     -ex="r" \
     -ex="show auto-solib-add" \
@@ -10,10 +12,12 @@ gdb \
     -ex="info args" \
     --args ./gtk
 
+# strace gtk app
 # ./strace \
 #    -s 1024 \
 #    ./gtk
 
+# strace File Manager
 # ./strace \
 #     -s 1024 \
 #     filemanager

@@ -146,14 +146,8 @@ Change `run.sh` to...
 ```
 #!/bin/bash
 gdb \
-    -ex=r \
-    -ex="show auto-solib-add" \
-    -ex="info sharedlibrary" \
-    -ex="info sources" \
+    -ex="r" \
     -ex="bt" \
-    -ex="frame" \
-    -ex="info locals" \
-    -ex="info args" \
     --args ./gtk
 ```
 
