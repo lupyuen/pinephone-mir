@@ -465,7 +465,7 @@ recvmsg(3, {msg_name(0)=NULL, msg_iov(2)=[{"\31\0\0\0\0\0\10\0\27\0\0\0\0\0\f\0\
 msg_controllen=0, msg_flags=MSG_CMSG_CLOEXEC}, MSG_DONTWAIT|MSG_CMSG_CLOEXEC) = 32
 ```
 
-## Build GTK Toolkit Library on PinePhone
+## Build GTK Toolkit Library on PinePhone with Ubuntu Touch
 
 ```bash
 # Install gobject-introspection Library. Must be installed before pip3 because it messes up Python.
@@ -501,6 +501,45 @@ meson wrap promote subprojects/glib/subprojects/libffi.wrap
 meson wrap promote subprojects/pango/subprojects/fribidi.wrap
 meson wrap promote subprojects/pango/subprojects/harfbuzz.wrap
 meson _build .
+```
+
+Stops with this error...
+
+```
+|Executing subproject sassc method meson 
+|
+|Project name: sassc
+|Project version: 3.5.0.99
+|C compiler for the host machine: cc (gcc 5.4.0 "cc (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
+|C linker for the host machine: cc ld.bfd 2.26.1
+|Configuring sassc_version.h using configuration
+|Run-time dependency libsass found: NO (tried pkgconfig and cmake)
+|Looking for a fallback subproject for the dependency libsass
+|
+||Executing subproject libsass method meson 
+||
+||Project name: libsass
+||Project version: 3.5.5.99
+||C compiler for the host machine: cc (gcc 5.4.0 "cc (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
+||C linker for the host machine: cc ld.bfd 2.26.1
+||C++ compiler for the host machine: c++ (gcc 5.4.0 "c++ (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609")
+||C++ linker for the host machine: c++ ld.bfd 2.26.1
+||Compiler for C++ supports arguments -Wno-non-virtual-dtor -Wnon-virtual-dtor: YES 
+||Configuring version.h using configuration
+||Library dl found: YES
+||Configuring libsass.pc using configuration
+||Build targets in project: 800
+||Subproject libsass finished.
+|
+|Dependency libsass from subproject subprojects/libsass found: YES 3.5.5.99
+|Build targets in project: 801
+|Subproject sassc finished.
+
+Program sassc found: YES (overriden)
+
+gtk/meson.build:845:0: ERROR: The "dependencies" argument of gnome.compile_resources() can not
+be used with the current version of glib-compile-resources due to
+<https://bugzilla.gnome.org/show_bug.cgi?id=774368>
 ```
 
 ## Wayland Compositor for Ubuntu Touch: `unity-system-compositor`
