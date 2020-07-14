@@ -14,7 +14,7 @@ int main()
                                        200, 200, 0); 
 
     //  Get window surface
-    screenSurface = SDL_GetWindowSurface( window );
+    SDL_Surface *screenSurface = SDL_GetWindowSurface( window );
 
     //  Fill the surface cyan
     SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0xFF, 0xFF ) );
