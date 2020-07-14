@@ -3,6 +3,7 @@
 //  Based on https://bugaevc.gitbooks.io/writing-wayland-clients/black-square/the-complete-code.html
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 #include <syscall.h>
 #include <unistd.h>
@@ -91,7 +92,7 @@ int main(void)
 
     // turn it into a shared memory pool
     assert(shell != NULL);
-    puts("Creating shared memory pool...")
+    puts("Creating shared memory pool...");
     struct wl_shm_pool *pool = wl_shm_create_pool(shm, fd, size);
     assert(pool != NULL);
 
