@@ -480,6 +480,10 @@ sudo mount -o remount,rw /
 # Install gobject-introspection Library. Must be installed before pip3 because it messes up Python.
 sudo apt install libgirepository1.0-dev
 
+# On Arch Linux: 
+# sudo pacman -S gobject-introspection
+# sudo pacman -S gstreamer
+
 # Remove outdated glib-compile-resources, it fails the sassc build with error: The "dependencies" argument of gnome.compile_resources() can not be used with the current version of glib-compile-resources due to <https://bugzilla.gnome.org/show_bug.cgi?id=774368>"
 sudo mv /usr/bin/glib-compile-resources /usr/bin/glib-compile-resources-old
 
