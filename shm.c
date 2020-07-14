@@ -1,120 +1,299 @@
 //  Wayland App that uses Shared Memory to render graphics on PinePhone with Ubuntu Touch.
-//  Note: This app causes PinePhone to crash after the last line "wl_display_disconnect()".
 //  To build and run on PinePhone, see shm.sh.
-//  Based on https://bugaevc.gitbooks.io/writing-wayland-clients/black-square/the-complete-code.html
+//  Based on https://jan.newmarch.name/Wayland/SharedMemory/
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <assert.h>
-
-#include <syscall.h>
-#include <unistd.h>
-#include <sys/mman.h>
-
 #include <wayland-client.h>
+//#include <wayland-server.h>
+#include <wayland-client-protocol.h>
+#include <wayland-egl.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <errno.h>
+#include <unistd.h>
 
-struct wl_compositor *compositor;
-struct wl_shm *shm;
+
+struct wl_display *display = NULL;
+struct wl_compositor *compositor = NULL;
+struct wl_surface *surface;
 struct wl_shell *shell;
+struct wl_shell_surface *shell_surface;
+struct wl_shm *shm;
+struct wl_buffer *buffer;
 
-void registry_global_handler
-(
-    void *data,
-    struct wl_registry *registry,
-    uint32_t name,
-    const char *interface,
-    uint32_t version
-) {
-    if (strcmp(interface, "wl_compositor") == 0) {
-        puts("Got compositor");
-        compositor = wl_registry_bind(registry, name,
-            &wl_compositor_interface, 3);
-    } else if (strcmp(interface, "wl_shm") == 0) {
-        puts("Got shared memory");
-        shm = wl_registry_bind(registry, name,
-            &wl_shm_interface, 1);
-    } else if (strcmp(interface, "wl_shell") == 0) {
-        puts("Got shell");
-        shell = wl_registry_bind(registry, name,
-            &wl_shell_interface, 1);
+void *shm_data;
+
+int WIDTH = 480;
+int HEIGHT = 360;
+
+static void
+handle_ping(void *data, struct wl_shell_surface *shell_surface,
+							uint32_t serial)
+{
+    wl_shell_surface_pong(shell_surface, serial);
+    fprintf(stderr, "Pinged and ponged\n");
+}
+
+static void
+handle_configure(void *data, struct wl_shell_surface *shell_surface,
+		 uint32_t edges, int32_t width, int32_t height)
+{
+}
+
+static void
+handle_popup_done(void *data, struct wl_shell_surface *shell_surface)
+{
+}
+
+static const struct wl_shell_surface_listener shell_surface_listener = {
+	handle_ping,
+	handle_configure,
+	handle_popup_done
+};
+
+static int
+set_cloexec_or_close(int fd)
+{
+        long flags;
+
+        if (fd == -1)
+                return -1;
+
+        flags = fcntl(fd, F_GETFD);
+        if (flags == -1)
+                goto err;
+
+        if (fcntl(fd, F_SETFD, flags | FD_CLOEXEC) == -1)
+                goto err;
+
+        return fd;
+
+err:
+        close(fd);
+        return -1;
+}
+
+static int
+create_tmpfile_cloexec(char *tmpname)
+{
+        int fd;
+
+#ifdef HAVE_MKOSTEMP
+        fd = mkostemp(tmpname, O_CLOEXEC);
+        if (fd >= 0)
+                unlink(tmpname);
+#else
+        fd = mkstemp(tmpname);
+        if (fd >= 0) {
+                fd = set_cloexec_or_close(fd);
+                unlink(tmpname);
+        }
+#endif
+
+        return fd;
+}
+
+/*
+ * Create a new, unique, anonymous file of the given size, and
+ * return the file descriptor for it. The file descriptor is set
+ * CLOEXEC. The file is immediately suitable for mmap()'ing
+ * the given size at offset zero.
+ *
+ * The file should not have a permanent backing store like a disk,
+ * but may have if XDG_RUNTIME_DIR is not properly implemented in OS.
+ *
+ * The file name is deleted from the file system.
+ *
+ * The file is suitable for buffer sharing between processes by
+ * transmitting the file descriptor over Unix sockets using the
+ * SCM_RIGHTS methods.
+ */
+int
+os_create_anonymous_file(off_t size)
+{
+        static const char template[] = "/weston-shared-XXXXXX";
+        const char *path;
+        char *name;
+        int fd;
+
+        path = getenv("XDG_RUNTIME_DIR");
+        if (!path) {
+                errno = ENOENT;
+                return -1;
+        }
+
+        name = malloc(strlen(path) + sizeof(template));
+        if (!name)
+                return -1;
+        strcpy(name, path);
+        strcat(name, template);
+
+        fd = create_tmpfile_cloexec(name);
+
+        free(name);
+
+        if (fd < 0)
+                return -1;
+
+        if (ftruncate(fd, size) < 0) {
+                close(fd);
+                return -1;
+        }
+
+        return fd;
+}
+
+static void
+paint_pixels() {
+    int n;
+    uint32_t *pixel = shm_data;
+
+    fprintf(stderr, "Painting pixels\n");
+    for (n =0; n < WIDTH*HEIGHT; n++) {
+	*pixel++ = 0xffff;
     }
 }
 
-void registry_global_remove_handler
-(
-    void *data,
-    struct wl_registry *registry,
-    uint32_t name
-) {}
+static struct wl_buffer *
+create_buffer() {
+    struct wl_shm_pool *pool;
+    int stride = WIDTH * 4; // 4 bytes per pixel
+    int size = stride * HEIGHT;
+    int fd;
+    struct wl_buffer *buff;
 
-const struct wl_registry_listener registry_listener = {
-    .global = registry_global_handler,
-    .global_remove = registry_global_remove_handler
+    fd = os_create_anonymous_file(size);
+    if (fd < 0) {
+	fprintf(stderr, "creating a buffer file for %d B failed: %m\n",
+		size);
+	exit(1);
+    }
+    
+    shm_data = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    if (shm_data == MAP_FAILED) {
+	fprintf(stderr, "mmap failed: %m\n");
+	close(fd);
+	exit(1);
+    }
+
+    pool = wl_shm_create_pool(shm, fd, size);
+    buff = wl_shm_pool_create_buffer(pool, 0,
+					  WIDTH, HEIGHT,
+					  stride, 	
+					  WL_SHM_FORMAT_XRGB8888);
+    //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
+    wl_shm_pool_destroy(pool);
+    return buff;
+}
+
+static void
+create_window() {
+
+    buffer = create_buffer();
+
+    wl_surface_attach(surface, buffer, 0, 0);
+    //wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);
+    wl_surface_commit(surface);
+}
+
+static void
+shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
+{
+    //struct display *d = data;
+
+    //	d->formats |= (1 << format);
+    fprintf(stderr, "Format %d\n", format);
+}
+
+struct wl_shm_listener shm_listener = {
+	shm_format
 };
 
-int main(void)
+static void
+global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
+	       const char *interface, uint32_t version)
 {
-    struct wl_display *display = wl_display_connect(NULL);
+    if (strcmp(interface, "wl_compositor") == 0) {
+        compositor = wl_registry_bind(registry, 
+				      id, 
+				      &wl_compositor_interface, 
+				      1);
+    } else if (strcmp(interface, "wl_shell") == 0) {
+        shell = wl_registry_bind(registry, id,
+                                 &wl_shell_interface, 1);
+    } else if (strcmp(interface, "wl_shm") == 0) {
+        shm = wl_registry_bind(registry, id,
+                                 &wl_shm_interface, 1);
+	wl_shm_add_listener(shm, &shm_listener, NULL);
+       
+    }
+}
+
+static void
+global_registry_remover(void *data, struct wl_registry *registry, uint32_t id)
+{
+    printf("Got a registry losing event for %d\n", id);
+}
+
+static const struct wl_registry_listener registry_listener = {
+    global_registry_handler,
+    global_registry_remover
+};
+
+
+int main(int argc, char **argv) {
+
+    display = wl_display_connect(NULL);
+    if (display == NULL) {
+	fprintf(stderr, "Can't connect to display\n");
+	exit(1);
+    }
+    printf("connected to display\n");
+
     struct wl_registry *registry = wl_display_get_registry(display);
     wl_registry_add_listener(registry, &registry_listener, NULL);
 
-    // wait for the "initial" set of globals to appear
+    wl_display_dispatch(display);
     wl_display_roundtrip(display);
 
-    puts("Creating surface...");
-    assert(compositor != NULL);    
-    struct wl_surface *surface = wl_compositor_create_surface(compositor);
-    assert(surface != NULL);
-
-    assert(shell != NULL);
-    puts("Getting shell surface...");
-    struct wl_shell_surface *shell_surface = wl_shell_get_shell_surface(shell, surface);
-    assert(shell_surface != NULL);
-
-    puts("Setting top level shell surface...");
-    wl_shell_surface_set_toplevel(shell_surface);
-
-    int width = 200;
-    int height = 200;
-    int stride = width * 4;
-    int size = stride * height;  // bytes
-
-    // open an anonymous file and write some zero bytes to it
-    puts("Creating anonymous file...");
-    int fd = syscall(SYS_memfd_create, "buffer", 0);
-    assert(fd >= 0);
-
-    puts("Truncating anonymous file...");
-    ftruncate(fd, size);
-
-    // map it to the memory
-    puts("Mapping anonymous file to memory...");
-    unsigned char *data = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-    assert(data != NULL);
-
-    // turn it into a shared memory pool
-    assert(shell != NULL);
-    puts("Creating shared memory pool...");
-    struct wl_shm_pool *pool = wl_shm_create_pool(shm, fd, size);
-    assert(pool != NULL);
-
-    // allocate the buffer in that pool
-    puts("Creating shared memory pool buffer...");
-    struct wl_buffer *buffer = wl_shm_pool_create_buffer(pool,
-        0, width, height, stride, WL_SHM_FORMAT_XRGB8888);
-    assert(buffer != NULL);
-
-    puts("Attaching surface...");
-    wl_surface_attach(surface, buffer, 0, 0);
-
-    puts("Commiting surface...");
-    wl_surface_commit(surface);
-
-    puts("Starting display loop...");
-    while (wl_display_dispatch(display) != -1)
-    {
-        ;
+    if (compositor == NULL) {
+	fprintf(stderr, "Can't find compositor\n");
+	exit(1);
+    } else {
+	fprintf(stderr, "Found compositor\n");
     }
 
-    puts("Disconnecting from display...");
+    surface = wl_compositor_create_surface(compositor);
+    if (surface == NULL) {
+	fprintf(stderr, "Can't create surface\n");
+	exit(1);
+    } else {
+	fprintf(stderr, "Created surface\n");
+    }
+
+    shell_surface = wl_shell_get_shell_surface(shell, surface);
+    if (shell_surface == NULL) {
+	fprintf(stderr, "Can't create shell surface\n");
+	exit(1);
+    } else {
+	fprintf(stderr, "Created shell surface\n");
+    }
+    wl_shell_surface_set_toplevel(shell_surface);
+
+    wl_shell_surface_add_listener(shell_surface,
+				  &shell_surface_listener, NULL);
+
+
+    create_window();
+    paint_pixels();
+
+    while (wl_display_dispatch(display) != -1) {
+	;
+    }
+
     wl_display_disconnect(display);
+    printf("disconnected from display\n");
+    
+    exit(0);
 }
