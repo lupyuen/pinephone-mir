@@ -2,6 +2,9 @@
 
 set -e -x
 
+# TODO: Install GLES2 library
+# sudo apt install libgles2-mesa-dev
+
 # Build app
 gcc \
     -o egl2 \
