@@ -39,7 +39,7 @@ gdb \
     -ex="r" \
     -ex="bt" \
     -ex="frame" \
-    --args ./sdl
+    --args ./filemanager.ubuntu.com.filemanager
 
 # Debug gtk app
 # gdb \

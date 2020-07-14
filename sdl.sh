@@ -18,9 +18,13 @@ gcc \
 sudo mount -o remount,rw /
 
 # Copy app to File Manager folder
-sudo cp sdl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
-sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
-ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+# sudo cp sdl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+# sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+# ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+
+sudo cp sdl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.ubuntu.com.filemanager
+sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.ubuntu.com.filemanager
+ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.ubuntu.com.filemanager
 
 # Copy run script to File Manager folder
 # TODO: Check that run.sh contains "./sdl"
