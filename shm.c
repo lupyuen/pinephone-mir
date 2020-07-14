@@ -189,7 +189,7 @@ create_buffer()
                                      stride,
                                      WL_SHM_FORMAT_XRGB8888);
     //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
-    wl_shm_pool_destroy(pool);
+    //// TODO: wl_shm_pool_destroy(pool);
     return buff;
 }
 
