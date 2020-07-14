@@ -1,5 +1,9 @@
 # Build and install Wayland SDL app
 
+# TODO: Install SDL2 library
+# sudo mount -o remount,rw /
+# sudo apt install libsdl2-dev libsdl2-dbg
+
 # Kill the app if it's already running
 pkill sdl
 
