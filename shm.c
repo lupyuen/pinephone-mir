@@ -1,4 +1,5 @@
 //  Wayland App that uses Shared Memory to render graphics on PinePhone with Ubuntu Touch.
+//  Note: This app causes PinePhone to crash after the last line "wl_display_disconnect()".
 //  To build and run on PinePhone, see shm.sh.
 //  Based on https://bugaevc.gitbooks.io/writing-wayland-clients/black-square/the-complete-code.html
 #include <stdio.h>
