@@ -1,7 +1,6 @@
 //  EGL Wayland App that renders simple graphics on PinePhone with Ubuntu Touch.
 //  To build and run on PinePhone, see egl2.sh.
 //  Based on https://jan.newmarch.name/Wayland/EGL/
-//  and https://www3.ntu.edu.sg/home/ehchua/programming/opengl/cg_introduction.html
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,20 +24,10 @@ EGLConfig egl_conf;
 EGLSurface egl_surface;
 EGLContext egl_context;
 
-/* Handler for window-repaint event. Call back when the window first appears and
-   whenever the window needs to be re-painted. */
+/// Render the GLES2 display
 void render_display() {
-   glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+   glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
- 
-   // Draw a Red 1x1 Square centered at origin
-   glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-      glColor3f(1.0f, 0.0f, 0.0f); // Red
-      glVertex2f(-0.5f, -0.5f);    // x, y
-      glVertex2f( 0.5f, -0.5f);
-      glVertex2f( 0.5f,  0.5f);
-      glVertex2f(-0.5f,  0.5f);
-   glEnd();
  
    glFlush();  // Render now
 }
