@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Log Wayland messages
+export WAYLAND_DEBUG=1
+
 # Run shm app
 ./shm
 
