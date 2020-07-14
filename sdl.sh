@@ -22,7 +22,7 @@ gcc \
     -g \
     -o sdl \
     sdl.c \
-    -wl,-L/usr/local/lib \
+    -Wl,-L/usr/local/lib \
     -lSDL2 \
     -Wl,-Map=sdl.map
 
