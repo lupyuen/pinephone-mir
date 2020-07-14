@@ -1,23 +1,28 @@
 #!/bin/bash
 
-# Debug gtk app
-gdb \
-    -ex="r" \
-    -ex="show auto-solib-add" \
-    -ex="info sharedlibrary" \
-    -ex="info sources" \
-    -ex="bt" \
-    -ex="frame" \
-    -ex="info locals" \
-    -ex="info args" \
-    --args ./gtk
+# Run egl2 app with strace
+./strace \
+   -s 1024 \
+   ./egl2
 
-# strace gtk app
+# Run gtk app with strace
 # ./strace \
 #    -s 1024 \
 #    ./gtk
 
-# strace File Manager
+# Run File Manager with strace
 # ./strace \
 #     -s 1024 \
 #     filemanager
+
+# Debug gtk app
+# gdb \
+#     -ex="r" \
+#     -ex="show auto-solib-add" \
+#     -ex="info sharedlibrary" \
+#     -ex="info sources" \
+#     -ex="bt" \
+#     -ex="frame" \
+#     -ex="info locals" \
+#     -ex="info args" \
+#     --args ./gtk
