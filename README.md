@@ -145,8 +145,25 @@ Log shows exception and backtrace...
 `/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
 
 ```
+Creating window...
+[3395355.709]  -> wl_compositor@4.create_surface(new id wl_surface@16)
+[3395355.813]  -> zxdg_shell_v6@9.get_xdg_surface(new id zxdg_surface_v6@17, wl_surface@16)
+[3395355.853]  -> zxdg_surface_v6@17.get_toplevel(new id zxdg_toplevel_v6@18)
+[3395355.882]  -> zxdg_toplevel_v6@18.set_app_id("filemanager.ubuntu.com.filemanager")
+[3395355.945]  -> zxdg_toplevel_v6@18.destroy()
+[3395355.982]  -> zxdg_surface_v6@17.destroy()
+[3395356.009]  -> wl_surface@16.destroy()
+filemanager.ubuntu.com.filemanager: sdl.c:24: main: Assertion `window != NULL' failed.
 
+Thread 1 "filemanager.ubu" received signal SIGABRT, Aborted.
+0x0000fffff7d5f568 in raise () from /lib/aarch64-linux-gnu/libc.so.6
+#0  0x0000fffff7d5f568 in raise () from /lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000fffff7d60a20 in abort () from /lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000fffff7d58c44 in ?? () from /lib/aarch64-linux-gnu/libc.so.6
+#3  0x0000000000400e40 in ?? ()
 ```
+
+So SDL2 doesn't work on PinePhone with Ubuntu Touch yet.
 
 ## How to run `strace` on the `gtk` app
 
