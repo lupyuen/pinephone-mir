@@ -4,13 +4,13 @@
 export WAYLAND_DEBUG=1
 
 # Run shm app
-# ./shm
+./shm
 
 # Run egl2 app
 # ./egl2
 
 # Run File Manager
-filemanager
+# filemanager
 
 # Run egl2 app with strace
 # ./strace \
