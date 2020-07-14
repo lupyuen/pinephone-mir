@@ -1,8 +1,15 @@
 # Build and install Wayland SDL app
 
-# TODO: Install SDL2 library
+# TODO: Install SDL2 library that supports Wayland. The "apt" version doesn't support Wayland.
 # sudo mount -o remount,rw /
-# sudo apt install libsdl2-dev libsdl2-dbg
+# wayland-client wayland-scanner wayland-protocols wayland-egl wayland-cursor egl xkbcommon
+# cd ~
+# wget https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
+# tar -xvf ../SDL2-2.0.12.tar.gz 
+# cd SDL2-2.0.12/
+# ./configure --enable-video-wayland --disable-video-x11
+# make
+# sudo make install
 
 # Kill the app if it's already running
 pkill sdl
