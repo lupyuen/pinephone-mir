@@ -10,6 +10,8 @@
 # ./configure --enable-video-wayland --disable-video-x11
 # make
 # sudo make install
+# sudo ln -s /usr/local/lib/libSDL2-2.0.so.0 /usr/lib/aarch64-linux-gnu/
+# sudo ln -s /usr/local/lib/libSDL2.so /usr/lib/aarch64-linux-gnu/
 
 # Kill the app if it's already running
 pkill sdl
@@ -22,7 +24,6 @@ gcc \
     -g \
     -o sdl \
     sdl.c \
-    -Wl,-L/usr/local/lib \
     -lSDL2 \
     -Wl,-Map=sdl.map
 

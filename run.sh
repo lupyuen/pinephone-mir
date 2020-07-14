@@ -4,8 +4,8 @@
 export WAYLAND_DEBUG=1
 
 # Run sdl app
-export SDL_VIDEODRIVER=wayland
-./sdl
+# export SDL_VIDEODRIVER=wayland
+# ./sdl
 
 # Run shm app
 # ./shm
@@ -30,6 +30,19 @@ export SDL_VIDEODRIVER=wayland
 # ./strace \
 #     -s 1024 \
 #     filemanager
+
+# Debug sdl app
+export SDL_VIDEODRIVER=wayland
+gdb \
+    -ex="r" \
+    -ex="show auto-solib-add" \
+    -ex="info sharedlibrary" \
+    -ex="info sources" \
+    -ex="bt" \
+    -ex="frame" \
+    -ex="info locals" \
+    -ex="info args" \
+    --args ./sdl
 
 # Debug gtk app
 # gdb \

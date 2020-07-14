@@ -17,6 +17,8 @@ cd SDL2-2.0.12/
 ./configure --enable-video-wayland --disable-video-x11
 make
 sudo make install
+sudo ln -s /usr/local/lib/libSDL2-2.0.so.0 /usr/lib/aarch64-linux-gnu/
+sudo ln -s /usr/local/lib/libSDL2.so /usr/lib/aarch64-linux-gnu/
 ```
 
 ## Build and Run SDL2 Apps on PinePhone with Ubuntu Touch
