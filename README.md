@@ -482,7 +482,6 @@ sudo apt install libgirepository1.0-dev
 
 # On Arch Linux: 
 # sudo pacman -S gobject-introspection
-# sudo pacman -S gstreamer
 
 # Remove outdated glib-compile-resources, it fails the sassc build with error: The "dependencies" argument of gnome.compile_resources() can not be used with the current version of glib-compile-resources due to <https://bugzilla.gnome.org/show_bug.cgi?id=774368>"
 sudo mv /usr/bin/glib-compile-resources /usr/bin/glib-compile-resources-old
@@ -579,6 +578,32 @@ gtk/meson.build:845:0: ERROR: The "dependencies" argument of gnome.compile_resou
 be used with the current version of glib-compile-resources due to
 <https://bugzilla.gnome.org/show_bug.cgi?id=774368>
 ```
+
+## What I like about Ubuntu Touch on PinePhone
+
+1. __AppArmor is good__, because iOS and Android have similar apps security
+
+1. __Read-only file system is good__ (system files are read-only by default, user files are read-write). Helps to prevent security holes. (Even PineTime has a read-only Flash ROM)
+
+1. __Why is Qt supported on Ubuntu Touch and not GTK?__ Because building a Linux mobile app requires mobile-friendly widgets. 
+
+    I think Qt has more mobile-friendly widgets, even through the internal plumbing is way too complicated. 
+    
+    When I get GTK running on Ubuntu Touch, I will face the same problem with widgets. And I have to make GTK widgets look and feel consistent with Qt / Ubuntu Touch widgets.
+
+1. __Older kernel base__ in Ubuntu Touch... I don't do kernel hacking much so it doesn't matter to me. 
+
+    I think for mobiles we only need to support a few common chipsets, so an older kernel is probably fine. 
+    
+    That explains why Raspberry Pi 4 isnt supported by Ubuntu Touch... The hardware is just too new.
+
+1. The issues I'm struggling with now... Wayland, GTK3, ... are actually really old stuff. Updating the kernel won't help.
+
+1. __Ubuntu Touch is pure Wayland__, none of the legacy X11 stuff. Xwayland is not even there (unless you use the Libertine containers ugh). 
+
+    The pure Wayland environment causes GTK to break, because GTK assumes some minimal X11 support (i.e. Xwayland).
+
+So Ubuntu Touch is not really that bad for PinePhone... It's just painful for building non-Qt apps. 🙂
 
 ## Wayland Compositor for Ubuntu Touch: `unity-system-compositor`
 
