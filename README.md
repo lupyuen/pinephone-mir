@@ -24,7 +24,7 @@ sudo ln -s /usr/local/lib/libSDL2-2.0.so.0 /usr/lib/aarch64-linux-gnu/
 sudo ln -s /usr/local/lib/libSDL2.so /usr/lib/aarch64-linux-gnu/
 ```
 
-## Build and Run SDL2 App on PinePhone with Ubuntu Touch
+## Build SDL2 App on PinePhone with Ubuntu Touch
 
 Check out the sample SDL program [`sdl.c`](sdl.c) and build script [`sdl.sh`](sdl.sh).
 
@@ -41,6 +41,10 @@ gcc \
     -lSDL2 \
     -Wl,-Map=sdl.map
 ```
+
+This generates an executable named `sdl`
+
+## Run SDL2 App on PinePhone with Ubuntu Touch
 
 For rapid testing, we shall replace the File Manager app by our `sdl` app because File Manager has no AppArmor restrictions (Unconfined).
 
@@ -69,6 +73,14 @@ Exec=./run.sh
 ```
 
 Save and exit `nano`
+
+Check that `~/pinephone-mir/run.sh` contains the following...
+
+```bash
+export SDL_VIDEODRIVER=wayland
+export SDL_DEBUG=1
+./sdl
+```
 
 Then enter these commands...
 
@@ -116,6 +128,8 @@ Change the contents of `run.sh` to...
 
 ```
 #!/bin/bash
+export SDL_VIDEODRIVER=wayland
+export SDL_DEBUG=1
 gdb \
     -ex="r" \
     -ex="bt" \
