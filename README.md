@@ -511,13 +511,28 @@ git clone https://gitlab.gnome.org/GNOME/glib
 cd glib
 meson _build
 ninja -C _build
+sudo cp _build/gio/glib-compile-resources /usr/bin
+glib-compile-resources --version
+# Should show "2.65.0"
 
 # Build GTK
 cd ~
 git clone https://gitlab.gnome.org/GNOME/gtk.git
 cd gtk
+meson _build .
+# Will fail with an libffi error
+
+# Promote libffi and rebuild
 meson wrap promote subprojects/glib/subprojects/libffi.wrap
+meson _build .
+# Will fail with a fribidi error
+
+# Promote fribidi and rebuild
 meson wrap promote subprojects/pango/subprojects/fribidi.wrap
+meson _build .
+# Will fail with a harfbuzz error
+
+# Promote harfbuzz and rebuild
 meson wrap promote subprojects/pango/subprojects/harfbuzz.wrap
 meson _build .
 ```
