@@ -35,13 +35,8 @@ export WAYLAND_DEBUG=1
 export SDL_VIDEODRIVER=wayland
 gdb \
     -ex="r" \
-    -ex="show auto-solib-add" \
-    -ex="info sharedlibrary" \
-    -ex="info sources" \
     -ex="bt" \
     -ex="frame" \
-    -ex="info locals" \
-    -ex="info args" \
     --args ./sdl
 
 # Debug gtk app

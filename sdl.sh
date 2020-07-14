@@ -1,18 +1,5 @@
 # Build and install Wayland SDL app
 
-# TODO: Run the steps below to build and install SDL2 library that supports Wayland. The "apt install" version doesn't support Wayland.
-# sudo mount -o remount,rw /
-# sudo apt install wayland-protocols libxkbcommon-dev
-# cd ~
-# wget https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
-# tar -xvf SDL2-2.0.12.tar.gz 
-# cd SDL2-2.0.12/
-# ./configure --enable-video-wayland --disable-video-x11
-# make
-# sudo make install
-# sudo ln -s /usr/local/lib/libSDL2-2.0.so.0 /usr/lib/aarch64-linux-gnu/
-# sudo ln -s /usr/local/lib/libSDL2.so /usr/lib/aarch64-linux-gnu/
-
 # Kill the app if it's already running
 pkill sdl
 

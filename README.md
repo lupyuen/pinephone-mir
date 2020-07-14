@@ -11,9 +11,8 @@ Connect to PinePhone over SSH and run these commands...
 sudo mount -o remount,rw /
 sudo apt install wayland-protocols libxkbcommon-dev
 cd ~
-wget https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
-tar -xvf SDL2-2.0.12.tar.gz 
-cd SDL2-2.0.12/
+git clone https://github.com/lupyuen/SDL-ubuntu-touch
+cd SDL-ubuntu-touch
 ./configure --enable-video-wayland --disable-video-x11
 make
 sudo make install
