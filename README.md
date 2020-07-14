@@ -20,9 +20,11 @@ sudo ln -s /usr/local/lib/libSDL2-2.0.so.0 /usr/lib/aarch64-linux-gnu/
 sudo ln -s /usr/local/lib/libSDL2.so /usr/lib/aarch64-linux-gnu/
 ```
 
-## Build and Run SDL2 Apps on PinePhone with Ubuntu Touch
+## Build and Run SDL2 App on PinePhone with Ubuntu Touch
 
-Check out sample program [`sdl.c`](sdl.c) and build script [`sdl.sh`](sdl.sh)...
+Check out sample SDL program [`sdl.c`](sdl.c) and build script [`sdl.sh`](sdl.sh)...
+
+To build the app on PinePhone via SSH...
 
 ```bash
 gcc \
@@ -31,6 +33,35 @@ gcc \
     sdl.c \
     -lSDL2 \
     -Wl,-Map=sdl.map
+```
+
+For rapid testing, we shall replace the File Manager app by our `sdl` app because File Manager has no AppArmor restrictions (Unconfined).
+
+```bash
+# Make system folders writeable
+sudo mount -o remount,rw /
+
+# Copy app to File Manager folder
+sudo cp sdl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+
+# Copy run script to File Manager folder
+# TODO: Check that run.sh contains "./sdl"
+sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+
+# Start the File Manager
+echo "*** Tap on File Manager icon on PinePhone"
+
+# Monitor the log file
+echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+```
+
+Press `Ctrl-C` to stop the log display. To kill the app...
+
+```bash
+pkill sdl
 ```
 
 ## How to run `strace` on the `gtk` app
