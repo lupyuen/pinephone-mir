@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Run shm app
+./shm
+
 # Run egl2 app
-./egl2
+# ./egl2
 
 # Run egl2 app with strace
 # ./strace \
