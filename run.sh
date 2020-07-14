@@ -5,6 +5,7 @@ export WAYLAND_DEBUG=1
 
 # Run sdl app
 # export SDL_VIDEODRIVER=wayland
+# export SDL_DEBUG=1
 # ./sdl
 
 # Run shm app
@@ -33,6 +34,7 @@ export WAYLAND_DEBUG=1
 
 # Debug sdl app
 export SDL_VIDEODRIVER=wayland
+export SDL_DEBUG=1
 gdb \
     -ex="r" \
     -ex="bt" \
