@@ -10,7 +10,7 @@
 #include <wayland-client-protocol.h>
 #include <wayland-egl.h>
 #include <EGL/egl.h>
-#include <GL/gl.h>
+#include <GL/glext.h>
 //  #include <GLES2/gl2.h>
 
 struct wl_display *display = NULL;

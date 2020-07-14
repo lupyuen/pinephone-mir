@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# Run egl2 app
+./egl2
+
 # Run egl2 app with strace
-./strace \
-   -s 1024 \
-   ./egl2
+# ./strace \
+#    -s 1024 \
+#    ./egl2
 
 # Run gtk app with strace
 # ./strace \

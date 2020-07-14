@@ -23,7 +23,7 @@ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com
 ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/egl2
 
 # Copy run script to File Manager folder
-# TODO: Check that run.sh contains "./strace -s 1024 ./egl2"
+# TODO: Check that run.sh contains "./egl2"
 sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 
 # Start the File Manager
