@@ -5,14 +5,15 @@
   
 int main() 
 {   
+    //  Set SDL logging
+    SDL_LogSetAllPriority(SDL_LOG_PRIORITY_INFO);
+    
     //  Init SDL library
     puts("Init SDL...");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) { 
         printf("error initializing SDL: %s\n", SDL_GetError()); 
+        exit(1);
     }
-
-    //  Set SDL logging
-    SDL_LogSetAllPriority(SDL_LOG_PRIORITY_INFO);
 
     //  Create window
     puts("Creating window...");
