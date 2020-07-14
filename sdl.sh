@@ -2,10 +2,10 @@
 
 # TODO: Install SDL2 library that supports Wayland. The "apt" version doesn't support Wayland.
 # sudo mount -o remount,rw /
-# wayland-client wayland-scanner wayland-protocols wayland-egl wayland-cursor egl xkbcommon
+# sudo apt install wayland-protocols libxkbcommon-dev
 # cd ~
 # wget https://www.libsdl.org/release/SDL2-2.0.12.tar.gz
-# tar -xvf ../SDL2-2.0.12.tar.gz 
+# tar -xvf SDL2-2.0.12.tar.gz 
 # cd SDL2-2.0.12/
 # ./configure --enable-video-wayland --disable-video-x11
 # make
