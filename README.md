@@ -19,6 +19,19 @@ make
 sudo make install
 ```
 
+## Build and Run SDL2 Apps on PinePhone with Ubuntu Touch
+
+Check out sample program [`sdl.c`](sdl.c) and build script [`sdl.sh`](sdl.sh)...
+
+```bash
+gcc \
+    -g \
+    -o sdl \
+    sdl.c \
+    -lSDL2 \
+    -Wl,-Map=sdl.map
+```
+
 ## How to run `strace` on the `gtk` app
 
 Assume that we have built the `gtk` app by running [`gtk.sh`](gtk.sh)
