@@ -22,7 +22,8 @@ gcc \
     -g \
     -o sdl \
     sdl.c \
-    /usr/local/lib/libSDL2.a \
+    -wl,-L/usr/local/lib \
+    -lSDL2 \
     -Wl,-Map=sdl.map
 
 # Make system folders writeable
