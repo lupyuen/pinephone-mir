@@ -1,6 +1,6 @@
 # Build and install Wayland SDL app
 
-# TODO: Install SDL2 library that supports Wayland. The "apt" version doesn't support Wayland.
+# TODO: Run the steps below to build and install SDL2 library that supports Wayland. The "apt install" version doesn't support Wayland.
 # sudo mount -o remount,rw /
 # sudo apt install wayland-protocols libxkbcommon-dev
 # cd ~
