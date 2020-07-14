@@ -3,8 +3,12 @@
 # Log Wayland messages
 export WAYLAND_DEBUG=1
 
+# Run sdl app
+export SDL_VIDEODRIVER=wayland
+./sdl
+
 # Run shm app
-./shm
+# ./shm
 
 # Run egl2 app
 # ./egl2
