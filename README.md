@@ -595,7 +595,7 @@ be used with the current version of glib-compile-resources due to
 
     I think for mobiles we only need to support a few common chipsets, so an older kernel is probably fine. 
     
-    That explains why Raspberry Pi 4 isnt supported by Ubuntu Touch... The hardware is just too new.
+    That explains why Raspberry Pi 4 isn't supported by Ubuntu Touch... The hardware is just too new.
 
 1. The issues I'm struggling with now... Wayland, GTK3, ... are actually really old stuff. Updating the kernel won't help.
 
