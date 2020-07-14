@@ -1,0 +1,41 @@
+
+connected to display
+[4242324.293]  -> wl_display@1.get_registry(new id wl_registry@2)
+[4242478.383] wl_registry@2.global(1, "wl_drm", 2)
+[4242478.762] wl_registry@2.global(2, "qt_windowmanager", 1)
+[4242478.903] wl_registry@2.global(3, "wl_compositor", 4)
+[4242479.058]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@3)
+[4242479.263] wl_registry@2.global(4, "wl_subcompositor", 1)
+[4242479.395] wl_registry@2.global(5, "wl_seat", 6)
+[4242479.520] wl_registry@2.global(6, "wl_output", 3)
+[4242479.657] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[4242479.705] wl_registry@2.global(8, "wl_shell", 1)
+[4242479.782]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@4)
+[4242479.865] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[4242479.930] wl_registry@2.global(10, "xdg_wm_base", 1)
+[4242479.992] wl_registry@2.global(11, "wl_shm", 1)
+[4242480.042]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@5)
+[4242480.158]  -> wl_display@1.sync(new id wl_callback@6)
+[4242480.812] wl_display@1.delete_id(6)
+[4242480.939] wl_shm@5.format(0)
+Format 0
+[4242481.038] wl_shm@5.format(1)
+Format 1
+[4242481.120] wl_callback@6.done(35)
+Found compositor
+[4242481.296]  -> wl_compositor@3.create_surface(new id wl_surface@6)
+Created surface
+[4242481.404]  -> wl_shell@4.get_shell_surface(new id wl_shell_surface@7, wl_surface@6)
+Created shell surface
+[4242481.543]  -> wl_shell_surface@7.set_toplevel()
+Creating temp file /run/user/32011/weston-shared-XXXXXX
+[4242481.949]  -> wl_shm@5.create_pool(new id wl_shm_pool@8, fd 5, 691200)
+[4242482.164]  -> wl_shm_pool@8.create_buffer(new id wl_buffer@9, 0, 480, 360, 1920, 1)
+[4242482.451]  -> wl_shm_pool@8.destroy()
+[4242482.513]  -> wl_surface@6.attach(wl_buffer@9, 0, 0)
+[4242482.996]  -> wl_surface@6.commit()
+Painting pixels
+[4242509.080] wl_display@1.delete_id(8)
+[4242509.341] wl_shell_surface@7.configure(0, 720, 1398)
+...disconnected from display
+Error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name com.canonical.PropertyService was not provided by any .service files
