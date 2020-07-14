@@ -1,9 +1,13 @@
 # Build and install Wayland EGL app
 
-set -e -x
-
 # TODO: Install GLES2 library
 # sudo apt install libgles2-mesa-dev
+
+# Kill the app if it's already running
+pkill egl2
+
+# Stop the script on error, echo all commands
+set -e -x
 
 # Build app
 gcc \
@@ -35,3 +39,6 @@ echo "*** Tap on File Manager icon on PinePhone"
 # Monitor the log file
 echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
 tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+
+# Press Ctrl-C to stop. To kill the app:
+# pkill egl2
