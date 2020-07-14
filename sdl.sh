@@ -25,6 +25,7 @@ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
 # Copy run script to File Manager folder
 # TODO: Check that run.sh contains "./sdl"
 sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/run.sh
 
 # Start the File Manager
 echo "*** Tap on File Manager icon on PinePhone"

@@ -26,11 +26,14 @@ sudo ln -s /usr/local/lib/libSDL2.so /usr/lib/aarch64-linux-gnu/
 
 ## Build and Run SDL2 App on PinePhone with Ubuntu Touch
 
-Check out the sample SDL program [`sdl.c`](sdl.c) and build script [`sdl.sh`](sdl.sh)...
+Check out the sample SDL program [`sdl.c`](sdl.c) and build script [`sdl.sh`](sdl.sh).
 
-To build the app on PinePhone via SSH...
+To build the `sdl` app on PinePhone via SSH...
 
 ```bash
+cd ~
+git clone https://github.com/lupyuen/pinephone-mir
+cd pinephone-mir
 gcc \
     -g \
     -o sdl \
@@ -41,60 +44,16 @@ gcc \
 
 For rapid testing, we shall replace the File Manager app by our `sdl` app because File Manager has no AppArmor restrictions (Unconfined).
 
-```bash
-# Make system folders writeable
-sudo mount -o remount,rw /
-
-# Copy app to File Manager folder
-sudo cp sdl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
-sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
-ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
-
-# Copy run script to File Manager folder
-# TODO: Check that run.sh contains "./sdl"
-sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
-
-# Start the File Manager
-echo "*** Tap on File Manager icon on PinePhone"
-
-# Monitor the log file
-echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
-tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
-```
-
-Press `Ctrl-C` to stop the log display. To kill the app...
-
-```bash
-pkill sdl
-```
-
-## How to run `strace` on the `gtk` app
-
-Assume that we have built the `gtk` app by running [`gtk.sh`](gtk.sh)
-
-We shall replace the File Manager app by `strace gtk` because it has no AppArmor restrictions (Unconfined) according to `/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.apparmor`...
-
-```
-{
-    "policy_version": 16.04,
-    "template": "unconfined",
-    "policy_groups": []
-}
-```
-
 Connect to PinePhone over SSH and run these commands...
 
 ```bash
-sudo bash
-
-mount -o remount,rw /
-
+# Make system folders writeable and go to File Manager folder
+sudo mount -o remount,rw /
 cd /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 
 # Back up the desktop file
-cp com.ubuntu.filemanager.desktop com.ubuntu.filemanager.desktop.old
-
-nano com.ubuntu.filemanager.desktop 
+sudo cp com.ubuntu.filemanager.desktop com.ubuntu.filemanager.desktop.old
+sudo nano com.ubuntu.filemanager.desktop 
 ```
 
 Change the `Exec` line from...
@@ -111,7 +70,91 @@ Exec=./run.sh
 
 Save and exit `nano`
 
-Create `run.sh` with `nano`, containing:
+Then enter these commands...
+
+```bash
+# Make system folders writeable
+sudo mount -o remount,rw /
+
+# Copy app to File Manager folder
+cd ~/pinephone-mir
+sudo cp sdl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/sdl
+
+# Copy run script to File Manager folder
+# TODO: Check that run.sh contains "./sdl"
+sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/run.sh
+
+# Start the File Manager
+echo "*** Tap on File Manager icon on PinePhone"
+
+# Monitor the log file
+echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+```
+
+Press `Ctrl-C` to stop the log display. To kill the app...
+
+```bash
+pkill sdl
+```
+
+## Debug `sdl` app with GDB
+
+To debug `sdl` app with GDB...
+
+```bash
+sudo bash
+sudo mount -o remount,rw /
+sudo apt install gdb
+sudo nano /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/run.sh
+```
+
+Change the contents of `run.sh` to...
+
+```
+#!/bin/bash
+gdb \
+    -ex="r" \
+    -ex="bt" \
+    --args ./sdl
+```
+
+Save the file and exit `nano`.
+
+Tap on File Manager icon on PinePhone to start `gdb` debugger on `sdl` app.
+
+Log shows exception and backtrace...
+
+`/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
+
+```
+
+```
+
+## How to run `strace` on the `gtk` app
+
+Assume that we have built the `gtk` app by running [`gtk.sh`](gtk.sh)
+
+We shall replace the File Manager app by `strace gtk` because it has no AppArmor restrictions (Unconfined) according to `/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/filemanager.apparmor`...
+
+```
+{
+    "policy_version": 16.04,
+    "template": "unconfined",
+    "policy_groups": []
+}
+```
+
+Edit `run.sh` with `nano`...
+
+```bash
+sudo nano /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/run.sh
+```
+
+Change the contents to...
 
 ```bash
 #!/bin/bash
@@ -123,12 +166,9 @@ Create `run.sh` with `nano`, containing:
 Copy `strace`, `gtk` and set ownership...
 
 ```bash
-cp /usr/bin/strace .
-
-cp /home/phablet/pinephone-mir/gtk .
-
-chown clickpkg:clickpkg strace gtk run.sh
-
+sudo cp /usr/bin/strace .
+sudo cp /home/phablet/pinephone-mir/gtk .
+sudo chown clickpkg:clickpkg strace gtk run.sh
 chmod a+x run.sh
 ```
 
@@ -200,15 +240,12 @@ To debug `gtk` app with GDB...
 
 ```bash
 sudo bash
-
-mount -o remount,rw /
-
-apt install gdb
-
-cd /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+sudo mount -o remount,rw /
+sudo apt install gdb
+sudo nano /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/run.sh
 ```
 
-Change `run.sh` to...
+Change the contents of `run.sh` to...
 
 ```
 #!/bin/bash
@@ -217,6 +254,8 @@ gdb \
     -ex="bt" \
     --args ./gtk
 ```
+
+Save the file and exit `nano`.
 
 Tap on File Manager icon on PinePhone to start `gdb` debugger on `gtk` app.
 
