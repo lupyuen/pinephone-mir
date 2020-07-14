@@ -13,7 +13,11 @@ sudo apt install wayland-protocols libxkbcommon-dev
 cd ~
 git clone https://github.com/lupyuen/SDL-ubuntu-touch
 cd SDL-ubuntu-touch
-./configure --enable-video-wayland --disable-video-x11
+./configure \
+    --enable-video-wayland \
+    --enable-video-wayland-qt-touch \
+    --disable-wayland-shared \
+    --disable-video-x11
 make
 sudo make install
 sudo ln -s /usr/local/lib/libSDL2-2.0.so.0 /usr/lib/aarch64-linux-gnu/
