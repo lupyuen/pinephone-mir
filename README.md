@@ -15,7 +15,7 @@ git clone https://github.com/lupyuen/SDL-ubuntu-touch
 cd SDL-ubuntu-touch
 ./configure \
     --enable-video-wayland \
-    --enable-video-wayland-qt-touch \
+    --disable-video-wayland-qt-touch \
     --disable-wayland-shared \
     --disable-video-x11
 make
