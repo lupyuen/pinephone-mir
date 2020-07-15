@@ -149,8 +149,8 @@ int os_create_anonymous_file(off_t size)
     strcpy(name, path);
     strcat(name, template);
 
-    name = "/run/user/32011/wayland-cursor-shared-cSi17X"; //// TODO
-    printf("Creating anonymous file %s...\n", name);
+    char *name2 = "/run/user/32011/wayland-cursor-shared-cSi17X"; //// TODO
+    printf("Creating anonymous file %s...\n", name2);
     fd = create_tmpfile_cloexec(name);
 
     free(name);
