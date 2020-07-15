@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include <wayland-client.h>
-//#include <wayland-server.h>
 #include <wayland-client-protocol.h>
 #include <wayland-egl.h>
 #include <fcntl.h>
@@ -78,22 +78,24 @@ create_tmpfile_cloexec(char *tmpname)
 {
     int fd;
 
-//#ifdef HAVE_MKOSTEMP
+#ifdef HAVE_MKOSTEMP
     printf("mkostemp %s\n", tmpname);
     fd = mkostemp(tmpname, O_CLOEXEC);
-    if (fd >= 0)
+    if (fd >= 0) {
         unlink(tmpname);
-/*
+    }
 #else
     printf("mkstemp %s\n", tmpname);
     fd = mkstemp(tmpname);
+    assert(fd >= 0);
     if (fd >= 0)
     {
         fd = set_cloexec_or_close(fd);
+        assert(fd >= 0);
         unlink(tmpname);
     }
 #endif
-*/
+
     return fd;
 }
 
@@ -132,8 +134,9 @@ int os_create_anonymous_file(off_t size)
     strcpy(name, path);
     strcat(name, template);
 
-    printf("Creating temp file %s\n...", name);
+    printf("Creating temp file %s...\n", name);
     fd = create_tmpfile_cloexec(name);
+    assert(fd >= 0);
 
     free(name);
 
@@ -142,6 +145,7 @@ int os_create_anonymous_file(off_t size)
 
     if (ftruncate(fd, size) < 0)
     {
+        assert(0);
         close(fd);
         return -1;
     }
@@ -188,10 +192,13 @@ create_buffer()
     }
 
     pool = wl_shm_create_pool(shm, fd, size);
+    assert(pool != NULL);
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
                                      WL_SHM_FORMAT_XRGB8888);
+    assert(buff != NULL);                                     
+                            
     //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
     //// TODO: wl_shm_pool_destroy(pool);
     return buff;
@@ -200,8 +207,8 @@ create_buffer()
 static void
 create_window()
 {
-
     buffer = create_buffer();
+    assert(buffer != NULL);
 
     wl_surface_attach(surface, buffer, 0, 0);
     //wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);
@@ -266,8 +273,10 @@ int main(int argc, char **argv)
     printf("connected to display\n");
 
     struct wl_registry *registry = wl_display_get_registry(display);
+    assert(registry != NULL);
     wl_registry_add_listener(registry, &registry_listener, NULL);
 
+    assert(display != NULL);
     wl_display_dispatch(display);
     wl_display_roundtrip(display);
 
@@ -320,3 +329,77 @@ int main(int argc, char **argv)
 
     exit(0);
 }
+/* Output:
+++ sudo mount -o remount,rw /
+++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+-rwxr-xr-x 1 clickpkg clickpkg 31584 Jul 15 09:59 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+++ echo '*** Tap on File Manager icon on PinePhone'
+*** Tap on File Manager icon on PinePhone
+++ echo
+++ tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
+
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "aarch64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./shm...done.
+Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+connected to display
+[1202218.042]  -> wl_display@1.get_registry(new id wl_registry@2)
+[1202236.790] wl_registry@2.global(1, "wl_drm", 2)
+[1202236.943] wl_registry@2.global(2, "qt_windowmanager", 1)
+[1202237.016] wl_registry@2.global(3, "wl_compositor", 4)
+[1202237.099]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@3)
+[1202237.202] wl_registry@2.global(4, "wl_subcompositor", 1)
+[1202237.270] wl_registry@2.global(5, "wl_seat", 6)
+[1202237.358] wl_registry@2.global(6, "wl_output", 3)
+[1202237.420] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[1202241.774] wl_registry@2.global(8, "wl_shell", 1)
+[1202241.888]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@4)
+[1202241.944] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[1202242.027] wl_registry@2.global(10, "xdg_wm_base", 1)
+[1202242.100] wl_registry@2.global(11, "wl_shm", 1)
+[1202242.183]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@5)
+[1202242.320]  -> wl_display@1.sync(new id wl_callback@6)
+[1202242.869] wl_display@1.delete_id(6)
+[1202242.953] wl_shm@5.format(0)
+Format 0
+[1202243.081] wl_shm@5.format(1)
+Format 1
+[1202243.135] wl_callback@6.done(0)
+Found compositor
+[1202243.200]  -> wl_compositor@3.create_surface(new id wl_surface@6)
+Created surface
+[1202243.265]  -> wl_shell@4.get_shell_surface(new id wl_shell_surface@7, wl_surface@6)
+Created shell surface
+[1202243.342]  -> wl_shell_surface@7.set_toplevel()
+Creating temp file /run/user/32011/weston-shared-XXXXXX
+...mkostemp /run/user/32011/weston-shared-XXXXXX
+[1202243.778]  -> wl_shm@5.create_pool(new id wl_shm_pool@8, fd 5, 691200)
+[1202243.894]  -> wl_shm_pool@8.create_buffer(new id wl_buffer@9, 0, 480, 360, 1920, 1)
+[1202244.012]  -> wl_surface@6.attach(wl_buffer@9, 0, 0)
+[1202244.069]  -> wl_surface@6.commit()
+Painting pixels
+[1202274.917] wl_shell_surface@7.configure(0, 720, 1398)
+disconnected from display
+[Inferior 1 (process 10732) exited normally]
+No stack.
+No stack.
+(gdb) quit
+Error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name com.canonical.PropertyService was not provided by any .service files
+*/
