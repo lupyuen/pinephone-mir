@@ -318,23 +318,21 @@ static void
 create_window()
 {
     puts("Creating window...");
+    //  Create a pool and buffer
     buffer = create_buffer();
     assert(buffer != NULL);
     assert(surface != NULL);
 
-    //// TODO
-    //  wl_surface@17.set_buffer_scale(1)
-    wl_surface_set_buffer_scale(surface, 1);
+    //  Wait for the surface to be configured
+    wl_display_roundtrip(display);
 
-    //  wl_surface@17.set_buffer_transform(0)
-    wl_surface_set_buffer_transform(surface, 0);
+    //  wl_surface@17.attach(wl_buffer@25, 0, 0)
+    wl_surface_attach(surface, buffer, 0, 0);
+
+    //  wl_surface@17.damage(0, 0, 2147483647, 2147483647)
+    wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);
 
     //  wl_surface@17.commit()
-    wl_surface_commit(surface);
-    ////
-
-    wl_surface_attach(surface, buffer, 0, 0);
-    wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);  //// TODO
     wl_surface_commit(surface);
 }
 
@@ -547,20 +545,15 @@ int main(int argc, char **argv)
     //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
     zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
 
-    // signal that the surface is ready to be configured
-    // wl_surface_commit(surface);
+    //  wl_surface@17.set_buffer_scale(1)
+    wl_surface_set_buffer_scale(surface, 1);
 
-    // ...
-    // create a pool
-    // create a buffer
-    // ...
+    //  wl_surface@17.set_buffer_transform(0)
+    wl_surface_set_buffer_transform(surface, 0);
 
-    // wait for the surface to be configured
-    // wl_display_roundtrip(display);
-
-    // wl_surface_attach(surface, buffer, 0, 0);
-    // wl_surface_commit(surface);
-    ////
+    //  Signal that the surface is ready to be configured
+    //  wl_surface@17.commit()
+    wl_surface_commit(surface);
 
 #ifdef NOTUSED
     shell_surface = wl_shell_get_shell_surface(shell, surface);
@@ -615,7 +608,7 @@ Output:
 ++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
--rwxr-xr-x 1 clickpkg clickpkg 45296 Jul 15 22:12 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+-rwxr-xr-x 1 clickpkg clickpkg 45096 Jul 15 22:18 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ echo '*** Tap on File Manager icon on PinePhone'
 *** Tap on File Manager icon on PinePhone
@@ -641,54 +634,53 @@ Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
 Connecting to display...
-proxy 0x415420 already has listener
-[2213728.072]  -> wl_display@1.get_registry(new id wl_registry@2)
-[2213728.193]  -> wl_display@1.sync(new id wl_callback@3)
-[2213753.104] wl_display@1.delete_id(3)
-[2213753.234] wl_registry@2.global(1, "wl_drm", 2)
-[2213753.325]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
-[2213753.428] wl_registry@2.global(2, "qt_windowmanager", 1)
-[2213753.489] wl_registry@2.global(3, "wl_compositor", 4)
-[2213753.548]  -> wl_registry@2.bind(3, "wl_compositor", 4, new id [unknown]@5)
-[2213753.845] wl_registry@2.global(4, "wl_subcompositor", 1)
-[2213753.883] wl_registry@2.global(5, "wl_seat", 6)
-[2213753.918] wl_registry@2.global(6, "wl_output", 3)
-[2213753.951] wl_registry@2.global(7, "wl_data_device_manager", 3)
-[2213753.986] wl_registry@2.global(8, "wl_shell", 1)
-[2213754.019] wl_registry@2.global(9, "zxdg_shell_v6", 1)
-[2213754.058]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
-[2213754.104] wl_registry@2.global(10, "xdg_wm_base", 1)
-[2213754.139] wl_registry@2.global(11, "wl_shm", 1)
-[2213754.204]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
-[2213754.273] wl_callback@3.done(22)
-[2213754.318]  -> wl_compositor@5.create_surface(new id wl_surface@3)
-[2213754.374]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
-[2213754.440]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
-[2213754.501]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
-[2213757.931]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
+[2568743.560]  -> wl_display@1.get_registry(new id wl_registry@2)
+[2568743.704]  -> wl_display@1.sync(new id wl_callback@3)
+[2568794.995] wl_display@1.delete_id(3)
+[2568795.086] wl_registry@2.global(1, "wl_drm", 2)
+[2568795.177]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
+[2568795.281] wl_registry@2.global(2, "qt_windowmanager", 1)
+[2568795.346] wl_registry@2.global(3, "wl_compositor", 4)
+[2568795.414]  -> wl_registry@2.bind(3, "wl_compositor", 3, new id [unknown]@5)
+[2568795.495] wl_registry@2.global(4, "wl_subcompositor", 1)
+[2568795.560] wl_registry@2.global(5, "wl_seat", 6)
+[2568795.592] wl_registry@2.global(6, "wl_output", 3)
+[2568795.638] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[2568795.719] wl_registry@2.global(8, "wl_shell", 1)
+[2568795.768] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[2568795.813]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
+[2568795.860] wl_registry@2.global(10, "xdg_wm_base", 1)
+[2568795.920] wl_registry@2.global(11, "wl_shm", 1)
+[2568795.991]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
+[2568796.063] wl_callback@3.done(25)
+[2568796.107]  -> wl_compositor@5.create_surface(new id wl_surface@3)
+[2568796.153]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
+[2568796.191]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
+[2568796.228]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
+[2568796.256]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
 Creating window...
 Creating buffer...
 Creating anonymous file /run/user/32011/weston-shared-XXXXXX...
-[2213760.738]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
-[2213760.856]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
-[2213761.039]  -> wl_surface@3.set_buffer_scale(1)
-[2213761.085]  -> wl_surface@3.set_buffer_transform(0)
-[2213761.116]  -> wl_surface@3.commit()
-[2213761.148]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[2213761.213]  -> wl_surface@3.damage(0, 0, 16, 16)
-[2213761.286]  -> wl_surface@3.commit()
+[2568796.718]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
+[2568796.838]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
+[2568797.019]  -> wl_surface@3.set_buffer_scale(1)
+[2568797.055]  -> wl_surface@3.set_buffer_transform(0)
+[2568797.091]  -> wl_surface@3.commit()
+[2568797.114]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[2568797.169]  -> wl_surface@3.damage(0, 0, 16, 16)
+[2568797.234]  -> wl_surface@3.commit()
 Redrawing...
-[2213761.331]  -> wl_surface@3.frame(new id wl_callback@12)
-[2213761.378]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[2213761.447]  -> wl_surface@3.damage(0, 0, 16, 16)
+[2568797.263]  -> wl_surface@3.frame(new id wl_callback@12)
+[2568797.304]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[2568797.368]  -> wl_surface@3.damage(0, 0, 16, 16)
 Painting...
-[2213761.603]  -> wl_surface@3.commit()
+[2568797.521]  -> wl_surface@3.commit()
 Dispatching display...
-[2213763.063] wl_display@1.error(wl_drm@4, 2, "invalid name")
+[2568798.969] wl_display@1.error(wl_drm@4, 2, "invalid name")
 wl_drm@4: error 2: invalid name
 Disconnecting display...
 disconnected from display
-[Inferior 1 (process 17812) exited normally]
+[Inferior 1 (process 21645) exited normally]
 No stack.
 No stack.
 (gdb) quit
