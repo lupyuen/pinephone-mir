@@ -95,7 +95,7 @@ static const struct wl_registry_listener registry_listener = {
 static void
 create_opaque_region()
 {
-    puts("Creating opague region...");
+    puts("Creating opaque region...");
     region = wl_compositor_create_region(compositor);
     assert(region != NULL);
 
@@ -529,12 +529,13 @@ int main(int argc, char **argv)
 
     create_opaque_region();
     init_egl();
-    ////  create_window();
-    create_window_shared_memory();
 
-    ////
+#ifdef WAYLAND_SHARED_MEMORY
+    create_window_shared_memory();
     redraw(NULL, NULL, 0);
-    ////
+#else
+    create_window();
+#endif  //  WAYLAND_SHARED_MEMORY    
 
     while (wl_display_dispatch(display) != -1)
     {
@@ -547,7 +548,7 @@ int main(int argc, char **argv)
     exit(0);
 }
 
-/* Output:
+#ifdef NOTUSED
 ++ gcc -g -o egl2 egl2.c -lwayland-client -lwayland-server -lwayland-egl -L/usr/lib/aarch64-linux-gnu/mesa-egl -lEGL /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 -Wl,-Map=egl2.map
 ++ sudo mount -o remount,rw /
 ++ sudo cp egl2 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
@@ -687,4 +688,4 @@ No stack.
 No stack.
 (gdb) quit
 Error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name com.canonical.PropertyService was not provided by any .service files
-*/
+#endif  //  NOTUSED
