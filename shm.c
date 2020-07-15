@@ -325,8 +325,10 @@ create_window()
     //// TODO
     //  wl_surface@17.set_buffer_scale(1)
     wl_surface_set_buffer_scale(surface, 1);
+
     //  wl_surface@17.set_buffer_transform(0)
     wl_surface_set_buffer_transform(surface, 0);
+
     //  wl_surface@17.commit()
     wl_surface_commit(surface);
     ////
@@ -451,6 +453,52 @@ const struct zxdg_surface_v6_listener xdg_surface_listener = {
 };
 
 ////////////////////////////////////////////////////////////////////
+//  Display
+
+/**
+ * error - fatal error event
+ * @object_id: (none)
+ * @code: (none)
+ * @message: (none)
+ *
+ * The error event is sent out when a fatal (non-recoverable)
+ * error has occurred. The object_id argument is the object where
+ * the error occurred, most often in response to a request to that
+ * object. The code identifies the error and is defined by the
+ * object interface. As such, each interface defines its own set of
+ * error codes. The message is an brief description of the error,
+ * for (debugging) convenience.
+ */
+void display_error(void *data,
+            struct wl_display *wl_display,
+            void *object_id,
+            uint32_t code,
+            const char *message) {
+    printf("*** ERROR %d: %s\n", code, message);
+}
+
+/**
+ * delete_id - acknowledge object ID deletion
+ * @id: (none)
+ *
+ * This event is used internally by the object ID management
+ * logic. When a client deletes an object, the server will send
+ * this event to acknowledge that it has seen the delete request.
+ * When the client receive this event, it will know that it can
+ * safely reuse the object ID.
+ */
+void display_delete_id(void *data,
+            struct wl_display *wl_display,
+            uint32_t id) {
+    printf("Deleting display %d...\n", id);
+}
+            
+const struct wl_display_listener *display_listener = {
+    .error = display_error,
+    .delete_id = display_delete_id
+};
+
+////////////////////////////////////////////////////////////////////
 //  Main
 
 int main(int argc, char **argv)
@@ -458,6 +506,8 @@ int main(int argc, char **argv)
     puts("Connecting to display...");
     display = wl_display_connect(NULL);
     assert(display != NULL);
+
+    wl_display_add_listener(display, &display_listener, NULL);
 
     struct wl_registry *registry = wl_display_get_registry(display);
     assert(registry != NULL);
