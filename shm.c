@@ -261,7 +261,7 @@ create_buffer()
 
     //  TODO
     assert(drm != NULL);
-    buff = wl_create_prime_buffer(
+    buff = wl_drm_create_prime_buffer(
         drm,
         fd,      //  <arg name="name" type="fd"/>
         WIDTH,   //  <arg name="width" type="int"/>
