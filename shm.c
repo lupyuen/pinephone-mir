@@ -553,12 +553,12 @@ Using the 'xdg-shell-v6' shell integration
 #ifdef NOTUSED
 Output:
 
-++ gcc -g -o shm shm.c wayland-drm-protocol.c -lwayland-client -Wl,-Map=shm.map
+++ gcc -g -o shm shm.c xdg-shell.c wayland-drm-protocol.c -lwayland-client -Wl,-Map=shm.map
 ++ sudo mount -o remount,rw /
 ++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
--rwxr-xr-x 1 clickpkg clickpkg 39824 Jul 15 20:36 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+-rwxr-xr-x 1 clickpkg clickpkg 44496 Jul 15 21:48 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ echo '*** Tap on File Manager icon on PinePhone'
 *** Tap on File Manager icon on PinePhone
@@ -583,60 +583,54 @@ Reading symbols from ./shm...done.
 Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm 
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
-connected to display
-[729032.290]  -> wl_display@1.get_registry(new id wl_registry@2)
-[729051.777] wl_registry@2.global(1, "wl_drm", 2)
-[729051.909]  -> wl_registry@2.bind(1, "wl_drm", 1, new id [unknown]@3)
-[729052.037] wl_registry@2.global(2, "qt_windowmanager", 1)
-[729052.121] wl_registry@2.global(3, "wl_compositor", 4)
-[729052.193]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@4)
-[729052.297] wl_registry@2.global(4, "wl_subcompositor", 1)
-[729052.346] wl_registry@2.global(5, "wl_seat", 6)
-[729052.393] wl_registry@2.global(6, "wl_output", 3)
-[729052.448] wl_registry@2.global(7, "wl_data_device_manager", 3)
-[729052.528] wl_registry@2.global(8, "wl_shell", 1)
-[729052.611]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@5)
-[729052.691] wl_registry@2.global(9, "zxdg_shell_v6", 1)
-[729052.770] wl_registry@2.global(10, "xdg_wm_base", 1)
-[729052.846] wl_registry@2.global(11, "wl_shm", 1)
-[729052.926]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@6)
-[729053.019]  -> wl_display@1.sync(new id wl_callback@7)
-[729053.839] wl_display@1.delete_id(7)
-[729054.016] wl_shm@6.format(0)
-Possible shmem format ARGB8888
-[729056.374] wl_shm@6.format(1)
-Possible shmem format XRGB8888
-[729058.049] wl_callback@7.done(82)
-Found compositor
-[729058.178]  -> wl_compositor@4.create_surface(new id wl_surface@7)
-Created surface
-[729058.261]  -> wl_shell@5.get_shell_surface(new id wl_shell_surface@8, wl_surface@7)
-Created shell surface
-[729058.358]  -> wl_shell_surface@8.set_toplevel()
-[729058.402]  -> wl_surface@7.frame(new id wl_callback@9)
+Connecting to display...
+[806924.394]  -> wl_display@1.get_registry(new id wl_registry@2)
+[806924.599]  -> wl_display@1.sync(new id wl_callback@3)
+[806944.909] wl_display@1.delete_id(3)
+[806945.303] wl_registry@2.global(1, "wl_drm", 2)
+[806945.434]  -> wl_registry@2.bind(1, "wl_drm", 1, new id [unknown]@4)
+[806945.520] wl_registry@2.global(2, "qt_windowmanager", 1)
+[806945.579] wl_registry@2.global(3, "wl_compositor", 4)
+[806945.623]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@5)
+[806945.668] wl_registry@2.global(4, "wl_subcompositor", 1)
+[806945.703] wl_registry@2.global(5, "wl_seat", 6)
+[806945.758] wl_registry@2.global(6, "wl_output", 3)
+[806945.815] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[806945.867] wl_registry@2.global(8, "wl_shell", 1)
+[806945.918] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[806945.981]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
+[806946.054] wl_registry@2.global(10, "xdg_wm_base", 1)
+[806946.103] wl_registry@2.global(11, "wl_shm", 1)
+[806946.152]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
+[806946.226] wl_callback@3.done(86)
+[806946.264]  -> wl_compositor@5.create_surface(new id wl_surface@3)
+[806946.313]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
+[806946.367]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
+[806950.474]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
+[806950.522]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
 Creating window...
 Creating buffer...
 Creating anonymous file /run/user/32011/weston-shared-XXXXXX...
-[729058.865]  -> wl_shm@6.create_pool(new id wl_shm_pool@10, fd 5, 1024)
-[729058.971]  -> wl_drm@3.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
-[729059.225]  -> wl_surface@7.set_buffer_scale(1)
-[729059.278]  -> wl_surface@7.set_buffer_transform(0)
-[729059.325]  -> wl_surface@7.commit()
-[729059.350]  -> wl_surface@7.attach(wl_buffer@11, 0, 0)
-[729059.436]  -> wl_surface@7.damage(0, 0, 16, 16)
-[729059.545]  -> wl_surface@7.commit()
+[806950.934]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
+[806951.004]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
+[806951.113]  -> wl_surface@3.set_buffer_scale(1)
+[806951.141]  -> wl_surface@3.set_buffer_transform(0)
+[806951.169]  -> wl_surface@3.commit()
+[806951.195]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[806951.239]  -> wl_surface@3.damage(0, 0, 16, 16)
+[806951.286]  -> wl_surface@3.commit()
 Redrawing...
-[729059.604]  -> wl_surface@7.frame(new id wl_callback@12)
-[729059.644]  -> wl_surface@7.attach(wl_buffer@11, 0, 0)
-[729059.686]  -> wl_surface@7.damage(0, 0, 16, 16)
+[806951.316]  -> wl_surface@3.frame(new id wl_callback@12)
+[806951.349]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[806951.392]  -> wl_surface@3.damage(0, 0, 16, 16)
 Painting...
-[729059.809]  -> wl_surface@7.commit()
+[806951.510]  -> wl_surface@3.commit()
 Dispatching display...
-[729060.751] wl_display@1.error(wl_display@1, 1, "invalid method 3 (since 1 < 2), object wl_drm@3")
-wl_display@1: error 1: invalid method 3 (since 1 < 2), object wl_drm@3
+[806953.011] wl_display@1.error(wl_display@1, 1, "invalid method 3 (since 1 < 2), object wl_drm@4")
+wl_display@1: error 1: invalid method 3 (since 1 < 2), object wl_drm@4
 Disconnecting display...
 disconnected from display
-[Inferior 1 (process 8310) exited normally]
+[Inferior 1 (process 22372) exited normally]
 No stack.
 No stack.
 (gdb) quit
