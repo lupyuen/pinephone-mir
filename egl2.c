@@ -217,7 +217,6 @@ get_server_references(void)
 ////////////////////////////////////////////////////////////////////
 //  Shared Memory
 
-
 void *shm_data;
 
 int WIDTH = 16;
@@ -425,11 +424,13 @@ create_buffer()
 }
 
 static void
-create_window()
+create_window_shared_memory()
 {
-
+    puts("Creating window with shared memory...");
     buffer = create_buffer();
+    assert(buffer != NULL);
 
+    assert(surface != NULL);
     wl_surface_attach(surface, buffer, 0, 0);
     //wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);
     wl_surface_commit(surface);
@@ -459,7 +460,7 @@ shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
 
 struct wl_shm_listener shm_listener = {
     shm_format};
-    
+
 ////////////////////////////////////////////////////////////////////
 //  Main
 
@@ -492,7 +493,8 @@ int main(int argc, char **argv)
 
     create_opaque_region();
     init_egl();
-    create_window();
+    ////  create_window();
+    create_window_shared_memory();
 
     ////
     redraw(NULL, NULL, 0);
