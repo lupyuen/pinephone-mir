@@ -373,7 +373,7 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
         compositor = wl_registry_bind(registry,
                                       id,
                                       &wl_compositor_interface,
-                                      1);
+                                      4);
     }
     else if (strcmp(interface, "zxdg_shell_v6") == 0)
     {
@@ -397,7 +397,7 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
     else if (strcmp(interface, "wl_drm") == 0)
     {
         drm = wl_registry_bind(registry, id,
-                               &wl_drm_interface, 1);
+                               &wl_drm_interface, 2);
     }
 }
 
