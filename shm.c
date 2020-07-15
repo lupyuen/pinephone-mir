@@ -24,8 +24,8 @@ struct wl_buffer *buffer;
 
 void *shm_data;
 
-int WIDTH = 480;
-int HEIGHT = 360;
+int WIDTH = 10;
+int HEIGHT = 10;
 
 static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
@@ -193,11 +193,14 @@ create_buffer()
 
     pool = wl_shm_create_pool(shm, fd, size);
     assert(pool != NULL);
+
+
+
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
-                                     //// WL_SHM_FORMAT_XRGB8888);
-                                     WL_SHM_FORMAT_ARGB8888); ////
+                                     WL_SHM_FORMAT_XRGB8888);
+                                     // WL_SHM_FORMAT_ARGB8888);
     assert(buff != NULL);                                     
                             
     //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
