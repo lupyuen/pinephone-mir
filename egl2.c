@@ -549,6 +549,8 @@ int main(int argc, char **argv)
 }
 
 #ifdef NOTUSED
+Output with Shared Memory:
+
 ++ gcc -g -o egl2 egl2.c -lwayland-client -lwayland-server -lwayland-egl -L/usr/lib/aarch64-linux-gnu/mesa-egl -lEGL /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 -Wl,-Map=egl2.map
 ++ sudo mount -o remount,rw /
 ++ sudo cp egl2 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
@@ -688,4 +690,107 @@ No stack.
 No stack.
 (gdb) quit
 Error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name com.canonical.PropertyService was not provided by any .service files
+#endif  //  NOTUSED
+
+#ifdef NOTUSED
+Output without Shared Memory:
+
+Getting server references...
+connected to display
+[2310849.806]  -> wl_display@1.get_registry(new id wl_registry@2)
+[2310869.547] wl_registry@2.global(1, "wl_drm", 2)
+Got a registry event for wl_drm id 1
+[2310869.755] wl_registry@2.global(2, "qt_windowmanager", 1)
+Got a registry event for qt_windowmanager id 2
+[2310869.859] wl_registry@2.global(3, "wl_compositor", 4)
+Got a registry event for wl_compositor id 3
+[2310869.969]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@3)
+[2310870.086] wl_registry@2.global(4, "wl_subcompositor", 1)
+Got a registry event for wl_subcompositor id 4
+[2310870.183] wl_registry@2.global(5, "wl_seat", 6)
+Got a registry event for wl_seat id 5
+[2310870.430] wl_registry@2.global(6, "wl_output", 3)
+Got a registry event for wl_output id 6
+[2310870.513] wl_registry@2.global(7, "wl_data_device_manager", 3)
+Got a registry event for wl_data_device_manager id 7
+[2310870.586] wl_registry@2.global(8, "wl_shell", 1)
+Got a registry event for wl_shell id 8
+[2310870.642]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@4)
+[2310870.729] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+Got a registry event for zxdg_shell_v6 id 9
+[2310870.823] wl_registry@2.global(10, "xdg_wm_base", 1)
+Got a registry event for xdg_wm_base id 10
+[2310871.008] wl_registry@2.global(11, "wl_shm", 1)
+Got a registry event for wl_shm id 11
+[2310871.104]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@5)
+[2310871.216]  -> wl_display@1.sync(new id wl_callback@6)
+[2310871.710] wl_display@1.delete_id(6)
+[2310871.785] wl_shm@5.format(0)
+Possible shmem format ARGB8888
+[2310871.894] wl_shm@5.format(1)
+Possible shmem format XRGB8888
+[2310871.939] wl_callback@6.done(0)
+Found compositor and shell
+[2310872.006]  -> wl_compositor@3.create_surface(new id wl_surface@6)
+Created surface
+[2310872.073]  -> wl_shell@4.get_shell_surface(new id wl_shell_surface@7, wl_surface@6)
+[2310872.155]  -> wl_shell_surface@7.set_toplevel()
+Creating opaque region...
+[2310872.202]  -> wl_compositor@3.create_region(new id wl_region@8)
+[2310872.261]  -> wl_region@8.add(0, 0, 480, 360)
+[2310872.329]  -> wl_surface@6.set_opaque_region(wl_region@8)
+Init EGL...
+Created egl display
+[2310872.924]  -> wl_display@1.get_registry(new id wl_registry@9)
+[2310873.018]  -> wl_display@1.sync(new id wl_callback@10)
+[2310873.471] wl_display@1.delete_id(10)
+[2310873.554] wl_registry@9.global(1, "wl_drm", 2)
+[2310873.669]  -> wl_registry@9.bind(1, "wl_drm", 2, new id [unknown]@11)
+[2310873.803] wl_registry@9.global(2, "qt_windowmanager", 1)
+[2310873.887] wl_registry@9.global(3, "wl_compositor", 4)
+[2310873.967] wl_registry@9.global(4, "wl_subcompositor", 1)
+[2310874.044] wl_registry@9.global(5, "wl_seat", 6)
+[2310874.121] wl_registry@9.global(6, "wl_output", 3)
+[2310874.192] wl_registry@9.global(7, "wl_data_device_manager", 3)
+[2310874.259] wl_registry@9.global(8, "wl_shell", 1)
+[2310874.338] wl_registry@9.global(9, "zxdg_shell_v6", 1)
+[2310874.389] wl_registry@9.global(10, "xdg_wm_base", 1)
+[2310874.459] wl_registry@9.global(11, "wl_shm", 1)
+[2310874.538] wl_callback@10.done(0)
+[2310874.596]  -> wl_display@1.sync(new id wl_callback@10)
+[2310878.802] wl_display@1.delete_id(10)
+[2310878.870] wl_drm@11.device("/dev/dri/card1")
+[2310879.276]  -> wl_drm@11.authenticate(3)
+[2310879.369] wl_drm@11.format(875713089)
+[2310879.398] wl_drm@11.format(875713112)
+[2310879.419] wl_drm@11.format(909199186)
+[2310879.439] wl_drm@11.format(961959257)
+[2310879.459] wl_drm@11.format(825316697)
+[2310879.480] wl_drm@11.format(842093913)
+[2310879.500] wl_drm@11.format(909202777)
+[2310879.520] wl_drm@11.format(875713881)
+[2310879.539] wl_drm@11.format(842094158)
+[2310879.559] wl_drm@11.format(909203022)
+[2310879.578] wl_drm@11.format(1448695129)
+[2310879.598] wl_drm@11.capabilities(1)
+[2310879.618] wl_callback@10.done(0)
+[2310879.650]  -> wl_display@1.sync(new id wl_callback@10)
+[2310880.365] wl_display@1.delete_id(10)
+[2310880.501] wl_drm@11.authenticated()
+[2310880.534] wl_callback@10.done(0)
+EGL major: 1, minor 4
+EGL has 14 configs
+Buffer size for config 0 is 24
+Red size for config 0 is 8
+Creating window...
+Created egl window
+Made current
+Rendering display...
+[2311326.953]  -> wl_surface@6.frame(new id wl_callback@10)
+[2311327.259]  -> wl_drm@11.create_prime_buffer(new id wl_buffer@12, fd 9, 480, 360, 875713112, 0, 1920, 0, 0, 0, 0)
+[2311327.486]  -> wl_surface@6.attach(wl_buffer@12, 0, 0)
+[2311327.545]  -> wl_surface@6.damage(0, 0, 2147483647, 2147483647)
+[2311327.643]  -> wl_surface@6.commit()
+Swapped buffers
+[2311469.045] wl_display@1.delete_id(10)
 #endif  //  NOTUSED
