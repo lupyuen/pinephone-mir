@@ -78,11 +78,12 @@ create_tmpfile_cloexec(char *tmpname)
 {
     int fd;
 
-#ifdef HAVE_MKOSTEMP
+//#ifdef HAVE_MKOSTEMP
     printf("mkostemp %s\n", tmpname);
     fd = mkostemp(tmpname, O_CLOEXEC);
     if (fd >= 0)
         unlink(tmpname);
+/*
 #else
     printf("mkstemp %s\n", tmpname);
     fd = mkstemp(tmpname);
@@ -92,7 +93,7 @@ create_tmpfile_cloexec(char *tmpname)
         unlink(tmpname);
     }
 #endif
-
+*/
     return fd;
 }
 
