@@ -493,7 +493,7 @@ void display_delete_id(void *data,
     printf("Deleting display %d...\n", id);
 }
             
-const struct wl_display_listener *display_listener = {
+const struct wl_display_listener display_listener = {
     .error = display_error,
     .delete_id = display_delete_id
 };
