@@ -17,6 +17,7 @@
 #include <sys/mman.h>
 #include <errno.h>
 #include <unistd.h>
+#include "wayland-drm-client-protocol.h"
 
 struct wl_display *display = NULL;
 struct wl_compositor *compositor = NULL;
