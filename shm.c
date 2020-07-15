@@ -248,7 +248,7 @@ create_buffer()
                                      stride,
                                      WL_SHM_FORMAT_XRGB8888);
     //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
-    wl_shm_pool_destroy(pool);
+    ////  TODO: wl_shm_pool_destroy(pool);
     return buff;
 }
 
@@ -391,11 +391,13 @@ int main(int argc, char **argv)
     create_window();
     redraw(NULL, NULL, 0);
 
+    puts("Dispatching display...");
     while (wl_display_dispatch(display) != -1)
     {
         ;
     }
 
+    puts("Disconnecting display...");
     wl_display_disconnect(display);
     printf("disconnected from display\n");
 
