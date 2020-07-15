@@ -476,13 +476,13 @@ int main(int argc, char **argv)
     zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
     assert(zsurface != NULL);
 
-    zxdg_surface_v6_add_listener(xdg_surface, &xdg_surface_listener, NULL);
+    zxdg_surface_v6_add_listener(zsurface, &xdg_surface_listener, NULL);
 
     //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
     toplevel = zxdg_surface_v6_get_toplevel(zsurface);
     assert(toplevel != NULL);
 
-    zxdg_toplevel_v6_add_listener(xdg_toplevel, &xdg_toplevel_listener, NULL);
+    zxdg_toplevel_v6_add_listener(toplevel, &xdg_toplevel_listener, NULL);
 
     //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
     zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
