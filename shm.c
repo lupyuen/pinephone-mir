@@ -220,7 +220,7 @@ create_buffer()
     assert(buff != NULL);                                     
                             
     wl_buffer_add_listener(buff, &buffer_listener, buff);
-    wl_shm_pool_destroy(pool);
+    //// TODO: wl_shm_pool_destroy(pool);
     return buff;
 }
 
