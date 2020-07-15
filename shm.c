@@ -620,7 +620,7 @@ Output:
 ++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
--rwxr-xr-x 1 clickpkg clickpkg 45096 Jul 16 00:05 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+-rwxr-xr-x 1 clickpkg clickpkg 45320 Jul 16 00:12 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ echo '*** Tap on File Manager icon on PinePhone'
 *** Tap on File Manager icon on PinePhone
@@ -645,55 +645,147 @@ Reading symbols from ./shm...done.
 Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm 
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+argv[0]=/usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm
+SHELL=/bin/bash
+UBUNTU_APPLICATION_ISOLATION=1
+GRID_UNIT_PX=14
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu-touch:/etc/xdg/xdg-ubuntu-touch:/etc/xdg
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+GTK_IM_MODULE=Maliit
+PULSE_PROP=media.role=multimedia
+GNOME_KEYRING_CONTROL=
+MIR_SERVER_PROMPT_FILE=1
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+HOSTNAME=android
+LANGUAGE=en_US:en
+APP_ID=com.ubuntu.filemanager_filemanager_0.7.5
+SSH_AUTH_SOCK=/tmp/ssh-eKU3MOrniVaF/agent.2848
+XDG_DATA_HOME=/home/phablet/.local/share
+__GL_SHADER_DISK_CACHE_PATH=/home/phablet/.cache/com.ubuntu.filemanager
+UBUNTU_APP_LAUNCH_ARCH=aarch64-linux-gnu
+XDG_CONFIG_HOME=/home/phablet/.config
+ANDROID_BOOTLOGO=1
+DESKTOP_SESSION=ubuntu-touch
+SSH_AGENT_PID=2901
+XDG_SEAT=seat0
+APP_EXEC=./run.sh
+PWD=/usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5
+LOGNAME=phablet
+XDG_SESSION_DESKTOP=ubuntu-touch
+QT_QPA_PLATFORMTHEME=ubuntuappmenu
+XDG_SESSION_TYPE=mir
+APP_XMIR_ENABLE=0
+APP_LAUNCHER_PID=3492
+_=/usr/bin/gdb
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/phablet
+PULSE_SCRIPT=/etc/pulse/touch.pa
+LINES=24
+EXTERNAL_STORAGE=/mnt/sdcard
+GDM_LANG=en_US
+UBUNTU_PLATFORM_API_BACKEND=desktop_mirclient
+HOME=/home/phablet
+LANG=en_US.UTF-8
+QV4_ENABLE_JIT_CACHE=1
+XDG_CURRENT_DESKTOP=Unity
+UPSTART_SESSION=unix:abstract=/com/ubuntu/upstart-session/32011/2848
+COLUMNS=80
+QT_EXCLUDE_GENERIC_BEARER=1
+TMPDIR=/run/user/32011/confined/com.ubuntu.filemanager
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+PULSE_CLIENTCONFIG=/etc/pulse/touch-client.conf
+GOROOT=
+ANDROID_CACHE=/cache
+APP_DESKTOP_FILE_PATH=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/com.ubuntu.filemanager.desktop
+QT_QPA_PLATFORM=wayland
+XDG_CACHE_HOME=/home/phablet/.cache
+FLASH_KERNEL_SKIP=true
+ANDROID_DATA=/data
+QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
+PULSE_PLAYBACK_CORK_STALLED=1
+TERM=linux
+MIR_SERVER_WAYLAND_HOST=/tmp/wayland-root
+USER=phablet
+UPSTART_INSTANCE=com.ubuntu.filemanager_filemanager_0.7.5
+MIR_SOCKET=/run/user/32011/mir_socket
+ASEC_MOUNTPOINT=/mnt/asec
+QT_WAYLAND_FORCE_DPI=96
+SHLVL=2
+APP_DIR=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+QT_IM_MODULE=maliitphablet
+XDG_VTNR=1
+ANDROID_ROOT=/system
+XDG_SESSION_ID=c1
+QT_FILE_SELECTORS=ubuntu-touch
+WAYLAND_DEBUG=1
+QML2_IMPORT_PATH=/usr/lib/aarch64-linux-gnu/qt5/imports:/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib/aarch64-linux-gnu
+LD_LIBRARY_PATH=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib/aarch64-linux-gnu:/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib
+QML_NO_TOUCH_COMPRESSION=1
+XDG_RUNTIME_DIR=/run/user/32011
+LOOP_MOUNTPOINT=/mnt/obb
+NATIVE_ORIENTATION=Portrait
+MIR_SERVER_NAME=session-0
+GNOME_KEYRING_PID=
+XDG_DATA_DIRS=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager:/usr/share/ubuntu-touch:/usr/share/ubuntu-touch:/usr/local/share/:/usr/share/:/custom/usr/share/
+PATH=/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/lib/aarch64-linux-gnu/bin:/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager:/home/phablet/go-1.14.4/bin:/home/phablet/go-1.13.6/bin:/usr/lib/go-1.13.6/bin:/home/phablet/bin:/home/phablet/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ANDROID_PROPERTY_WORKSPACE=8,49152
+MKSH=/system/bin/sh
+GDMSESSION=ubuntu-touch
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-MFIpIrNCAy
+LIMA_DEBUG=notiling
+UPSTART_JOB=application-click
+QT_SELECT=qt5
+ANDROID_ASSETS=/system/app
+QTWEBKIT_DPR=1
+UBUNTU_APP_LAUNCH_XMIR_PATH=/usr/bin/libertine-xmir
 Connecting to display...
-[413812.438]  -> wl_display@1.get_registry(new id wl_registry@2)
-[413812.586]  -> wl_display@1.sync(new id wl_callback@3)
-[413838.311] wl_display@1.delete_id(3)
-[413838.490] wl_registry@2.global(1, "wl_drm", 2)
-[413838.653]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
-[413838.764] wl_registry@2.global(2, "qt_windowmanager", 1)
-[413838.829] wl_registry@2.global(3, "wl_compositor", 4)
-[413842.673]  -> wl_registry@2.bind(3, "wl_compositor", 3, new id [unknown]@5)
-[413842.746] wl_registry@2.global(4, "wl_subcompositor", 1)
-[413842.783] wl_registry@2.global(5, "wl_seat", 6)
-[413842.818] wl_registry@2.global(6, "wl_output", 3)
-[413842.851] wl_registry@2.global(7, "wl_data_device_manager", 3)
-[413842.885] wl_registry@2.global(8, "wl_shell", 1)
-[413842.918] wl_registry@2.global(9, "zxdg_shell_v6", 1)
-[413842.955]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
-[413843.000] wl_registry@2.global(10, "xdg_wm_base", 1)
-[413843.034] wl_registry@2.global(11, "wl_shm", 1)
-[413843.072]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
-[413843.118] wl_callback@3.done(29)
-[413843.146]  -> wl_compositor@5.create_surface(new id wl_surface@3)
-[413843.178]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
-[413843.214]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
-[413843.258]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
-[413843.283]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
-[413843.307]  -> wl_surface@3.set_buffer_scale(1)
-[413843.330]  -> wl_surface@3.set_buffer_transform(0)
-[413843.351]  -> wl_surface@3.commit()
+[819920.734]  -> wl_display@1.get_registry(new id wl_registry@2)
+[819921.286]  -> wl_display@1.sync(new id wl_callback@3)
+[819943.868] wl_display@1.delete_id(3)
+[819943.999] wl_registry@2.global(1, "wl_drm", 2)
+[819944.087]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
+[819944.182] wl_registry@2.global(2, "qt_windowmanager", 1)
+[819944.260] wl_registry@2.global(3, "wl_compositor", 4)
+[819944.339]  -> wl_registry@2.bind(3, "wl_compositor", 3, new id [unknown]@5)
+[819944.413] wl_registry@2.global(4, "wl_subcompositor", 1)
+[819944.450] wl_registry@2.global(5, "wl_seat", 6)
+[819944.496] wl_registry@2.global(6, "wl_output", 3)
+[819944.557] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[819944.624] wl_registry@2.global(8, "wl_shell", 1)
+[819944.683] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[819944.764]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
+[819944.865] wl_registry@2.global(10, "xdg_wm_base", 1)
+[819944.922] wl_registry@2.global(11, "wl_shm", 1)
+[819944.994]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
+[819945.090] wl_callback@3.done(34)
+[819945.140]  -> wl_compositor@5.create_surface(new id wl_surface@3)
+[819945.201]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
+[819945.247]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
+[819945.307]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
+[819945.332]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
+[819945.357]  -> wl_surface@3.set_buffer_scale(1)
+[819945.381]  -> wl_surface@3.set_buffer_transform(0)
+[819945.404]  -> wl_surface@3.commit()
 Creating window...
 Creating buffer...
-Creating anonymous file /run/user/32011/weston-shared-XXXXXX...
-[413843.791]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
-[413843.973]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
-[413844.069]  -> wl_display@1.sync(new id wl_callback@12)
-[413846.392] wl_display@1.error(wl_drm@4, 2, "invalid name")
+Creating anonymous file /run/user/32011/wayland-cursor-shared-cSi17X...
+[819945.915]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
+[819946.121]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
+[819946.349]  -> wl_display@1.sync(new id wl_callback@12)
+[819954.780] wl_display@1.error(wl_drm@4, 2, "invalid name")
 wl_drm@4: error 2: invalid name
-[413846.679]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[413846.867]  -> wl_surface@3.damage(0, 0, 16, 16)
-[413846.950]  -> wl_surface@3.commit()
+[819955.127]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[819955.288]  -> wl_surface@3.damage(0, 0, 16, 16)
+[819955.469]  -> wl_surface@3.commit()
 Redrawing...
-[413846.983]  -> wl_surface@3.frame(new id wl_callback@13)
-[413847.038]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[413847.116]  -> wl_surface@3.damage(0, 0, 16, 16)
+[819955.555]  -> wl_surface@3.frame(new id wl_callback@13)
+[819955.653]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[819955.847]  -> wl_surface@3.damage(0, 0, 16, 16)
 Painting...
-[413847.361]  -> wl_surface@3.commit()
+[819956.908]  -> wl_surface@3.commit()
 Dispatching display...
 Disconnecting display...
 disconnected from display
-[Inferior 1 (process 25420) exited normally]
+[Inferior 1 (process 29858) exited normally]
 No stack.
 No stack.
 (gdb) quit
