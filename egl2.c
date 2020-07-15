@@ -521,21 +521,21 @@ int main(int argc, char **argv)
 
     wl_shell_surface_set_toplevel(shell_surface);
 
-    ////
+#ifdef USE_SHARED_MEMORY
     frame_callback = wl_surface_frame(surface);
     assert(frame_callback != NULL);
     wl_callback_add_listener(frame_callback, &frame_listener, NULL);
-    ////
+#endif  //  USE_SHARED_MEMORY    
 
     create_opaque_region();
     init_egl();
 
-#ifdef WAYLAND_SHARED_MEMORY
+#ifdef USE_SHARED_MEMORY
     create_window_shared_memory();
     redraw(NULL, NULL, 0);
 #else
     create_window();
-#endif  //  WAYLAND_SHARED_MEMORY    
+#endif  //  USE_SHARED_MEMORY    
 
     while (wl_display_dispatch(display) != -1)
     {
