@@ -169,6 +169,7 @@ paint_pixels()
 static struct wl_buffer *
 create_buffer()
 {
+    puts("Creating buffer...");
     struct wl_shm_pool *pool;
     int stride = WIDTH * 4; // 4 bytes per pixel
     int size = stride * HEIGHT;
@@ -213,6 +214,7 @@ create_buffer()
 static void
 create_window()
 {
+    puts("Creating window...");
     buffer = create_buffer();
     assert(buffer != NULL);
 
@@ -325,11 +327,13 @@ int main(int argc, char **argv)
     create_window();
     paint_pixels();
 
+    puts("Dispatching display...");
     while (wl_display_dispatch(display) != -1)
     {
         ;
     }
 
+    puts("Disconnecting display...");
     wl_display_disconnect(display);
     printf("disconnected from display\n");
 
