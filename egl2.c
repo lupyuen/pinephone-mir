@@ -437,7 +437,10 @@ create_buffer()
         exit(1);
     }
 
+    assert(shm != NULL);
     pool = wl_shm_create_pool(shm, fd, size);
+    assert(pool != NULL);
+
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
