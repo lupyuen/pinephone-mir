@@ -32,14 +32,21 @@ export WAYLAND_DEBUG=1
 #     -s 1024 \
 #     filemanager
 
-# Debug sdl app
-export SDL_VIDEODRIVER=wayland
-export SDL_DEBUG=1
+# Debug shm app
 gdb \
     -ex="r" \
     -ex="bt" \
     -ex="frame" \
-    --args ./filemanager.ubuntu.com.filemanager
+    --args ./shm
+
+# Debug sdl app
+# export SDL_VIDEODRIVER=wayland
+# export SDL_DEBUG=1
+# gdb \
+#     -ex="r" \
+#     -ex="bt" \
+#     -ex="frame" \
+#     --args ./filemanager.ubuntu.com.filemanager
 
 # Debug gtk app
 # gdb \
