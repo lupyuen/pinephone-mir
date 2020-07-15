@@ -191,7 +191,6 @@ static void
 redraw(void *data, struct wl_callback *callback, uint32_t time)
 {
     puts("Redrawing...");
-    assert(data != NULL); assert(callback != NULL);
     wl_callback_destroy(frame_callback);
     if (ht == 0)
         ht = HEIGHT;
