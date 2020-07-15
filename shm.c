@@ -196,7 +196,8 @@ create_buffer()
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
-                                     WL_SHM_FORMAT_XRGB8888);
+                                     //// WL_SHM_FORMAT_XRGB8888);
+                                     WL_SHM_FORMAT_ARGB8888); ////
     assert(buff != NULL);                                     
                             
     //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
