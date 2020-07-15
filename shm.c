@@ -4,7 +4,9 @@
 //    terminate called after throwing an instance of 'std::logic_error'
 //    what():  Buffer does not support GL rendering
 //  To build and run on PinePhone, see shm.sh.
-//  Based on https://jan.newmarch.name/Wayland/WhenCanIDraw/
+//  Based on inspection of Ubuntu Touch File Manager Wayland Log (logs/filemanager-wayland.log)
+//  and https://jan.newmarch.name/Wayland/WhenCanIDraw/
+//  and https://bugaevc.gitbooks.io/writing-wayland-clients/beyond-the-black-square/xdg-shell.html
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -203,7 +205,7 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
     if (ht == 0) {
         ht = HEIGHT;
     }
-    
+
     //  wl_surface@17.frame(new id wl_callback@24)
     frame_callback = wl_surface_frame(surface);
     assert(frame_callback != NULL);
@@ -408,6 +410,49 @@ static const struct wl_registry_listener registry_listener = {
     global_registry_remover
 };
 
+////////////////////////////////////////////////////////////////////
+//  XDG
+
+void xdg_toplevel_configure_handler
+(
+    void *data,
+    struct zxdg_toplevel_v6 *xdg_toplevel,
+    int32_t width,
+    int32_t height,
+    struct wl_array *states
+) {
+    printf("configure: %dx%d\n", width, height);
+}
+
+void xdg_toplevel_close_handler
+(
+    void *data,
+    struct zxdg_toplevel_v6 *xdg_toplevel
+) {
+    printf("close\n");
+}
+
+const struct zxdg_toplevel_v6_listener xdg_toplevel_listener = {
+    .configure = xdg_toplevel_configure_handler,
+    .close = xdg_toplevel_close_handler
+};
+
+void xdg_surface_configure_handler
+(
+    void *data,
+    struct zxdg_surface_v6 *xdg_surface,
+    uint32_t serial
+) {
+    zxdg_surface_v6_ack_configure(xdg_surface, serial);
+}
+
+const struct zxdg_surface_v6_listener xdg_surface_listener = {
+    .configure = xdg_surface_configure_handler
+};
+
+////////////////////////////////////////////////////////////////////
+//  Main
+
 int main(int argc, char **argv)
 {
     puts("Connecting to display...");
@@ -418,7 +463,7 @@ int main(int argc, char **argv)
     assert(registry != NULL);
     wl_registry_add_listener(registry, &registry_listener, NULL);
 
-    wl_display_dispatch(display);
+    // wait for the "initial" set of globals to appear
     wl_display_roundtrip(display);
     assert(compositor != NULL);
     assert(shell != NULL);
@@ -431,15 +476,33 @@ int main(int argc, char **argv)
     zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
     assert(zsurface != NULL);
 
+    zxdg_surface_v6_add_listener(xdg_surface, &xdg_surface_listener, NULL);
+
     //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
     toplevel = zxdg_surface_v6_get_toplevel(zsurface);
     assert(toplevel != NULL);
+
+    zxdg_toplevel_v6_add_listener(xdg_toplevel, &xdg_toplevel_listener, NULL);
 
     //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
     zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
 
     //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
     zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
+
+    // signal that the surface is ready to be configured
+    // wl_surface_commit(surface);
+
+    // ...
+    // create a pool
+    // create a buffer
+    // ...
+
+    // wait for the surface to be configured
+    // wl_display_roundtrip(display);
+
+    // wl_surface_attach(surface, buffer, 0, 0);
+    // wl_surface_commit(surface);
     ////
 
 #ifdef NOTUSED
