@@ -548,34 +548,143 @@ int main(int argc, char **argv)
 }
 
 /* Output:
-++ gcc -o egl egl.c -lwayland-client -lwayland-server -lwayland-egl -L/usr/lib/aarch64-linux-gnu/mesa-egl -lEGL /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 -Wl,-Map=egl.map
+++ gcc -g -o egl2 egl2.c -lwayland-client -lwayland-server -lwayland-egl -L/usr/lib/aarch64-linux-gnu/mesa-egl -lEGL /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 -Wl,-Map=egl2.map
 ++ sudo mount -o remount,rw /
-++ sudo cp egl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
-++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
--rwxr-xr-x 1 clickpkg clickpkg 20568 Jul 12 03:27 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
+++ sudo cp egl2 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/egl2
+++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/egl2
+-rwxr-xr-x 1 clickpkg clickpkg 40944 Jul 15 16:04 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/egl2
+++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
+++ echo '*** Tap on File Manager icon on PinePhone'
+*** Tap on File Manager icon on PinePhone
 ++ echo
-++ tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
+++ tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
 
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "aarch64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./egl2...done.
+Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/egl2 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+Getting server references...
 connected to display
+[1609874.744]  -> wl_display@1.get_registry(new id wl_registry@2)
+[1609892.217] wl_registry@2.global(1, "wl_drm", 2)
 Got a registry event for wl_drm id 1
+[1609892.472] wl_registry@2.global(2, "qt_windowmanager", 1)
 Got a registry event for qt_windowmanager id 2
+[1609892.563] wl_registry@2.global(3, "wl_compositor", 4)
 Got a registry event for wl_compositor id 3
+[1609892.682]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@3)
+[1609892.800] wl_registry@2.global(4, "wl_subcompositor", 1)
 Got a registry event for wl_subcompositor id 4
+[1609892.899] wl_registry@2.global(5, "wl_seat", 6)
 Got a registry event for wl_seat id 5
+[1609892.969] wl_registry@2.global(6, "wl_output", 3)
 Got a registry event for wl_output id 6
+[1609893.045] wl_registry@2.global(7, "wl_data_device_manager", 3)
 Got a registry event for wl_data_device_manager id 7
+[1609893.099] wl_registry@2.global(8, "wl_shell", 1)
 Got a registry event for wl_shell id 8
+[1609893.213]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@4)
+[1609893.328] wl_registry@2.global(9, "zxdg_shell_v6", 1)
 Got a registry event for zxdg_shell_v6 id 9
+[1609893.427] wl_registry@2.global(10, "xdg_wm_base", 1)
 Got a registry event for xdg_wm_base id 10
+[1609893.519] wl_registry@2.global(11, "wl_shm", 1)
 Got a registry event for wl_shm id 11
+[1609893.617]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@5)
+[1609893.725]  -> wl_display@1.sync(new id wl_callback@6)
+[1609894.123] wl_display@1.delete_id(6)
+[1609894.199] wl_shm@5.format(0)
+Possible shmem format ARGB8888
+[1609894.278] wl_shm@5.format(1)
+Possible shmem format XRGB8888
+[1609894.338] wl_callback@6.done(31)
 Found compositor and shell
+[1609894.406]  -> wl_compositor@3.create_surface(new id wl_surface@6)
 Created surface
+[1609894.463]  -> wl_shell@4.get_shell_surface(new id wl_shell_surface@7, wl_surface@6)
+[1609894.538]  -> wl_shell_surface@7.set_toplevel()
+[1609894.574]  -> wl_surface@6.frame(new id wl_callback@8)
+Creating opague region...
+[1609894.642]  -> wl_compositor@3.create_region(new id wl_region@9)
+[1609894.681]  -> wl_region@9.add(0, 0, 480, 360)
+[1609894.782]  -> wl_surface@6.set_opaque_region(wl_region@9)
+Init EGL...
 Created egl display
+[1609895.320]  -> wl_display@1.get_registry(new id wl_registry@10)
+[1609895.412]  -> wl_display@1.sync(new id wl_callback@11)
+[1609895.918] wl_display@1.delete_id(11)
+[1609895.996] wl_registry@10.global(1, "wl_drm", 2)
+[1609896.104]  -> wl_registry@10.bind(1, "wl_drm", 2, new id [unknown]@12)
+[1609896.332] wl_registry@10.global(2, "qt_windowmanager", 1)
+[1609896.406] wl_registry@10.global(3, "wl_compositor", 4)
+[1609896.560] wl_registry@10.global(4, "wl_subcompositor", 1)
+[1609896.665] wl_registry@10.global(5, "wl_seat", 6)
+[1609896.754] wl_registry@10.global(6, "wl_output", 3)
+[1609896.833] wl_registry@10.global(7, "wl_data_device_manager", 3)
+[1609896.911] wl_registry@10.global(8, "wl_shell", 1)
+[1609896.976] wl_registry@10.global(9, "zxdg_shell_v6", 1)
+[1609897.050] wl_registry@10.global(10, "xdg_wm_base", 1)
+[1609897.104] wl_registry@10.global(11, "wl_shm", 1)
+[1609897.177] wl_callback@11.done(31)
+[1609897.238]  -> wl_display@1.sync(new id wl_callback@11)
+[1609897.999] wl_display@1.delete_id(11)
+[1609898.072] wl_drm@12.device("/dev/dri/card1")
+[1609898.434]  -> wl_drm@12.authenticate(4)
+[1609898.493] wl_drm@12.format(875713089)
+[1609898.543] wl_drm@12.format(875713112)
+[1609898.588] wl_drm@12.format(909199186)
+[1609898.650] wl_drm@12.format(961959257)
+[1609898.698] wl_drm@12.format(825316697)
+[1609898.732] wl_drm@12.format(842093913)
+[1609898.777] wl_drm@12.format(909202777)
+[1609898.817] wl_drm@12.format(875713881)
+[1609898.857] wl_drm@12.format(842094158)
+[1609898.902] wl_drm@12.format(909203022)
+[1609898.938] wl_drm@12.format(1448695129)
+[1609898.972] wl_drm@12.capabilities(1)
+[1609899.016] wl_callback@11.done(31)
+[1609899.073]  -> wl_display@1.sync(new id wl_callback@11)
+[1609899.747] wl_display@1.delete_id(11)
+[1609901.542] wl_drm@12.authenticated()
+[1609903.286] wl_callback@11.done(31)
 EGL major: 1, minor 4
 EGL has 14 configs
 Buffer size for config 0 is 24
 Red size for config 0 is 8
-Created egl window
-Made current
-Swapped buffers
+Creating window with shared memory...
+Creating buffer...
+Creating anonymous file /run/user/32011/weston-shared-XXXXXX...
+[1610345.063]  -> wl_shm@5.create_pool(new id wl_shm_pool@11, fd 9, 1024)
+[1610345.189]  -> wl_shm_pool@11.create_buffer(new id wl_buffer@13, 0, 16, 16, 64, 1)
+[1610345.295]  -> wl_shm_pool@11.destroy()
+[1610345.332]  -> wl_surface@6.attach(wl_buffer@13, 0, 0)
+[1610345.395]  -> wl_surface@6.commit()
+Redrawing...
+[1610345.438]  -> wl_surface@6.damage(0, 0, 16, 16)
+Painting...
+[1610345.624]  -> wl_surface@6.frame(new id wl_callback@14)
+[1610345.664]  -> wl_surface@6.attach(wl_buffer@13, 0, 0)
+[1610345.733]  -> wl_surface@6.commit()
+[1610352.605] wl_display@1.delete_id(11)
+disconnected from display
+[Inferior 1 (process 29077) exited normally]
+No stack.
+No stack.
+(gdb) quit
+Error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name com.canonical.PropertyService was not provided by any .service files
 */
