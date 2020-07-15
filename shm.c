@@ -17,6 +17,7 @@
 #include <sys/mman.h>
 #include <errno.h>
 #include <unistd.h>
+#include "xdg-shell.h"
 #include "wayland-drm-client-protocol.h"
 
 struct wl_display *display = NULL;
@@ -369,11 +370,19 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
                                       &wl_compositor_interface,
                                       1);
     }
+    else if (strcmp(interface, "zxdg_shell_v6") == 0)
+    {
+        //  wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@19)
+        shell = wl_registry_bind(registry, id,
+                                 &zxdg_shell_v6_interface, 1);
+    }
+#ifdef NOTUSED
     else if (strcmp(interface, "wl_shell") == 0)
     {
         shell = wl_registry_bind(registry, id,
                                  &wl_shell_interface, 1);
     }
+#endif  //  NOTUSED
     else if (strcmp(interface, "wl_shm") == 0)
     {
         shm = wl_registry_bind(registry, id,

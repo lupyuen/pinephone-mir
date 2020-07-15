@@ -1,5 +1,9 @@
 # Build and install Wayland Shared Memory app
 
+# TODO: Generate xdg-shell.h and .c
+# wayland-scanner client-header /usr/share/wayland-protocols/unstable/xdg-shell/xdg-shell-unstable-v6.xml xdg-shell.h
+# wayland-scanner public-code /usr/share/wayland-protocols/unstable/xdg-shell/xdg-shell-unstable-v6.xml xdg-shell.c
+
 # Kill the app if it's already running
 pkill shm
 
@@ -11,6 +15,7 @@ gcc \
     -g \
     -o shm \
     shm.c \
+    xdg-shell.c \
     wayland-drm-protocol.c \
     -lwayland-client \
     -Wl,-Map=shm.map
