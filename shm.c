@@ -197,12 +197,13 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
     puts("Redrawing...");
     assert(surface != NULL);
     assert(buffer != NULL);
-    assert(frame_callback != NULL);
-
-    wl_callback_destroy(frame_callback);
-    if (ht == 0)
+    if (frame_callback != NULL) {
+        wl_callback_destroy(frame_callback);
+    }
+    if (ht == 0) {
         ht = HEIGHT;
-
+    }
+    
     //  wl_surface@17.frame(new id wl_callback@24)
     frame_callback = wl_surface_frame(surface);
     assert(frame_callback != NULL);
