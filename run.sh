@@ -33,18 +33,18 @@ export WAYLAND_DEBUG=1
 #     filemanager
 
 # Debug egl2 app
-gdb \
-    -ex="r" \
-    -ex="bt" \
-    -ex="frame" \
-    --args ./egl2
-
-# Debug shm app
 # gdb \
 #     -ex="r" \
 #     -ex="bt" \
 #     -ex="frame" \
-#     --args ./shm
+#     --args ./egl2
+
+# Debug shm app
+gdb \
+    -ex="r" \
+    -ex="bt" \
+    -ex="frame" \
+    --args ./shm
 
 # Debug sdl app
 # export SDL_VIDEODRIVER=wayland

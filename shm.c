@@ -35,6 +35,8 @@ static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
             uint32_t serial)
 {
+    puts("Handling ping...");
+    assert(shell_surface != NULL);
     wl_shell_surface_pong(shell_surface, serial);
     fprintf(stderr, "Pinged and ponged\n");
 }
@@ -43,17 +45,22 @@ static void
 handle_configure(void *data, struct wl_shell_surface *shell_surface,
                  uint32_t edges, int32_t width, int32_t height)
 {
+    printf("Handling configure: edges=%d, width=%d, height=%d\n", edges, width, height);
+    assert(shell_surface != NULL);
 }
 
 static void
 handle_popup_done(void *data, struct wl_shell_surface *shell_surface)
 {
+    puts("Handling popup done");
+    assert(shell_surface != NULL);
 }
 
 static const struct wl_shell_surface_listener shell_surface_listener = {
     handle_ping,
     handle_configure,
-    handle_popup_done};
+    handle_popup_done
+};
 
 static int
 set_cloexec_or_close(int fd)
@@ -133,6 +140,7 @@ int os_create_anonymous_file(off_t size)
     strcpy(name, path);
     strcat(name, template);
 
+    printf("Creating anonymous file %s...\n", name);
     fd = create_tmpfile_cloexec(name);
 
     free(name);
@@ -154,8 +162,10 @@ uint32_t pixel_value = 0x0; // black
 static void
 paint_pixels()
 {
+    puts("Painting...");
     int n;
     uint32_t *pixel = shm_data;
+    assert(pixel != NULL);
 
     for (n = 0; n < WIDTH * HEIGHT; n++)
     {
@@ -179,7 +189,8 @@ int ht;
 static void
 redraw(void *data, struct wl_callback *callback, uint32_t time)
 {
-    // fprintf(stderr, "Redrawing\n");
+    puts("Redrawing...");
+    assert(data != NULL); assert(callback != NULL);
     wl_callback_destroy(frame_callback);
     if (ht == 0)
         ht = HEIGHT;
@@ -187,17 +198,21 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
                       WIDTH, ht--);
     paint_pixels();
     frame_callback = wl_surface_frame(surface);
+    assert(frame_callback != NULL);
+
     wl_surface_attach(surface, buffer, 0, 0);
     wl_callback_add_listener(frame_callback, &frame_listener, NULL);
     wl_surface_commit(surface);
 }
 
 static const struct wl_callback_listener frame_listener = {
-    redraw};
+    redraw
+};
 
 static struct wl_buffer *
 create_buffer()
 {
+    puts("Creating buffer...");
     struct wl_shm_pool *pool;
     int stride = WIDTH * 4; // 4 bytes per pixel
     int size = stride * HEIGHT;
@@ -222,7 +237,10 @@ create_buffer()
         exit(1);
     }
 
+    assert(shm != NULL);
     pool = wl_shm_create_pool(shm, fd, size);
+    assert(pool != NULL);
+
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
@@ -235,9 +253,11 @@ create_buffer()
 static void
 create_window()
 {
-
+    puts("Creating window...");
     buffer = create_buffer();
+    assert(buffer != NULL);
 
+    assert(surface != NULL);
     wl_surface_attach(surface, buffer, 0, 0);
     //wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);
     wl_surface_commit(surface);
@@ -266,7 +286,8 @@ shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
 }
 
 struct wl_shm_listener shm_listener = {
-    shm_format};
+    shm_format
+};
 
 static void
 global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
@@ -300,7 +321,8 @@ global_registry_remover(void *data, struct wl_registry *registry, uint32_t id)
 
 static const struct wl_registry_listener registry_listener = {
     global_registry_handler,
-    global_registry_remover};
+    global_registry_remover
+};
 
 int main(int argc, char **argv)
 {
