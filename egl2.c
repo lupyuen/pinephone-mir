@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <errno.h>
+#include <unistd.h>
 #include <wayland-client.h>
 #include <wayland-server.h>
 #include <wayland-client-protocol.h>
@@ -32,7 +36,7 @@ EGLContext egl_context;
 /// Render the GLES2 display
 void render_display()
 {
-    puts("Rendering display...")
+    puts("Rendering display...");
     glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
 
@@ -242,7 +246,7 @@ static void
 handle_configure(void *data, struct wl_shell_surface *shell_surface,
                  uint32_t edges, int32_t width, int32_t height)
 {
-    printf("Handling configure: edges=%d, width=%d, height=%d\n");
+    printf("Handling configure: edges=%d, width=%d, height=%d\n", edges, width, height);
 }
 
 static void
