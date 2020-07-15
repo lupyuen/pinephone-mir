@@ -261,6 +261,9 @@ create_buffer()
     assert(pool != NULL);
 
     //  TODO
+    //  [4046596.866]  -> wl_shm_pool@9.resize(12288)
+
+    //  TODO
     assert(drm != NULL);
     buff = wl_drm_create_prime_buffer(
         drm,
