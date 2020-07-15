@@ -461,42 +461,12 @@ int main(int argc, char **argv)
 #ifdef NOTUSED
 Output:
 
-++ gcc -g -o shm shm.c -lwayland-client -Wl,-Map=shm.map
+++ gcc -g -o shm shm.c wayland-drm-protocol.c -lwayland-client -Wl,-Map=shm.map
 ++ sudo mount -o remount,rw /
 ++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
--rwxr-xr-x 1 clickpkg clickpkg 33928 Jul 15 16:43 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
-++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
-++ echo '*** Tap on File Manager icon on PinePhone'
-*** Tap on File Manager icon on PinePhone
-++ echo
-++ tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log
-
-GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
-Copyright (C) 2016 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
-and "show warranty" for details.
-This GDB was configured as "aarch64-linux-gnu".
-remote: Enumerating objects: 5, done.
-remote: Counting objects: 100% (5/5), done.
-remote: Compressing objects: 100% (1/1), done.
-remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
-Unpacking objects: 100% (3/3), done.
-From https://github.com/lupyuen/pinephone-mir
-   427e005..7ec6e3d  master     -> origin/master
-Updating 427e005..7ec6e3d
-Fast-forward
- shm.c | 1 -
- 1 file changed, 1 deletion(-)
-++ gcc -g -o shm shm.c -lwayland-client -Wl,-Map=shm.map
-++ sudo mount -o remount,rw /
-++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
-++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
-++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
--rwxr-xr-x 1 clickpkg clickpkg 33912 Jul 15 16:43 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+-rwxr-xr-x 1 clickpkg clickpkg 39824 Jul 15 20:36 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ echo '*** Tap on File Manager icon on PinePhone'
 *** Tap on File Manager icon on PinePhone
@@ -522,56 +492,62 @@ Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
 connected to display
-[3967421.999]  -> wl_display@1.get_registry(new id wl_registry@2)
-[3967442.634] wl_registry@2.global(1, "wl_drm", 2)
-[3967442.788] wl_registry@2.global(2, "qt_windowmanager", 1)
-[3967442.885] wl_registry@2.global(3, "wl_compositor", 4)
-[3967442.979]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@3)
-[3967443.085] wl_registry@2.global(4, "wl_subcompositor", 1)
-[3967443.165] wl_registry@2.global(5, "wl_seat", 6)
-[3967443.244] wl_registry@2.global(6, "wl_output", 3)
-[3967443.326] wl_registry@2.global(7, "wl_data_device_manager", 3)
-[3967443.405] wl_registry@2.global(8, "wl_shell", 1)
-[3967443.489]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@4)
-[3967443.595] wl_registry@2.global(9, "zxdg_shell_v6", 1)
-[3967443.680] wl_registry@2.global(10, "xdg_wm_base", 1)
-[3967443.758] wl_registry@2.global(11, "wl_shm", 1)
-[3967443.836]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@5)
-[3967443.956]  -> wl_display@1.sync(new id wl_callback@6)
-[3967444.250] wl_display@1.delete_id(6)
-[3967444.299] wl_shm@5.format(0)
+[729032.290]  -> wl_display@1.get_registry(new id wl_registry@2)
+[729051.777] wl_registry@2.global(1, "wl_drm", 2)
+[729051.909]  -> wl_registry@2.bind(1, "wl_drm", 1, new id [unknown]@3)
+[729052.037] wl_registry@2.global(2, "qt_windowmanager", 1)
+[729052.121] wl_registry@2.global(3, "wl_compositor", 4)
+[729052.193]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@4)
+[729052.297] wl_registry@2.global(4, "wl_subcompositor", 1)
+[729052.346] wl_registry@2.global(5, "wl_seat", 6)
+[729052.393] wl_registry@2.global(6, "wl_output", 3)
+[729052.448] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[729052.528] wl_registry@2.global(8, "wl_shell", 1)
+[729052.611]  -> wl_registry@2.bind(8, "wl_shell", 1, new id [unknown]@5)
+[729052.691] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[729052.770] wl_registry@2.global(10, "xdg_wm_base", 1)
+[729052.846] wl_registry@2.global(11, "wl_shm", 1)
+[729052.926]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@6)
+[729053.019]  -> wl_display@1.sync(new id wl_callback@7)
+[729053.839] wl_display@1.delete_id(7)
+[729054.016] wl_shm@6.format(0)
 Possible shmem format ARGB8888
-[3967444.365] wl_shm@5.format(1)
+[729056.374] wl_shm@6.format(1)
 Possible shmem format XRGB8888
-[3967444.419] wl_callback@6.done(0)
+[729058.049] wl_callback@7.done(82)
 Found compositor
-[3967444.538]  -> wl_compositor@3.create_surface(new id wl_surface@6)
+[729058.178]  -> wl_compositor@4.create_surface(new id wl_surface@7)
 Created surface
-[3967444.592]  -> wl_shell@4.get_shell_surface(new id wl_shell_surface@7, wl_surface@6)
+[729058.261]  -> wl_shell@5.get_shell_surface(new id wl_shell_surface@8, wl_surface@7)
 Created shell surface
-[3967444.653]  -> wl_shell_surface@7.set_toplevel()
-[3967444.694]  -> wl_surface@6.frame(new id wl_callback@8)
+[729058.358]  -> wl_shell_surface@8.set_toplevel()
+[729058.402]  -> wl_surface@7.frame(new id wl_callback@9)
 Creating window...
 Creating buffer...
 Creating anonymous file /run/user/32011/weston-shared-XXXXXX...
-[3967445.127]  -> wl_shm@5.create_pool(new id wl_shm_pool@9, fd 5, 1024)
-[3967445.203]  -> wl_shm_pool@9.create_buffer(new id wl_buffer@10, 0, 16, 16, 64, 1)
-[3967445.263]  -> wl_shm_pool@9.destroy()
-[3967445.290]  -> wl_surface@6.attach(wl_buffer@10, 0, 0)
-[3967445.343]  -> wl_surface@6.commit()
+[729058.865]  -> wl_shm@6.create_pool(new id wl_shm_pool@10, fd 5, 1024)
+[729058.971]  -> wl_drm@3.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
+[729059.225]  -> wl_surface@7.set_buffer_scale(1)
+[729059.278]  -> wl_surface@7.set_buffer_transform(0)
+[729059.325]  -> wl_surface@7.commit()
+[729059.350]  -> wl_surface@7.attach(wl_buffer@11, 0, 0)
+[729059.436]  -> wl_surface@7.damage(0, 0, 16, 16)
+[729059.545]  -> wl_surface@7.commit()
 Redrawing...
-[3967445.380]  -> wl_surface@6.damage(0, 0, 16, 16)
+[729059.604]  -> wl_surface@7.frame(new id wl_callback@12)
+[729059.644]  -> wl_surface@7.attach(wl_buffer@11, 0, 0)
+[729059.686]  -> wl_surface@7.damage(0, 0, 16, 16)
 Painting...
-[3967445.556]  -> wl_surface@6.frame(new id wl_callback@11)
-[3967445.599]  -> wl_surface@6.attach(wl_buffer@10, 0, 0)
-[3967445.636]  -> wl_surface@6.commit()
-[3967452.277] wl_display@1.delete_id(9)
-[3967452.496] wl_shell_surface@7.configure(0, 720, 1398)
-Handling configure: edges=0, width=720, height=1398
+[729059.809]  -> wl_surface@7.commit()
+Dispatching display...
+[729060.751] wl_display@1.error(wl_display@1, 1, "invalid method 3 (since 1 < 2), object wl_drm@3")
+wl_display@1: error 1: invalid method 3 (since 1 < 2), object wl_drm@3
+Disconnecting display...
 disconnected from display
-[Inferior 1 (process 23114) exited normally]
+[Inferior 1 (process 8310) exited normally]
 No stack.
 No stack.
 (gdb) quit
 Error: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name com.canonical.PropertyService was not provided by any .service files
+
 #endif  //  NOTUSED
