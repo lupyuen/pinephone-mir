@@ -810,13 +810,9 @@ be used with the current version of glib-compile-resources due to
 
 So Ubuntu Touch is not really that bad for PinePhone... It's just painful for building non-Qt apps. 🙂
 
-## Wayland Compositor for Ubuntu Touch: `unity-system-compositor`
+## Mir Server for Ubuntu Touch
 
-TODO
-
-Log is here...
-
-`/home/phablet/.cache/upstart/unity8.log`
+Runs as the `unity-system-compositor` process...
 
 ```
 $ ps -aux
@@ -828,4 +824,190 @@ unity-system-compositor \
     --file /run/mir_socket \
     --from-dm-fd 11 \
     --to-dm-fd 14 --vt 1
+```
+
+Mir Server Log may be found on PinePhone here...
+
+`/home/phablet/.cache/upstart/unity8.log`
+
+Check the sample log: [`logs/unity8.log`](logs/unity8.log)
+
+```
+[2020-07-15:10:58:22.762] Using mirserver qt platform
+[2020-07-15:10:58:22.762] Not using nested server, using null mir cursor
+[2020-07-15:10:58:23.075] qtmir.screens: ScreensModel::ScreensModel
+[2020-07-15 10:58:23.181861] <information> mirserver: Starting
+[2020-07-15 10:58:23.272222] < - debug - > mirserver: Using logind for session management
+[2020-07-15 10:58:23.276582] <information> mircommon: Loading modules from: /usr/lib/aarch64-linux-gnu/mir/server-platform
+[2020-07-15 10:58:23.277579] <information> mircommon: Loading module: /usr/lib/aarch64-linux-gnu/mir/server-platform/graphics-mesa-kms.so.16
+[2020-07-15 10:58:23.278121] <information> mircommon: Loading module: /usr/lib/aarch64-linux-gnu/mir/server-platform/graphics-wayland.so.16
+[2020-07-15 10:58:23.278840] <information> mircommon: Loading module: /usr/lib/aarch64-linux-gnu/mir/server-platform/server-mesa-x11.so.16
+[2020-07-15 10:58:23.279606] <information> mircommon: Loading module: /usr/lib/aarch64-linux-gnu/mir/server-platform/input-evdev.so.7
+[2020-07-15 10:58:23.303380] <information> mesa-kms: EGL platform does not support EGL_KHR_platform_gbm extension
+[2020-07-15 10:58:23.338281] < -warning- > mesa-kms: Failed to detect whether device /dev/dri/card0 supports KMS, continuing with lower confidence
+[2020-07-15 10:58:23.417808] <information> mirserver: Found graphics driver: mir:mesa-kms (version 1.7.2) Support priority: 128
+[2020-07-15 10:58:23.418182] <information> mirserver: Found graphics driver: mir:wayland (version 1.7.2) Support priority: 256
+[2020-07-15 10:58:23.418449] <information> mirserver: Found graphics driver: mir:mesa-x11 (version 1.7.2) Support priority: 0
+[2020-07-15 10:58:23.420831] <information> mirserver: Selected driver: mir:wayland (version 1.7.2)
+[2020-07-15:10:58:24.016] qtmir.mir: PromptSessionListener::PromptSessionListener - this= PromptSessionListener(0xffff9812a5e0)
+[2020-07-15 10:58:24.018289] <information> mirserver: Cursor disabled
+[2020-07-15 10:58:24.057022] <information> mirserver: Selected input driver: mir:wayland (version: 1.7.2)
+[2020-07-15:10:58:24.057] qtmir.mir: MirServer created
+[2020-07-15:10:58:24.058] qtmir.mir: Command line arguments passed to Qt: ("unity8", "--mode=full-greeter")
+[2020-07-15 10:58:24.059135] <information> mirserver: Mir version 1.7.2
+[2020-07-15:10:58:24.059] qtmir.screens: QtCompositor::start
+[2020-07-15 10:58:24.104796] <information> mirserver: Initial display configuration:
+[2020-07-15 10:58:24.105203] <information> mirserver: * Output 0: unknown connected, used
+[2020-07-15 10:58:24.105266] <information> mirserver: . |_ Physical size 68x136mm
+[2020-07-15 10:58:24.105311] <information> mirserver: . |_ Power is on
+[2020-07-15 10:58:24.105347] <information> mirserver: . |_ Current mode 720x1440
+[2020-07-15 10:58:24.105389] <information> mirserver: . |_ Preferred mode 720x1440
+[2020-07-15 10:58:24.105495] <information> mirserver: . |_ Orientation normal
+[2020-07-15 10:58:24.105617] <information> mirserver: . |_ Logical size 720x1440
+[2020-07-15 10:58:24.105659] <information> mirserver: . |_ Logical position +0+0
+[2020-07-15:10:58:24.105] qtmir.screens: ScreensModel::update
+[2020-07-15:10:58:24.106] qtmir.sensor: Screen - nativeOrientation is: Qt::ScreenOrientation(PortraitOrientation)
+[2020-07-15:10:58:24.106] qtmir.sensor: Screen - initial currentOrientation is: Qt::ScreenOrientation(PortraitOrientation)
+[2020-07-15:10:58:24.107] is not internalDisplay, but enabling anyway
+[2020-07-15:10:58:24.107] qtmir.screens: Added Screen with id 0 and geometry QRect(0,0 720x1440)
+[2020-07-15:10:58:24.140] qtmir.screens: Screen::setMirDisplayBuffer Screen(0xffff98133960) 0xffff980a0788 0xffff980a0780
+[2020-07-15:10:58:24.140] qtmir.screens: =======================================
+[2020-07-15:10:58:24.141] qtmir.screens: Screen(0xffff98133960) - id: 0 geometry: QRect(0,0 720x1440) window: 0x0 type: "Unknown" scale: 1.75
+[2020-07-15:10:58:24.141] qtmir.screens: =======================================
+library "libcutils.so" not found
+failed to load bionic libc.so, falling back own property implementation
+[2020-07-15:10:58:26.011] QObject::connect: signal not found in qtmir::Wakelock
+[2020-07-15:10:58:26.379] file:///usr/share/unity8//Components/Showable.qml:44: Error: Cannot assign to non-existent property "target"
+[2020-07-15:10:58:26.395] file:///usr/share/unity8//Components/Showable.qml:43: Error: Cannot assign to non-existent property "target"
+[2020-07-15:10:58:26.621] file:///usr/share/unity8//Components/Showable.qml:44: Error: Cannot assign to non-existent property "target"
+[2020-07-15:10:58:26.623] file:///usr/share/unity8//Components/Showable.qml:43: Error: Cannot assign to non-existent property "target"
+[2020-07-15:10:58:27.213] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff981327d0) pid= 6814
+[2020-07-15:10:58:27.215] ApplicationManager REJECTED connection from app with pid 6814 as it was not launched by upstart, and no desktop_file_hint is specified
+[2020-07-15:10:58:27.764] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff981327d0) pid= 6867
+[2020-07-15:10:58:28.287] CursorImageProvider: "" not found (nor its fallbacks, if any). Going for "left_ptr" as a last resort.
+[2020-07-15:10:58:28.315] QObject::connect: No such signal QDBusAbstractInterface::StartUrl(const QString &, const QString &)
+[2020-07-15:10:58:28.316] QObject::connect: No such signal QDBusAbstractInterface::ShowHome(const QString &)
+
+** (process:6738): CRITICAL **: Error parsing manifest for package 'mycontainer': mycontainer does not exist in any database for user phablet
+[2020-07-15:10:58:29.456] qml: updateLightState: onDisplayStatusChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: , batteryLevel: 0
+[2020-07-15:10:58:29.488] qml: updateLightState: onBatteryIconNameChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: , batteryLevel: 0
+[2020-07-15:10:58:29.504] file:///usr/share/unity8//Panel/Indicators/IndicatorsLight.qml:207: Error: Cannot assign [undefined] to double
+[2020-07-15:10:58:29.525] file:///usr/share/unity8//Panel/Indicators/IndicatorsLight.qml:211: Error: Cannot assign [undefined] to QString
+
+** (process:6738): CRITICAL **: Error parsing manifest for package 'mycontainer': mycontainer does not exist in any database for user phablet
+[2020-07-15:10:58:29.958] QQmlExpression: Expression file:///usr/share/unity8//DeviceConfiguration.qml:62:46 depends on non-NOTIFYable properties:
+[2020-07-15:10:58:29.959]     DeviceConfig::supportsMultiColorLed
+[2020-07-15:10:58:29.968] qtmir.mir.keymap: SET KEYMAP "us"
+[2020-07-15:10:58:30.057] ubuntu-app-launch threw an exception getting app info for appId: "mycontainer_notification-daemon" : Application is not meant to be displayed
+[2020-07-15:10:58:30.058] Failed to get app info for app "mycontainer_notification-daemon"
+
+** (process:6738): CRITICAL **: Error parsing manifest for package 'mycontainer': mycontainer does not exist in any database for user phablet
+[2020-07-15:10:58:30.349] ubuntu-app-launch threw an exception getting app info for appId: "mycontainer_org.gnome.gedit" : Application is not meant to be displayed
+[2020-07-15:10:58:30.350] Failed to get app info for app "mycontainer_org.gnome.gedit"
+
+** (process:6738): CRITICAL **: Error parsing manifest for package 'mycontainer': mycontainer does not exist in any database for user phablet
+[2020-07-15:10:58:30.446] file:///usr/share/unity8//Components/ImageResolver.qml:41:19: QML QQuickImage: Cannot open: file:///custom/graphics/homebutton.svg
+[2020-07-15:10:58:30.514] ubuntu-app-launch threw an exception getting app info for appId: "mycontainer_python3.5" : Application is not meant to be displayed
+[2020-07-15:10:58:30.514] Failed to get app info for app "mycontainer_python3.5"
+
+** (process:6738): CRITICAL **: Error parsing manifest for package 'mycontainer': mycontainer does not exist in any database for user phablet
+Attempted to unregister path (path[0] = null path[1] = null) which isn't registered
+[2020-07-15:10:58:31.767] toplevelwindowmodel: setRootFocus(false), surfaceManagerBusy is false
+[2020-07-15:10:58:31.769] toplevelwindowmodel: setFocusedWindow(Window[0x1896eb80, id=0, null])
+[2020-07-15:10:58:32.062] file:///usr/share/unity8//Components/ImageResolver.qml:41:19: QML QQuickImage: Cannot open: file:///usr/share/unity8/graphics/phone_background.jpg
+[2020-07-15:10:58:32.245] qml: Calculating new usage mode. Pointer devices: 0 current mode: Staged old device count 0 root width: 40 height: 71
+[2020-07-15:10:58:32.270] file:///usr/share/unity8//Panel/Indicators/IndicatorsLight.qml:216: ReferenceError: Lights is not defined
+[2020-07-15:10:58:32.293] file:///usr/share/unity8//OrientedShell.qml:281:32: Unable to assign [undefined] to bool
+[2020-07-15:10:58:32.294] qtmir.screens: Screen::setWindow - new geometry for shell surface ShellView(0x188d76f0) QRect(0,0 720x1440)
+[2020-07-15:10:58:32.295] qtmir.screens: ScreenWindow 0x189a7940 with window ID 1 backed by Screen(0xffff98133960) with ID 0
+[2020-07-15:10:58:32.295] qtmir.screens: QWindow ShellView(0x188d76f0) with geom QRect(0,0 720x1440) is backed by a Screen(0xffff98133960) with geometry QRect(0,0 720x1440)
+[2020-07-15:10:58:32.305] qml: Calculating new usage mode. Pointer devices: 0 current mode: Staged old device count 0 root width: 51.42857142857143 height: 102.85714285714286
+[2020-07-15:10:58:32.329] qtmir.screens: ScreensModel::onCompositorStarting
+[2020-07-15:10:58:32.430] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-15:10:58:32.430] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-15:10:58:32.468] qtmir.screens: ScreensModel::update
+[2020-07-15:10:58:32.468] qtmir.screens: Can reuse Screen with id 0
+[2020-07-15:10:58:32.469] qtmir.screens: Screen::setMirDisplayBuffer Screen(0xffff98133960) 0xffff980a0788 0xffff980a0780
+[2020-07-15:10:58:32.469] qtmir.screens: =======================================
+[2020-07-15:10:58:32.469] qtmir.screens: Screen(0xffff98133960) - id: 0 geometry: QRect(0,0 720x1440) window: 0x189a7940 type: "Unknown" scale: 1.75
+[2020-07-15:10:58:32.469] qtmir.screens: =======================================
+[2020-07-15:10:58:32.469] qtmir.screens: ScreenWindow::setExposed 0x189a7940 true 0xffff98133970
+[2020-07-15:10:58:32.476] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-15:10:58:34.957] Input device added: "gpio-keys" "/dev/input/event2" QFlags<QInputDevice::InputType>(Button)
+[2020-07-15:10:58:34.967] Input device added: "1c21800.lradc" "/dev/input/event3" QFlags<QInputDevice::InputType>(Button)
+[2020-07-15:10:58:34.972] Input device added: "Goodix Capacitive TouchScreen" "/dev/input/event1" QFlags<QInputDevice::InputType>(Button|TouchScreen)
+[2020-07-15:10:58:34.975] Input device added: "axp20x-pek" "/dev/input/event0" QFlags<QInputDevice::InputType>(Button)
+[2020-07-15:10:58:35.136] APP_ID isn't set, the handler ignored
+[2020-07-15:10:58:35.975] [PERFORMANCE]: Last frame took 431 ms to render.
+[2020-07-15:10:58:35.989] Unknown orientation.
+[2020-07-15:10:58:36.074] qml: EdgeBarrierSettings: min=2gu(28px), max=120gu(1680px), sensitivity=0.5, threshold=61gu(854px)
+[2020-07-15:10:58:36.140] [PERFORMANCE]: Last frame took 53 ms to render.
+[2020-07-15:10:58:36.288] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: , batteryLevel: 95
+[2020-07-15:10:58:36.289] qml: updateLightState: onDeviceStateChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 95
+[2020-07-15:10:58:37.508] [PERFORMANCE]: Last frame took 64 ms to render.
+[2020-07-15:10:59:15.237] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 96
+[2020-07-15:11:01:15.300] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 97
+[2020-07-15:11:04:29.762] [PERFORMANCE]: Last frame took 45 ms to render.
+[2020-07-15:11:04:34.709] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::Application()
+[2020-07-15:11:04:34.710] toplevelwindowmodel: prependPlaceholder(com.ubuntu.terminal_terminal)
+[2020-07-15:11:04:34.790] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff981327d0) pid= 11695
+[2020-07-15:11:04:34.965] file:///usr/share/unity8//Stage/Stage.qml:1877:17: QML WindowInfoItem: Binding loop detected for property "maxWidth"
+[2020-07-15:11:04:35.017] toplevelwindowmodel: setFocusedWindow(Window[0x1a274750, id=1, null])
+[2020-07-15:11:04:35.018] toplevelwindowmodel: prependSurfaceHelper after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x0,id=1)
+[2020-07-15:11:04:35.019] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=suspended)
+[2020-07-15:11:04:35.057] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-15:11:04:35.058] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::addSession(session=qtmir::Session(0x1a7506e0))
+[2020-07-15:11:04:35.346] toplevelwindowmodel: setRootFocus(true), surfaceManagerBusy is false
+[2020-07-15:11:04:35.347] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=running)
+[2020-07-15:11:04:36.571] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::MirSurface(type=freestyle,state=restored,size=(640,480),parentSurface=QObject(0x0))
+[2020-07-15:11:04:36.572] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::activate()
+[2020-07-15 11:04:36.574409] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-15:11:04:36.581] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::registerView(440057776) after=1
+[2020-07-15:11:04:36.583] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::setKeymap("us")
+[2020-07-15:11:04:36.584] toplevelwindowmodel: prependSurface appId=com.ubuntu.terminal_terminal surface=qtmir::MirSurface(0x1a31c340), filling out placeholder. after: (index=0,appId=com.ubuntu.terminal_terminal,surface=0x1a31c340,id=1)
+[2020-07-15:11:04:36.584] toplevelwindowmodel: setFocusedWindow(0x0)
+[2020-07-15:11:04:36.585] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::setFocused(true)
+[2020-07-15:11:04:36.588] toplevelwindowmodel: setFocusedWindow(Window[0x1a274750, id=1, MirSurface[0x1a31c340,"ubuntu-terminal-app"]])
+[2020-07-15:11:04:36.690] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::requestState(restored)
+[2020-07-15:11:04:37.469] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::setReady()
+[2020-07-15:11:04:37.470] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Running)
+[2020-07-15:11:04:37.476] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::updateExposure(true)
+[2020-07-15:11:04:38.954] qtmir.surfaces: MirSurface[0x1a3155a0,""]::MirSurface(type=input Method,state=restored,size=(640,480),parentSurface=QObject(0x0))
+[2020-07-15:11:04:38.955] qtmir.surfaces: MirSurface[0x1a3155a0,""]::registerView(413341760) after=1
+[2020-07-15:11:04:39.242] qtmir.surfaces: MirSurface[0x1a3155a0,""]::setReady()
+[2020-07-15:11:04:39.243] qtmir.surfaces: MirSurface[0x1a3155a0,""]::updateExposure(true)
+[2020-07-15:11:05:03.192] [PERFORMANCE]: Last frame took 148 ms to render.
+[2020-07-15:11:05:03.297] [PERFORMANCE]: Last frame took 37 ms to render.
+[2020-07-15:11:05:04.709] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::Application()
+[2020-07-15:11:05:04.710] toplevelwindowmodel: prependPlaceholder(com.ubuntu.filemanager_filemanager)
+[2020-07-15:11:05:04.864] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=suspended)
+[2020-07-15:11:05:04.864] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::suspend()
+[2020-07-15:11:05:04.864] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitSession)
+[2020-07-15:11:05:04.865] toplevelwindowmodel: setFocusedWindow(Window[0x18fa2fc0, id=3, null])
+[2020-07-15:11:05:04.867] toplevelwindowmodel: prependSurfaceHelper after (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x0,id=3),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x1a31c340,id=1)
+[2020-07-15:11:05:04.871] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::setFocused(false)
+[2020-07-15:11:05:05.082] qtmir.surfaces: MirSurface[0x1a31c340,"com.ubuntu.terminal_terminal"]::updateExposure(false)
+[2020-07-15:11:05:05.166] qtmir.surfaces: MirSurface[0x1a3155a0,""]::setLive(false)
+[2020-07-15:11:05:05.167] qtmir.surfaces: MirSurface[0x1a3155a0,""]::unregisterView(413341760) after=0 live=false
+[2020-07-15:11:05:05.168] qtmir.surfaces: MirSurface[0x1a3155a0,""]::updateExposure(false)
+[2020-07-15:11:05:05.169] qtmir.surfaces: MirSurface[0x1a3155a0,""]::~MirSurface() viewCount=0
+[2020-07-15:11:05:05.341] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff981327d0) pid= 12109
+[2020-07-15:11:05:05.364] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-15:11:05:05.364] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::addSession(session=qtmir::Session(0x19db4100))
+[2020-07-15:11:05:05.369] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::MirSurface(type=freestyle,state=restored,size=(16,16),parentSurface=QObject(0x0))
+[2020-07-15:11:05:05.370] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::activate()
+[2020-07-15 11:05:05.370912] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-15:11:05:05.374] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::registerView(420469040) after=1
+[2020-07-15:11:05:05.382] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::setKeymap("us")
+[2020-07-15:11:05:05.383] toplevelwindowmodel: prependSurface appId=com.ubuntu.filemanager_filemanager surface=qtmir::MirSurface(0x1a3155a0), filling out placeholder. after: (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x1a3155a0,id=3),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x1a31c340,id=1)
+[2020-07-15:11:05:05.383] toplevelwindowmodel: setFocusedWindow(0x0)
+[2020-07-15:11:05:05.383] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::setReady()
+[2020-07-15:11:05:05.384] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setInternalState(state=Running)
+[2020-07-15:11:05:05.388] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::setFocused(true)
+[2020-07-15:11:05:05.391] toplevelwindowmodel: setFocusedWindow(Window[0x18fa2fc0, id=3, MirSurface[0x1a3155a0,""]])
+[2020-07-15:11:05:05.525] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::requestState(restored)
+[2020-07-15:11:05:05.528] qtmir.surfaces: MirSurface[0x1a3155a0,"com.ubuntu.filemanager_filemanager"]::updateExposure(true)
+terminate called after throwing an instance of 'std::logic_error'
+  what():  Buffer does not support GL rendering
+()
 ```
