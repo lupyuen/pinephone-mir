@@ -39,17 +39,30 @@ static void
 handle_configure(void *data, struct wl_shell_surface *shell_surface,
                  uint32_t edges, int32_t width, int32_t height)
 {
+    printf("Handing configure: edges=%d, width=%d, height=%d...\n", edges, width, height);
 }
 
 static void
 handle_popup_done(void *data, struct wl_shell_surface *shell_surface)
 {
+    puts("Handing popup done...");
 }
 
 static const struct wl_shell_surface_listener shell_surface_listener = {
     handle_ping,
     handle_configure,
-    handle_popup_done};
+    handle_popup_done
+};
+
+static void
+buffer_release(void *data, struct wl_buffer *buffer)
+{
+    puts("Releasing buffer...");
+}
+
+static const struct wl_buffer_listener buffer_listener = {
+    buffer_release
+};
 
 static int
 set_cloexec_or_close(int fd)
@@ -206,8 +219,8 @@ create_buffer()
                                      // WL_SHM_FORMAT_ARGB8888);
     assert(buff != NULL);                                     
                             
-    //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
-    //// TODO: wl_shm_pool_destroy(pool);
+    wl_buffer_add_listener(buff, &buffer_listener, buff);
+    wl_shm_pool_destroy(pool);
     return buff;
 }
 
