@@ -24,6 +24,13 @@ struct wl_egl_window *egl_window;
 struct wl_region *region;
 struct wl_shell *shell;
 struct wl_shell_surface *shell_surface;
+struct wl_shm *shm;
+struct wl_buffer *buffer;
+struct wl_callback *frame_callback;
+void *shm_data;
+
+int WIDTH = 16;
+int HEIGHT = 16;
 
 EGLDisplay egl_display;
 EGLConfig egl_conf;
@@ -227,11 +234,6 @@ get_server_references(void)
 
 ////////////////////////////////////////////////////////////////////
 //  Shared Memory
-
-void *shm_data;
-
-int WIDTH = 16;
-int HEIGHT = 16;
 
 static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
