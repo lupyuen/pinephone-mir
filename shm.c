@@ -24,8 +24,8 @@ struct wl_buffer *buffer;
 
 void *shm_data;
 
-int WIDTH = 16;
-int HEIGHT = 16;
+int WIDTH = 720;
+int HEIGHT = 1398;
 
 static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
