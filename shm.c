@@ -202,14 +202,20 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
     if (ht == 0)
         ht = HEIGHT;
 
+    //  wl_surface@17.frame(new id wl_callback@24)
     frame_callback = wl_surface_frame(surface);
     assert(frame_callback != NULL);
 
+    //  wl_surface@17.attach(wl_buffer@25, 0, 0)
     wl_surface_attach(surface, buffer, 0, 0);
     wl_callback_add_listener(frame_callback, &frame_listener, NULL);
+
+    //  wl_surface@17.damage(0, 0, 2147483647, 2147483647)
     wl_surface_damage(surface, 0, 0,
                       WIDTH, ht--);
     paint_pixels();
+
+    //  wl_surface@17.commit()
     wl_surface_commit(surface);
 }
 
