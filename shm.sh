@@ -11,6 +11,7 @@ gcc \
     -g \
     -o shm \
     shm.c \
+    wayland-drm-protocol.c \
     -lwayland-client \
     -Wl,-Map=shm.map
 
