@@ -17,6 +17,9 @@
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 
+static void
+shm_format(void *data, struct wl_shm *wl_shm, uint32_t format);
+
 struct wl_display *display = NULL;
 struct wl_compositor *compositor = NULL;
 struct wl_surface *surface;
@@ -28,6 +31,10 @@ struct wl_shm *shm;
 struct wl_buffer *buffer;
 struct wl_callback *frame_callback;
 void *shm_data;
+
+struct wl_shm_listener shm_listener = {
+    shm_format
+};
 
 int WIDTH = 16;
 int HEIGHT = 16;
@@ -66,6 +73,12 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
     {
         shell = wl_registry_bind(registry, id,
                                  &wl_shell_interface, 1);
+    }
+    else if (strcmp(interface, "wl_shm") == 0)
+    {
+        shm = wl_registry_bind(registry, id,
+                               &wl_shm_interface, 1);
+        wl_shm_add_listener(shm, &shm_listener, NULL);
     }
 }
 
@@ -484,9 +497,6 @@ shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
     }
     fprintf(stderr, "Possible shmem format %s\n", s);
 }
-
-struct wl_shm_listener shm_listener = {
-    shm_format};
 
 ////////////////////////////////////////////////////////////////////
 //  Main
