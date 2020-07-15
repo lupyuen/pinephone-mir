@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include <wayland-client.h>
 #include <wayland-client-protocol.h>
 #include <wayland-server-protocol.h>
