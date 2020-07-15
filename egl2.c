@@ -324,6 +324,7 @@ int os_create_anonymous_file(off_t size)
     strcpy(name, path);
     strcat(name, template);
 
+    printf("Creating anonymous file %s...\n", name);
     fd = create_tmpfile_cloexec(name);
 
     free(name);
@@ -345,6 +346,7 @@ uint32_t pixel_value = 0x0; // black
 static void
 paint_pixels()
 {
+    puts("Painting...");
     int n;
     uint32_t *pixel = shm_data;
 
@@ -370,7 +372,7 @@ int ht;
 static void
 redraw(void *data, struct wl_callback *callback, uint32_t time)
 {
-    // fprintf(stderr, "Redrawing\n");
+    puts("Redrawing...");
     wl_callback_destroy(frame_callback);
     if (ht == 0)
         ht = HEIGHT;
