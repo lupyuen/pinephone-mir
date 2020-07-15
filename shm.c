@@ -270,7 +270,7 @@ create_buffer()
         fd,      //  <arg name="name" type="fd"/>
         WIDTH,   //  <arg name="width" type="int"/>
         HEIGHT,  //  <arg name="height" type="int"/>
-        WL_SHM_FORMAT_XRGB8888, //  <arg name="format" type="uint"/>
+        875713112, //  <arg name="format" type="uint"/>
         0,       //  <arg name="offset0" type="int"/>
         stride,  //  <arg name="stride0" type="int"/>
         0,       //  <arg name="offset1" type="int"/>
