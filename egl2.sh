@@ -11,6 +11,7 @@ set -e -x
 
 # Build app
 gcc \
+    -g \
     -o egl2 \
     egl2.c \
     -lwayland-client \
