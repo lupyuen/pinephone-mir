@@ -333,12 +333,17 @@ int main(int argc, char **argv)
         fprintf(stderr, "Created shell surface\n");
     }
     wl_shell_surface_set_toplevel(shell_surface);
+    assert(wl_display_get_error(display) == 0);
 
     wl_shell_surface_add_listener(shell_surface,
                                   &shell_surface_listener, NULL);
+    assert(wl_display_get_error(display) == 0);
 
     create_window();
+    assert(wl_display_get_error(display) == 0);
+
     paint_pixels();
+    assert(wl_display_get_error(display) == 0);
 
     puts("Dispatching display...");
     while (wl_display_dispatch(display) != -1)
