@@ -22,8 +22,9 @@
 struct wl_display *display = NULL;
 struct wl_compositor *compositor = NULL;
 struct wl_surface *surface;
-struct wl_shell *shell;
-struct wl_shell_surface *shell_surface;
+struct zxdg_shell_v6 *shell;      //  Previously: struct wl_shell *shell;
+struct zxdg_surface_v6 *zsurface;  //  Previously: struct wl_shell_surface *shell_surface;
+struct zxdg_toplevel_v6 *toplevel;
 struct wl_shm *shm;
 struct wl_drm *drm;
 struct wl_buffer *buffer;
@@ -212,7 +213,8 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
     wl_surface_commit(surface);
 }
 
-/*
+#ifdef NOTUSED
+From File Manager Wayland Log:
 [4049499.565] zxdg_surface_v6@20.configure(28)
 [4049499.630]  -> zxdg_surface_v6@20.ack_configure(28)
 [4049526.045]  -> wl_compositor@5.create_surface(new id wl_surface@23)
@@ -222,7 +224,7 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
 [4050226.976]  -> wl_surface@17.attach(wl_buffer@25, 0, 0)
 [4050227.051]  -> wl_surface@17.damage(0, 0, 2147483647, 2147483647)
 [4050227.570]  -> wl_surface@17.commit()
-*/
+#endif  //  NOTUSED
 
 static const struct wl_callback_listener frame_listener = {
     redraw
@@ -289,7 +291,8 @@ create_buffer()
     return buff;
 }
 
-/*
+#ifdef NOTUSED
+From File Manager Wayland Log:
 [4050226.792]  -> wl_drm@18.create_prime_buffer(
     new id wl_buffer@25, 
     fd 25, 
@@ -299,7 +302,7 @@ create_buffer()
     0, 
     2880, 
     0, 0, 0, 0)
-*/
+#endif  //  NOTUSED
 
 static void
 create_window()
@@ -310,8 +313,11 @@ create_window()
     assert(surface != NULL);
 
     //// TODO
+    //  wl_surface@17.set_buffer_scale(1)
     wl_surface_set_buffer_scale(surface, 1);
+    //  wl_surface@17.set_buffer_transform(0)
     wl_surface_set_buffer_transform(surface, 0);
+    //  wl_surface@17.commit()
     wl_surface_commit(surface);
     ////
 
@@ -388,59 +394,52 @@ static const struct wl_registry_listener registry_listener = {
 
 int main(int argc, char **argv)
 {
-
+    puts("Connecting to display...");
     display = wl_display_connect(NULL);
-    if (display == NULL)
-    {
-        fprintf(stderr, "Can't connect to display\n");
-        exit(1);
-    }
-    printf("connected to display\n");
+    assert(display != NULL);
 
     struct wl_registry *registry = wl_display_get_registry(display);
+    assert(registry != NULL);
     wl_registry_add_listener(registry, &registry_listener, NULL);
 
     wl_display_dispatch(display);
     wl_display_roundtrip(display);
-
-    if (compositor == NULL)
-    {
-        fprintf(stderr, "Can't find compositor\n");
-        exit(1);
-    }
-    else
-    {
-        fprintf(stderr, "Found compositor\n");
-    }
+    assert(compositor != NULL);
+    assert(shell != NULL);
 
     surface = wl_compositor_create_surface(compositor);
-    if (surface == NULL)
-    {
-        fprintf(stderr, "Can't create surface\n");
-        exit(1);
-    }
-    else
-    {
-        fprintf(stderr, "Created surface\n");
-    }
+    assert(surface != NULL);
 
+    ////  TODO
+    //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
+    zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
+    assert(zsurface != NULL);
+
+    //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
+    toplevel = zxdg_surface_v6_get_toplevel(zsurface);
+    assert(toplevel != NULL);
+
+    //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
+    zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
+
+    //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
+    zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
+    ////
+
+#ifdef NOTUSED
     shell_surface = wl_shell_get_shell_surface(shell, surface);
-    if (shell_surface == NULL)
-    {
-        fprintf(stderr, "Can't create shell surface\n");
-        exit(1);
-    }
-    else
-    {
-        fprintf(stderr, "Created shell surface\n");
-    }
+    assert(shell_surface != NULL);
+
     wl_shell_surface_set_toplevel(shell_surface);
 
     wl_shell_surface_add_listener(shell_surface,
                                   &shell_surface_listener, NULL);
 
     frame_callback = wl_surface_frame(surface);
+    assert(frame_callback != NULL);
+
     wl_callback_add_listener(frame_callback, &frame_listener, NULL);
+#endif  //  NOTUSED
 
     create_window();
     redraw(NULL, NULL, 0);
@@ -457,6 +456,20 @@ int main(int argc, char **argv)
 
     exit(0);
 }
+
+#ifdef NOTUSED
+From File Manager Wayland Log:
+[4049436.500]  -> wl_compositor@5.create_surface(new id wl_surface@17)
+[4049437.181]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@19)
+Using the 'xdg-shell-v6' shell integration
+[4049437.402]  -> zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
+[4049437.469]  -> zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
+[4049437.603]  -> zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
+[4049437.717]  -> zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
+[4049437.757]  -> wl_surface@17.set_buffer_scale(1)
+[4049437.882]  -> wl_surface@17.set_buffer_transform(0)
+[4049437.921]  -> wl_surface@17.commit()
+#endif  //  NOTUSED
 
 #ifdef NOTUSED
 Output:
