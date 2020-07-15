@@ -24,6 +24,7 @@ struct wl_surface *surface;
 struct wl_shell *shell;
 struct wl_shell_surface *shell_surface;
 struct wl_shm *shm;
+struct wl_drm *drm;
 struct wl_buffer *buffer;
 struct wl_callback *frame_callback;
 
@@ -191,21 +192,36 @@ static void
 redraw(void *data, struct wl_callback *callback, uint32_t time)
 {
     puts("Redrawing...");
+    assert(surface != NULL);
+    assert(buffer != NULL);
+    assert(frame_callback != NULL);
+
     wl_callback_destroy(frame_callback);
     if (ht == 0)
         ht = HEIGHT;
 
-    assert(surface != NULL);
-    wl_surface_damage(surface, 0, 0,
-                      WIDTH, ht--);
-    paint_pixels();
     frame_callback = wl_surface_frame(surface);
     assert(frame_callback != NULL);
 
     wl_surface_attach(surface, buffer, 0, 0);
     wl_callback_add_listener(frame_callback, &frame_listener, NULL);
+    wl_surface_damage(surface, 0, 0,
+                      WIDTH, ht--);
+    paint_pixels();
     wl_surface_commit(surface);
 }
+
+/*
+[4049499.565] zxdg_surface_v6@20.configure(28)
+[4049499.630]  -> zxdg_surface_v6@20.ack_configure(28)
+[4049526.045]  -> wl_compositor@5.create_surface(new id wl_surface@23)
+[4049526.895]  -> wl_surface@23.destroy()
+[4050226.585]  -> wl_surface@17.frame(new id wl_callback@24)
+[4050226.792]  -> wl_drm@18.create_prime_buffer(new id wl_buffer@25, fd 25, 720, 1398, 875713112, 0, 2880, 0, 0, 0, 0)
+[4050226.976]  -> wl_surface@17.attach(wl_buffer@25, 0, 0)
+[4050227.051]  -> wl_surface@17.damage(0, 0, 2147483647, 2147483647)
+[4050227.570]  -> wl_surface@17.commit()
+*/
 
 static const struct wl_callback_listener frame_listener = {
     redraw
@@ -243,14 +259,43 @@ create_buffer()
     pool = wl_shm_create_pool(shm, fd, size);
     assert(pool != NULL);
 
+    //  TODO
+    assert(drm != NULL);
+    buff = wl_create_prime_buffer(
+        drm,
+        fd,      //  <arg name="name" type="fd"/>
+        WIDTH,   //  <arg name="width" type="int"/>
+        HEIGHT,  //  <arg name="height" type="int"/>
+        WL_SHM_FORMAT_XRGB8888, //  <arg name="format" type="uint"/>
+        0,       //  <arg name="offset0" type="int"/>
+        stride,  //  <arg name="stride0" type="int"/>
+        0,       //  <arg name="offset1" type="int"/>
+        0,       //  <arg name="stride1" type="int"/>
+        0,       //  <arg name="offset2" type="int"/>
+        0        //  <arg name="stride2" type="int"/>
+    );
+    /* TODO
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
                                      WL_SHM_FORMAT_XRGB8888);
+    */
     //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
     ////  TODO: wl_shm_pool_destroy(pool);
     return buff;
 }
+
+/*
+[4050226.792]  -> wl_drm@18.create_prime_buffer(
+    new id wl_buffer@25, 
+    fd 25, 
+    720, 
+    1398, 
+    875713112, 
+    0, 
+    2880, 
+    0, 0, 0, 0)
+*/
 
 static void
 create_window()
@@ -318,6 +363,11 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
         shm = wl_registry_bind(registry, id,
                                &wl_shm_interface, 1);
         wl_shm_add_listener(shm, &shm_listener, NULL);
+    }
+    else if (strcmp(interface, "wl_drm") == 0)
+    {
+        drm = wl_registry_bind(registry, id,
+                               &wl_drm_interface, 1);
     }
 }
 
