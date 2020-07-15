@@ -368,36 +368,43 @@ static void
 global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
                         const char *interface, uint32_t version)
 {
+    //  Note: Version numbers must be correct (last para of wl_registry_bind)
     if (strcmp(interface, "wl_compositor") == 0)
     {
-        compositor = wl_registry_bind(registry,
-                                      id,
+        //  wl_registry@2.bind(3, "wl_compositor", 3, new id [unknown]@5)
+        compositor = wl_registry_bind(registry, id,
                                       &wl_compositor_interface,
-                                      4);
+                                      3);
     }
     else if (strcmp(interface, "zxdg_shell_v6") == 0)
     {
         //  wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@19)
         shell = wl_registry_bind(registry, id,
-                                 &zxdg_shell_v6_interface, 1);
+                                 &zxdg_shell_v6_interface, 
+                                 1);
     }
 #ifdef NOTUSED
     else if (strcmp(interface, "wl_shell") == 0)
     {
         shell = wl_registry_bind(registry, id,
-                                 &wl_shell_interface, 1);
+                                 &wl_shell_interface, 
+                                 1);
     }
 #endif  //  NOTUSED
     else if (strcmp(interface, "wl_shm") == 0)
     {
+        //  wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@12)
         shm = wl_registry_bind(registry, id,
-                               &wl_shm_interface, 1);
+                               &wl_shm_interface, 
+                               1);
         wl_shm_add_listener(shm, &shm_listener, NULL);
     }
     else if (strcmp(interface, "wl_drm") == 0)
     {
+        //  wl_registry@16.bind(1, "wl_drm", 2, new id [unknown]@18)
         drm = wl_registry_bind(registry, id,
-                               &wl_drm_interface, 2);
+                               &wl_drm_interface, 
+                               2);
     }
 }
 
@@ -507,7 +514,7 @@ int main(int argc, char **argv)
     display = wl_display_connect(NULL);
     assert(display != NULL);
 
-    wl_display_add_listener(display, &display_listener, NULL);
+    //  wl_display_add_listener(display, &display_listener, NULL);
 
     struct wl_registry *registry = wl_display_get_registry(display);
     assert(registry != NULL);
@@ -608,7 +615,7 @@ Output:
 ++ sudo cp shm /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ sudo chown clickpkg:clickpkg /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
--rwxr-xr-x 1 clickpkg clickpkg 44496 Jul 15 21:48 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
+-rwxr-xr-x 1 clickpkg clickpkg 45296 Jul 15 22:12 /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager/shm
 ++ sudo cp run.sh /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.filemanager
 ++ echo '*** Tap on File Manager icon on PinePhone'
 *** Tap on File Manager icon on PinePhone
@@ -634,53 +641,54 @@ Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
 Connecting to display...
-[806924.394]  -> wl_display@1.get_registry(new id wl_registry@2)
-[806924.599]  -> wl_display@1.sync(new id wl_callback@3)
-[806944.909] wl_display@1.delete_id(3)
-[806945.303] wl_registry@2.global(1, "wl_drm", 2)
-[806945.434]  -> wl_registry@2.bind(1, "wl_drm", 1, new id [unknown]@4)
-[806945.520] wl_registry@2.global(2, "qt_windowmanager", 1)
-[806945.579] wl_registry@2.global(3, "wl_compositor", 4)
-[806945.623]  -> wl_registry@2.bind(3, "wl_compositor", 1, new id [unknown]@5)
-[806945.668] wl_registry@2.global(4, "wl_subcompositor", 1)
-[806945.703] wl_registry@2.global(5, "wl_seat", 6)
-[806945.758] wl_registry@2.global(6, "wl_output", 3)
-[806945.815] wl_registry@2.global(7, "wl_data_device_manager", 3)
-[806945.867] wl_registry@2.global(8, "wl_shell", 1)
-[806945.918] wl_registry@2.global(9, "zxdg_shell_v6", 1)
-[806945.981]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
-[806946.054] wl_registry@2.global(10, "xdg_wm_base", 1)
-[806946.103] wl_registry@2.global(11, "wl_shm", 1)
-[806946.152]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
-[806946.226] wl_callback@3.done(86)
-[806946.264]  -> wl_compositor@5.create_surface(new id wl_surface@3)
-[806946.313]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
-[806946.367]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
-[806950.474]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
-[806950.522]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
+proxy 0x415420 already has listener
+[2213728.072]  -> wl_display@1.get_registry(new id wl_registry@2)
+[2213728.193]  -> wl_display@1.sync(new id wl_callback@3)
+[2213753.104] wl_display@1.delete_id(3)
+[2213753.234] wl_registry@2.global(1, "wl_drm", 2)
+[2213753.325]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
+[2213753.428] wl_registry@2.global(2, "qt_windowmanager", 1)
+[2213753.489] wl_registry@2.global(3, "wl_compositor", 4)
+[2213753.548]  -> wl_registry@2.bind(3, "wl_compositor", 4, new id [unknown]@5)
+[2213753.845] wl_registry@2.global(4, "wl_subcompositor", 1)
+[2213753.883] wl_registry@2.global(5, "wl_seat", 6)
+[2213753.918] wl_registry@2.global(6, "wl_output", 3)
+[2213753.951] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[2213753.986] wl_registry@2.global(8, "wl_shell", 1)
+[2213754.019] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[2213754.058]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
+[2213754.104] wl_registry@2.global(10, "xdg_wm_base", 1)
+[2213754.139] wl_registry@2.global(11, "wl_shm", 1)
+[2213754.204]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
+[2213754.273] wl_callback@3.done(22)
+[2213754.318]  -> wl_compositor@5.create_surface(new id wl_surface@3)
+[2213754.374]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
+[2213754.440]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
+[2213754.501]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
+[2213757.931]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
 Creating window...
 Creating buffer...
 Creating anonymous file /run/user/32011/weston-shared-XXXXXX...
-[806950.934]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
-[806951.004]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
-[806951.113]  -> wl_surface@3.set_buffer_scale(1)
-[806951.141]  -> wl_surface@3.set_buffer_transform(0)
-[806951.169]  -> wl_surface@3.commit()
-[806951.195]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[806951.239]  -> wl_surface@3.damage(0, 0, 16, 16)
-[806951.286]  -> wl_surface@3.commit()
+[2213760.738]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 1024)
+[2213760.856]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 6, 16, 16, 875713112, 0, 64, 0, 0, 0, 0)
+[2213761.039]  -> wl_surface@3.set_buffer_scale(1)
+[2213761.085]  -> wl_surface@3.set_buffer_transform(0)
+[2213761.116]  -> wl_surface@3.commit()
+[2213761.148]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[2213761.213]  -> wl_surface@3.damage(0, 0, 16, 16)
+[2213761.286]  -> wl_surface@3.commit()
 Redrawing...
-[806951.316]  -> wl_surface@3.frame(new id wl_callback@12)
-[806951.349]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[806951.392]  -> wl_surface@3.damage(0, 0, 16, 16)
+[2213761.331]  -> wl_surface@3.frame(new id wl_callback@12)
+[2213761.378]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
+[2213761.447]  -> wl_surface@3.damage(0, 0, 16, 16)
 Painting...
-[806951.510]  -> wl_surface@3.commit()
+[2213761.603]  -> wl_surface@3.commit()
 Dispatching display...
-[806953.011] wl_display@1.error(wl_display@1, 1, "invalid method 3 (since 1 < 2), object wl_drm@4")
-wl_display@1: error 1: invalid method 3 (since 1 < 2), object wl_drm@4
+[2213763.063] wl_display@1.error(wl_drm@4, 2, "invalid name")
+wl_drm@4: error 2: invalid name
 Disconnecting display...
 disconnected from display
-[Inferior 1 (process 22372) exited normally]
+[Inferior 1 (process 17812) exited normally]
 No stack.
 No stack.
 (gdb) quit
