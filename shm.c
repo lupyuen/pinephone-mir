@@ -1,5 +1,8 @@
 //  Wayland App that uses Shared Memory to render graphics on PinePhone with Ubuntu Touch.
 //  Note: PinePhone display server crashes after the last line "wl_display_disconnect()"
+//  Error in /home/phablet/.cache/upstart/unity8.log:
+//    terminate called after throwing an instance of 'std::logic_error'
+//    what():  Buffer does not support GL rendering
 //  To build and run on PinePhone, see shm.sh.
 //  Based on https://jan.newmarch.name/Wayland/WhenCanIDraw/
 #include <stdio.h>
