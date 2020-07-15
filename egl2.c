@@ -32,6 +32,7 @@ EGLContext egl_context;
 /// Render the GLES2 display
 void render_display()
 {
+    puts("Rendering display...")
     glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
 
@@ -70,7 +71,10 @@ static const struct wl_registry_listener registry_listener = {
 static void
 create_opaque_region()
 {
+    puts("Creating opague region...");
     region = wl_compositor_create_region(compositor);
+    assert(region != NULL);
+
     wl_region_add(region, 0, 0,
                   480,
                   360);
@@ -80,7 +84,7 @@ create_opaque_region()
 static void
 create_window()
 {
-
+    puts("Creating window...");
     egl_window = wl_egl_window_create(surface,
                                       480, 360);
     if (egl_window == EGL_NO_SURFACE)
@@ -124,6 +128,7 @@ create_window()
 static void
 init_egl()
 {
+    puts("Init EGL...");
     EGLint major, minor, count, n, size;
     EGLConfig *configs;
     int i;
@@ -188,7 +193,7 @@ init_egl()
 static void
 get_server_references(void)
 {
-
+    puts("Getting server references...");
     display = wl_display_connect(NULL);
     if (display == NULL)
     {
@@ -198,6 +203,8 @@ get_server_references(void)
     printf("connected to display\n");
 
     struct wl_registry *registry = wl_display_get_registry(display);
+    assert(registry != NULL);
+
     wl_registry_add_listener(registry, &registry_listener, NULL);
 
     wl_display_dispatch(display);
@@ -226,6 +233,7 @@ static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
             uint32_t serial)
 {
+    puts("Handling ping...");
     wl_shell_surface_pong(shell_surface, serial);
     fprintf(stderr, "Pinged and ponged\n");
 }
@@ -234,11 +242,13 @@ static void
 handle_configure(void *data, struct wl_shell_surface *shell_surface,
                  uint32_t edges, int32_t width, int32_t height)
 {
+    printf("Handling configure: edges=%d, width=%d, height=%d\n");
 }
 
 static void
 handle_popup_done(void *data, struct wl_shell_surface *shell_surface)
 {
+    puts("Handling popup done");
 }
 
 static const struct wl_shell_surface_listener shell_surface_listener = {
@@ -349,6 +359,7 @@ paint_pixels()
     puts("Painting...");
     int n;
     uint32_t *pixel = shm_data;
+    assert(pixel != NULL);
 
     for (n = 0; n < WIDTH * HEIGHT; n++)
     {
@@ -373,6 +384,7 @@ static void
 redraw(void *data, struct wl_callback *callback, uint32_t time)
 {
     puts("Redrawing...");
+    assert(surface != NULL);
     wl_callback_destroy(frame_callback);
     if (ht == 0)
         ht = HEIGHT;
@@ -380,17 +392,21 @@ redraw(void *data, struct wl_callback *callback, uint32_t time)
                       WIDTH, ht--);
     paint_pixels();
     frame_callback = wl_surface_frame(surface);
+    assert(frame_callback != NULL);
+
     wl_surface_attach(surface, buffer, 0, 0);
     wl_callback_add_listener(frame_callback, &frame_listener, NULL);
     wl_surface_commit(surface);
 }
 
 static const struct wl_callback_listener frame_listener = {
-    redraw};
+    redraw
+};
 
 static struct wl_buffer *
 create_buffer()
 {
+    puts("Creating buffer...");
     struct wl_shm_pool *pool;
     int stride = WIDTH * 4; // 4 bytes per pixel
     int size = stride * HEIGHT;
@@ -468,7 +484,6 @@ struct wl_shm_listener shm_listener = {
 
 int main(int argc, char **argv)
 {
-
     get_server_references();
 
     surface = wl_compositor_create_surface(compositor);
