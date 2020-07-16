@@ -39,8 +39,8 @@ void *shm_data;
 
 //  Note: If height or width are below 160, wl_drm will fail with error "invalid name"
 //  https://github.com/alacritty/alacritty/issues/2895
-int WIDTH = 240;
-int HEIGHT = 240;
+int WIDTH = 720;
+int HEIGHT = 1398;
 
 static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
