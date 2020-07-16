@@ -53,8 +53,8 @@ EGLContext egl_context;
 void render_display()
 {
     puts("Rendering display...");
-    glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
-    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+    // glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
+    // glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
 
     ////
     static ESContext esContext;
