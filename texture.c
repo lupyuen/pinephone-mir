@@ -4,6 +4,7 @@
 //    the basics of 2D texturing
 //  Based on https://github.com/danginsburg/opengles-book-samples/blob/master/LinuxX11/Chapter_9/Simple_Texture2D/Simple_Texture2D.c
 #include <stdlib.h>
+#include <assert.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include "esutil.h"
@@ -132,15 +133,12 @@ void Draw(ESContext *esContext)
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Use the program object
-    assert(userData->programObject != NULL);
     glUseProgram(userData->programObject);
 
     // Load the vertex position
-    assert(userData->positionLoc != NULL);
     glVertexAttribPointer(userData->positionLoc, 3, GL_FLOAT,
                           GL_FALSE, 5 * sizeof(GLfloat), vVertices);
     // Load the texture coordinate
-    assert(userData->texCoordLoc != NULL);
     glVertexAttribPointer(userData->texCoordLoc, 2, GL_FLOAT,
                           GL_FALSE, 5 * sizeof(GLfloat), &vVertices[3]);
 
@@ -152,7 +150,6 @@ void Draw(ESContext *esContext)
     glBindTexture(GL_TEXTURE_2D, userData->textureId);
 
     // Set the sampler texture unit to 0
-    assert(userData->samplerLoc != NULL);
     glUniform1i(userData->samplerLoc, 0);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, indices);
