@@ -22,6 +22,7 @@
 #include <wayland-server-protocol.h>
 #include <wayland-egl.h>
 #include <EGL/egl.h>
+#include <GLES2/gl2.h>
 #include "xdg-shell.h"
 #include "wayland-drm-client-protocol.h"
 
@@ -47,8 +48,8 @@ void *shm_data;
 
 //  Note: If height or width are below 160, wl_drm will fail with error "invalid name"
 //  https://github.com/alacritty/alacritty/issues/2895
-int WIDTH = 720;
-int HEIGHT = 1398;
+int WIDTH = 240;
+int HEIGHT = 240;
 
 static void
 handle_ping(void *data, struct wl_shell_surface *shell_surface,
@@ -747,6 +748,73 @@ init_egl()
                          EGL_NO_CONTEXT, context_attribs);
 }
 
+/// Render the GLES2 display
+void render_display()
+{
+    puts("Rendering display...");
+    glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
+    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+
+    glFlush(); // Render now
+}
+
+static void
+create_opaque_region()
+{
+    puts("Creating opaque region...");
+    region = wl_compositor_create_region(compositor);
+    assert(region != NULL);
+
+    wl_region_add(region, 0, 0,
+                  480,
+                  360);
+    wl_surface_set_opaque_region(surface, region);
+}
+
+static void
+create_egl_window()
+{
+    puts("Creating window...");
+    egl_window = wl_egl_window_create(surface,
+                                      480, 360);
+    if (egl_window == EGL_NO_SURFACE)
+    {
+        fprintf(stderr, "Can't create egl window\n");
+        exit(1);
+    }
+    else
+    {
+        fprintf(stderr, "Created egl window\n");
+    }
+
+    egl_surface =
+        eglCreateWindowSurface(egl_display,
+                               egl_conf,
+                               egl_window, NULL);
+
+    if (eglMakeCurrent(egl_display, egl_surface,
+                       egl_surface, egl_context))
+    {
+        fprintf(stderr, "Made current\n");
+    }
+    else
+    {
+        fprintf(stderr, "Made current failed\n");
+    }
+
+    // Render the display
+    render_display();
+
+    if (eglSwapBuffers(egl_display, egl_surface))
+    {
+        fprintf(stderr, "Swapped buffers\n");
+    }
+    else
+    {
+        fprintf(stderr, "Swapped buffers failed\n");
+    }
+}
+
 ////////////////////////////////////////////////////////////////////
 //  Main
 
@@ -777,6 +845,10 @@ int main(int argc, char **argv) {
     //  Authenticate the display before creating buffers
     init_egl();
 
+    ////  TODO
+    create_egl_window();
+
+#ifdef SHARED_MEMORY
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
@@ -815,6 +887,7 @@ int main(int argc, char **argv) {
     //  wl_surface@17.commit()
     wl_surface_commit(surface);
     wl_display_roundtrip(display);  //  Check for errors
+#endif  //  SHARED_MEMORY
 
 #ifdef NOTUSED
     shell_surface = wl_shell_get_shell_surface(shell, surface);
