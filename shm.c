@@ -332,8 +332,7 @@ static struct wl_buffer *create_buffer(int fd) {
     return buff;
 }
 
-#ifdef NOTUSED
-From File Manager Wayland Log:
+#ifdef NOTUSED  //  From File Manager Wayland Log:
 [4050226.792]  -> wl_drm@18.create_prime_buffer(
     new id wl_buffer@25, 
     fd 25, 
@@ -401,6 +400,75 @@ struct wl_shm_listener shm_listener = {
     shm_format
 };
 
+
+////////////////////////////////////////////////////////////////////
+//  Direct Rendering Manager
+
+/**
+ * device - (none)
+ * @name: (none)
+ */
+void drm_device(void *data,
+            struct wl_drm *wl_drm,
+            const char *name) {
+    printf("DRM device: %s\n", name);
+    //  wl_drm@18.device("/dev/dri/card1")
+    wl_drm_device(name);
+}
+
+/**
+ * format - (none)
+ * @format: (none)
+ */
+void drm_format(void *data,
+            struct wl_drm *wl_drm,
+            uint32_t format) {                
+}
+
+/**
+ * authenticated - (none)
+ */
+void drm_authenticated(void *data,
+                struct wl_drm *wl_drm) {
+}
+
+/**
+ * capabilities - (none)
+ * @value: (none)
+ */
+void drm_capabilities(void *data,
+                struct wl_drm *wl_drm,
+                uint32_t value) {
+}
+
+const struct wl_drm_listener drm_listener = {
+    .device = drm_device,
+    .format = drm_format,
+    .authenticated = drm_authenticated,
+    .capabilities = drm_capabilities
+};
+
+#ifdef NOTUSED  //  From File Manager Wayland Log:
+[4046796.038] wl_drm@18.device("/dev/dri/card1")
+[4046796.445]  -> wl_drm@18.authenticate(4)
+[4046796.511] wl_drm@18.format(875713089)
+[4046796.556] wl_drm@18.format(875713112)
+[4046796.595] wl_drm@18.format(909199186)
+[4046796.633] wl_drm@18.format(961959257)
+[4046796.668] wl_drm@18.format(825316697)
+[4046796.702] wl_drm@18.format(842093913)
+[4046796.740] wl_drm@18.format(909202777)
+[4046796.764] wl_drm@18.format(875713881)
+[4046796.801] wl_drm@18.format(842094158)
+[4046796.841] wl_drm@18.format(909203022)
+[4046796.878] wl_drm@18.format(1448695129)
+[4046796.917] wl_drm@18.capabilities(1)
+[4046796.956] wl_callback@17.done(24)
+[4046797.003]  -> wl_display@1.sync(new id wl_callback@17)
+[4046797.576] wl_display@1.delete_id(17)
+[4046797.660] wl_drm@18.authenticated()
+#endif  //  NOTUSED
+
 ////////////////////////////////////////////////////////////////////
 //  Global Registry
 
@@ -445,6 +513,7 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
         drm = wl_registry_bind(registry, id,
                                &wl_drm_interface, 
                                2);
+        wl_drm_add_listener(drm, &drm_listener, NULL);
     }
 }
 
@@ -568,8 +637,7 @@ const struct wl_display_listener display_listener = {
 ////////////////////////////////////////////////////////////////////
 //  Main
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     // Show command-line parameters
     for (int i = 0; i < argc; i++) {
         printf("argv[%d]=%s\n", i, argv[i]);
@@ -593,6 +661,7 @@ int main(int argc, char **argv)
     wl_display_roundtrip(display);
     assert(compositor != NULL);
     assert(shell != NULL);
+    assert(drm != NULL);
 
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
