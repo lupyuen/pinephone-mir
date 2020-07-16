@@ -19,6 +19,7 @@
 #include <sys/mman.h>
 #include <errno.h>
 #include <unistd.h>
+#include <syscall.h>
 #include "xdg-shell.h"
 #include "wayland-drm-client-protocol.h"
 
@@ -257,6 +258,16 @@ create_buffer()
 
     ht = HEIGHT;
 
+    // Open an anonymous file and write some zero bytes to it
+    fd = syscall(SYS_memfd_create, "buffer", 0);
+    assert(fd >= 0);
+    ftruncate(fd, size);
+
+    //  Map it to the memory
+    shm_data = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    assert(shm_data != MAP_FAILED);
+
+#ifdef NOTUSED
     fd = os_create_anonymous_file(size);
     if (fd < 0)
     {
@@ -272,6 +283,7 @@ create_buffer()
         close(fd);
         exit(1);
     }
+#endif  //  NOTUSED
 
     assert(shm != NULL);
     pool = wl_shm_create_pool(shm, fd, size);
