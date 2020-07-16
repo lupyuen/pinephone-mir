@@ -906,3 +906,36 @@ error in client communication (pid 25224)
 [2020-07-16:12:56:29.772] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitProcess)
 [2020-07-16:12:56:29.894] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Suspended)
 [2020-07-16:12:56:29.895] qtmir.sessions: Wakelock released "66"
+[2020-07-16:12:57:22.673] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 95
+[2020-07-16:13:05:22.709] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 96
+[2020-07-16:13:09:22.725] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 97
+[2020-07-16:13:15:22.766] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-full-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 98
+[2020-07-16:13:17:36.354] [PERFORMANCE]: Last frame took 44 ms to render.
+[2020-07-16:13:17:37.505] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::Application()
+[2020-07-16:13:17:37.505] toplevelwindowmodel: prependPlaceholder(com.ubuntu.filemanager_filemanager)
+[2020-07-16:13:17:37.714] toplevelwindowmodel: setFocusedWindow(Window[0x6e7fee0, id=15, null])
+[2020-07-16:13:17:37.716] toplevelwindowmodel: prependSurfaceHelper after (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x0,id=15),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:13:17:37.720] qtmir.sessions: Wakelock acquired "71"
+[2020-07-16:13:17:37.905] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(false)
+[2020-07-16:13:17:38.510] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff9c132f60) pid= 6703
+[2020-07-16:13:17:38.532] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-16:13:17:38.533] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::addSession(session=qtmir::Session(0x8525b10))
+error in client communication (pid 6703)
+[2020-07-16:13:17:39.026] qtmir.sessions: TaskController::onSessionStopping - sessionName=
+[2020-07-16:13:17:39.027] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setInternalState(state=Stopped)
+[2020-07-16:13:17:39.072] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=running)
+[2020-07-16:13:17:39.074] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::resume()
+[2020-07-16:13:17:39.088] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Running)
+[2020-07-16:13:17:39.089] toplevelwindowmodel: setFocusedWindow(0x0)
+[2020-07-16:13:17:39.089] toplevelwindowmodel: removeAt after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1) apps left 1
+[2020-07-16:13:17:39.089] file:///usr/share/unity8//Stage/Stage.qml:148: TypeError: Cannot read property 'confinesMousePointer' of null
+[2020-07-16:13:17:39.092] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=suspended)
+[2020-07-16:13:17:39.092] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::suspend()
+[2020-07-16:13:17:39.092] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitSession)
+[2020-07-16:13:17:39.232] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::~Application()
+[2020-07-16:13:17:39.240] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(true)
+[2020-07-16:13:17:39.587] ApplicationManager::onProcessFailed - upstart reports failure of application "com.ubuntu.filemanager_filemanager" that AppManager is not managing
+[2020-07-16:13:17:39.599] ApplicationManager::onProcessStopped reports stop of appId= "com.ubuntu.filemanager_filemanager" which AppMan is not managing, ignoring the event
+[2020-07-16:13:17:40.609] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitProcess)
+[2020-07-16:13:17:40.739] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Suspended)
+[2020-07-16:13:17:40.739] qtmir.sessions: Wakelock released "71"
