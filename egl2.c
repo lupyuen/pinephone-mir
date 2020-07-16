@@ -16,7 +16,7 @@
 #include <wayland-egl.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
-#include "esutil.h"
+#include "util.h"
 
 static void shm_format(void *data, struct wl_shm *wl_shm, uint32_t format);
 void Init ( ESContext *esContext );
