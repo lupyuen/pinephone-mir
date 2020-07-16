@@ -262,6 +262,7 @@ create_buffer()
     fd = syscall(SYS_memfd_create, "buffer", 0);
     assert(fd >= 0);
     ftruncate(fd, size);
+    fallocate(fd, 0, 0, size);
 
     //  Map it to the memory
     shm_data = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
