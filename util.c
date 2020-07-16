@@ -25,7 +25,7 @@
 #include <sys/time.h>
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
-#include "esutil.h"
+#include "util.h"
 
 // #include  <X11/Xlib.h>
 // #include  <X11/Xatom.h>
@@ -123,6 +123,7 @@ void ESUTIL_API esInitContext ( ESContext *esContext )
    }
 }
 
+#ifdef NOTUSED
 ///
 //  esMainLoop()
 //
@@ -162,7 +163,7 @@ void ESUTIL_API esMainLoop ( ESContext *esContext )
         }
     }
 }
-
+#endif  //  NOTUSED
 
 ///
 //  esRegisterDrawFunc()
