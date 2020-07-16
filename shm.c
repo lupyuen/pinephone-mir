@@ -21,6 +21,7 @@
 #include <wayland-client-protocol.h>
 #include <wayland-server-protocol.h>
 #include <wayland-egl.h>
+#include <EGL/egl.h>
 #include "xdg-shell.h"
 #include "wayland-drm-client-protocol.h"
 
