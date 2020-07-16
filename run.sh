@@ -41,6 +41,7 @@ export WAYLAND_DEBUG=1
 
 # Debug shm app
 gdb \
+    --quiet \
     -ex="r" \
     -ex="bt" \
     -ex="frame" \

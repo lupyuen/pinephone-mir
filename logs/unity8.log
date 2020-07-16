@@ -580,3 +580,77 @@ error in client communication (pid 16850)
 [2020-07-16:11:03:18.717] ApplicationManager::onProcessStopped reports stop of appId= "com.ubuntu.filemanager_filemanager" which AppMan is not managing, ignoring the event
 [2020-07-16:11:03:22.713] qml: updateLightState: onBatteryIconNameChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 29
 [2020-07-16:11:03:22.727] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 33
+[2020-07-16:11:05:22.698] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 36
+[2020-07-16:11:07:22.651] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 37
+[2020-07-16:11:08:04.269] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:08:04.270] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:08:04.270] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(LandscapeOrientation) handled
+[2020-07-16:11:08:05.205] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:08:05.205] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:08:05.206] Unknown orientation.
+[2020-07-16:11:09:22.637] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 38
+[2020-07-16:11:11:22.728] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 39
+[2020-07-16:11:11:35.512] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::Application()
+[2020-07-16:11:11:35.513] toplevelwindowmodel: prependPlaceholder(com.ubuntu.filemanager_filemanager)
+[2020-07-16:11:11:35.697] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=suspended)
+[2020-07-16:11:11:35.698] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::suspend()
+[2020-07-16:11:11:35.698] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitSession)
+[2020-07-16:11:11:35.699] toplevelwindowmodel: setFocusedWindow(Window[0x7151b60, id=7, null])
+[2020-07-16:11:11:35.700] toplevelwindowmodel: prependSurfaceHelper after (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x0,id=7),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:11:11:35.705] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(false)
+[2020-07-16:11:11:35.926] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(false)
+[2020-07-16:11:11:36.081] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff9c132f60) pid= 22207
+[2020-07-16:11:11:36.110] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-16:11:11:36.110] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::addSession(session=qtmir::Session(0x768deb0))
+[2020-07-16:11:11:36.123] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::MirSurface(type=freestyle,state=restored,size=(640,480),parentSurface=QObject(0x0))
+[2020-07-16:11:11:36.126] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::activate()
+[2020-07-16 11:11:36.128074] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+error in client communication (pid 22207)
+[2020-07-16 11:11:36.131736] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-16 11:11:36.132468] < - debug - > miral: BasicWindowManager::remove_surface() called with unknown or already removed session  (PID: 22207)
+[2020-07-16:11:11:36.141] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::registerView(135163008) after=1
+[2020-07-16:11:11:36.146] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::setKeymap("us")
+[2020-07-16:11:11:36.146] toplevelwindowmodel: prependSurface appId=com.ubuntu.filemanager_filemanager surface=qtmir::MirSurface(0x8541240), filling out placeholder. after: (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x8541240,id=7),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:11:11:36.146] toplevelwindowmodel: setFocusedWindow(0x0)
+[2020-07-16:11:11:36.147] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::setFocused(true)
+[2020-07-16:11:11:36.152] toplevelwindowmodel: setFocusedWindow(Window[0x7151b60, id=7, MirSurface[0x8541240,"com.ubuntu.filemanager"]])
+[2020-07-16:11:11:36.153] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::setLive(false)
+[2020-07-16:11:11:36.153] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(true)
+[2020-07-16:11:11:36.158] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=running)
+[2020-07-16:11:11:36.159] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::resume()
+[2020-07-16:11:11:36.159] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Running)
+[2020-07-16:11:11:36.164] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setRequestedState(requestedState=suspended)
+[2020-07-16:11:11:36.165] toplevelwindowmodel: move after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1),(index=1,appId=com.ubuntu.filemanager_filemanager,surface=0x8541240,id=7)
+[2020-07-16:11:11:36.165] toplevelwindowmodel: setFocusedWindow(Window[0x82fd840, id=1, MirSurface[0x7f801a0,"phablet@ubuntu-phablet: ~"]])
+[2020-07-16:11:11:36.165] qtmir.sessions: TaskController::onSessionStopping - sessionName=
+[2020-07-16:11:11:36.166] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setInternalState(state=Stopped)
+[2020-07-16:11:11:36.195] toplevelwindowmodel: removeAt after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1) apps left 1
+[2020-07-16:11:11:36.207] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(true)
+[2020-07-16:11:11:36.225] qtmir.surfaces: MirSurface[0x8541240,"com.ubuntu.filemanager_filemanager"]::unregisterView(135163008) after=0 live=false
+[2020-07-16:11:11:36.230] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::~Application()
+[2020-07-16:11:11:36.232] qtmir.surfaces: MirSurface[0x8541240,"-"]::~MirSurface() viewCount=0
+[2020-07-16:11:11:36.626] ApplicationManager::onProcessFailed - upstart reports failure of application "com.ubuntu.filemanager_filemanager" that AppManager is not managing
+[2020-07-16:11:11:36.640] ApplicationManager::onProcessStopped reports stop of appId= "com.ubuntu.filemanager_filemanager" which AppMan is not managing, ignoring the event
+[2020-07-16:11:12:15.098] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:12:15.098] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:12:15.098] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(InvertedLandscapeOrientation) handled
+[2020-07-16:11:12:16.033] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:12:16.034] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:12:16.034] Unknown orientation.
+[2020-07-16:11:12:22.557] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:12:22.558] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:12:22.558] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(InvertedLandscapeOrientation) handled
+[2020-07-16:11:12:23.488] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:12:23.488] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:12:23.488] Unknown orientation.
+[2020-07-16:11:13:22.721] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 40
+[2020-07-16:11:15:22.722] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 41
+[2020-07-16:11:17:22.708] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 42
+[2020-07-16:11:19:22.706] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 43
+[2020-07-16:11:21:22.671] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 44
+[2020-07-16:11:22:57.285] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:22:57.289] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:22:57.290] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(InvertedLandscapeOrientation) handled
+[2020-07-16:11:22:58.205] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:11:22:58.206] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:11:22:58.206] Unknown orientation.
