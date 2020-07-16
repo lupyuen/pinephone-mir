@@ -140,9 +140,17 @@ Save the file and exit `nano`.
 
 Tap on File Manager icon on PinePhone to start `gdb` debugger on `sdl` app.
 
-Log shows exception and backtrace...
+Press Ctrl-C to stop the log. The log is located here...
 
 `/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log`
+
+Copy the log to our machine like this...
+
+```bash
+scp -i ~/.ssh/pinebook_rsa phablet@192.168.1.10:/home/phablet/.cache/upstart/application-click-com.ubuntu.filemanager_filemanager_0.7.5.log .
+```
+
+Log shows exception and backtrace...
 
 ```
 Reading symbols from ./filemanager.ubuntu.com.filemanager...done.
@@ -829,6 +837,12 @@ unity-system-compositor \
 Mir Server Log may be found on PinePhone here...
 
 `/home/phablet/.cache/upstart/unity8.log`
+
+Copy the log to our machine like this...
+
+```bash
+scp -i ~/.ssh/pinebook_rsa phablet@192.168.1.10:/home/phablet/.cache/upstart/unity8.log .
+```
 
 Check the sample log: [`logs/unity8.log`](logs/unity8.log)
 

@@ -460,3 +460,123 @@ error in client communication (pid 9597)
 [2020-07-16:10:47:19.735] qml: updateLightState: onBatteryIconNameChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-symbolic, displayStatus: 1, deviceState: discharging, batteryLevel: 30
 [2020-07-16:10:47:19.747] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-symbolic, displayStatus: 1, deviceState: discharging, batteryLevel: 29
 [2020-07-16:10:49:19.736] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-symbolic, displayStatus: 1, deviceState: discharging, batteryLevel: 28
+[2020-07-16:10:51:52.505] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:51:52.509] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:51:52.509] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(LandscapeOrientation) handled
+[2020-07-16:10:51:53.453] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:51:53.454] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:51:53.454] Unknown orientation.
+[2020-07-16:10:53:19.656] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-symbolic, displayStatus: 1, deviceState: discharging, batteryLevel: 27
+[2020-07-16:10:59:16.847] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:59:16.848] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:59:16.848] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(LandscapeOrientation) handled
+[2020-07-16:10:59:17.305] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:59:17.306] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:59:17.306] Unknown orientation.
+[2020-07-16:10:59:17.773] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:59:17.774] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:59:17.774] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(PortraitOrientation) handled
+[2020-07-16:10:59:19.171] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:59:19.172] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:59:19.172] Unknown orientation.
+[2020-07-16:10:59:19.742] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-symbolic, displayStatus: 1, deviceState: discharging, batteryLevel: 26
+[2020-07-16:10:59:20.577] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:59:20.578] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:59:20.578] qtmir.sensor: Screen::customEvent - new orientation Qt::ScreenOrientation(PortraitOrientation) handled
+[2020-07-16:10:59:22.422] qml: updateLightState: onBatteryIconNameChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-charging-symbolic, displayStatus: 1, deviceState: discharging, batteryLevel: 26
+[2020-07-16:10:59:22.436] qml: updateLightState: onDeviceStateChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 26
+[2020-07-16:10:59:24.770] qtmir.sensor: OrientationSensor::readingChanged
+[2020-07-16:10:59:24.770] qtmir.sensor: Screen::onOrientationReadingChanged
+[2020-07-16:10:59:24.770] Unknown orientation.
+[2020-07-16 10:59:27.543927] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-16:10:59:27.544] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(true)
+[2020-07-16:10:59:27.555] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=running)
+[2020-07-16:10:59:27.556] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::resume()
+[2020-07-16:10:59:27.573] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Running)
+[2020-07-16:10:59:27.574] toplevelwindowmodel: setFocusedWindow(Window[0x82fd840, id=1, MirSurface[0x7f801a0,"phablet@ubuntu-phablet: ~"]])
+[2020-07-16:10:59:27.737] qtmir.sessions: Wakelock acquired "36"
+[2020-07-16:10:59:30.521] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::Application()
+[2020-07-16:10:59:30.526] toplevelwindowmodel: prependPlaceholder(com.ubuntu.filemanager_filemanager)
+[2020-07-16:10:59:30.700] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=suspended)
+[2020-07-16:10:59:30.700] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::suspend()
+[2020-07-16:10:59:30.700] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitSession)
+[2020-07-16:10:59:30.701] toplevelwindowmodel: setFocusedWindow(Window[0x6ef4050, id=5, null])
+[2020-07-16:10:59:30.702] toplevelwindowmodel: prependSurfaceHelper after (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x0,id=5),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:10:59:30.711] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(false)
+[2020-07-16:10:59:30.920] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(false)
+[2020-07-16:10:59:31.103] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff9c132f60) pid= 14396
+[2020-07-16:10:59:31.127] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-16:10:59:31.128] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::addSession(session=qtmir::Session(0x8534470))
+[2020-07-16:10:59:31.155] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::MirSurface(type=freestyle,state=restored,size=(640,480),parentSurface=QObject(0x0))
+[2020-07-16:10:59:31.156] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::activate()
+[2020-07-16 10:59:31.156612] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-16:10:59:31.163] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::registerView(116207376) after=1
+error in client communication (pid 14396)
+[2020-07-16 10:59:31.166432] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-16 10:59:31.167816] < - debug - > miral: BasicWindowManager::remove_surface() called with unknown or already removed session  (PID: 14396)
+[2020-07-16:10:59:31.167] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::setKeymap("us")
+[2020-07-16:10:59:31.168] toplevelwindowmodel: prependSurface appId=com.ubuntu.filemanager_filemanager surface=qtmir::MirSurface(0x84a8f70), filling out placeholder. after: (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x84a8f70,id=5),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:10:59:31.168] toplevelwindowmodel: setFocusedWindow(0x0)
+[2020-07-16:10:59:31.169] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::setFocused(true)
+[2020-07-16:10:59:31.176] toplevelwindowmodel: setFocusedWindow(Window[0x6ef4050, id=5, MirSurface[0x84a8f70,"com.ubuntu.filemanager"]])
+[2020-07-16:10:59:31.176] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::setLive(false)
+[2020-07-16:10:59:31.177] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(true)
+[2020-07-16:10:59:31.182] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=running)
+[2020-07-16:10:59:31.182] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::resume()
+[2020-07-16:10:59:31.182] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Running)
+[2020-07-16:10:59:31.187] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setRequestedState(requestedState=suspended)
+[2020-07-16:10:59:31.188] toplevelwindowmodel: move after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1),(index=1,appId=com.ubuntu.filemanager_filemanager,surface=0x84a8f70,id=5)
+[2020-07-16:10:59:31.188] toplevelwindowmodel: setFocusedWindow(Window[0x82fd840, id=1, MirSurface[0x7f801a0,"phablet@ubuntu-phablet: ~"]])
+[2020-07-16:10:59:31.188] qtmir.sessions: TaskController::onSessionStopping - sessionName=
+[2020-07-16:10:59:31.188] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setInternalState(state=Stopped)
+[2020-07-16:10:59:31.266] toplevelwindowmodel: removeAt after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1) apps left 1
+[2020-07-16:10:59:31.289] qtmir.surfaces: MirSurface[0x84a8f70,"com.ubuntu.filemanager_filemanager"]::unregisterView(116207376) after=0 live=false
+[2020-07-16:10:59:31.294] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::~Application()
+[2020-07-16:10:59:31.295] qtmir.surfaces: MirSurface[0x84a8f70,"-"]::~MirSurface() viewCount=0
+[2020-07-16:10:59:31.296] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(true)
+[2020-07-16:10:59:31.666] ApplicationManager::onProcessFailed - upstart reports failure of application "com.ubuntu.filemanager_filemanager" that AppManager is not managing
+[2020-07-16:10:59:31.681] ApplicationManager::onProcessStopped reports stop of appId= "com.ubuntu.filemanager_filemanager" which AppMan is not managing, ignoring the event
+[2020-07-16:11:01:22.646] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-low-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 29
+[2020-07-16:11:03:17.557] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::Application()
+[2020-07-16:11:03:17.557] toplevelwindowmodel: prependPlaceholder(com.ubuntu.filemanager_filemanager)
+[2020-07-16:11:03:17.736] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=suspended)
+[2020-07-16:11:03:17.737] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::suspend()
+[2020-07-16:11:03:17.737] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=SuspendingWaitSession)
+[2020-07-16:11:03:17.738] toplevelwindowmodel: setFocusedWindow(Window[0x77afec0, id=6, null])
+[2020-07-16:11:03:17.743] toplevelwindowmodel: prependSurfaceHelper after (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x0,id=6),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:11:03:17.750] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(false)
+[2020-07-16:11:03:17.974] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(false)
+[2020-07-16:11:03:18.161] qtmir.mir: SessionAuthorizer::connection_is_allowed - this= SessionAuthorizer(0xffff9c132f60) pid= 16850
+[2020-07-16:11:03:18.195] qtmir.sessions: TaskController::onSessionStarting - sessionName=
+[2020-07-16:11:03:18.196] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::addSession(session=qtmir::Session(0x81157e0))
+[2020-07-16:11:03:18.204] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::MirSurface(type=freestyle,state=restored,size=(640,480),parentSurface=QObject(0x0))
+[2020-07-16:11:03:18.205] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::activate()
+[2020-07-16 11:03:18.205429] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+error in client communication (pid 16850)
+[2020-07-16:11:03:18.211] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::registerView(119290464) after=1
+[2020-07-16 11:03:18.212415] < -warning- > mirserver: WaylandInputDispatcher::input_consumed() got non-input event type 11
+[2020-07-16 11:03:18.213358] < - debug - > miral: BasicWindowManager::remove_surface() called with unknown or already removed session  (PID: 16850)
+[2020-07-16:11:03:18.215] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::setKeymap("us")
+[2020-07-16:11:03:18.215] toplevelwindowmodel: prependSurface appId=com.ubuntu.filemanager_filemanager surface=qtmir::MirSurface(0x6e925f0), filling out placeholder. after: (index=0,appId=com.ubuntu.filemanager_filemanager,surface=0x6e925f0,id=6),(index=1,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1)
+[2020-07-16:11:03:18.216] toplevelwindowmodel: setFocusedWindow(0x0)
+[2020-07-16:11:03:18.216] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::setFocused(true)
+[2020-07-16:11:03:18.222] toplevelwindowmodel: setFocusedWindow(Window[0x77afec0, id=6, MirSurface[0x6e925f0,"com.ubuntu.filemanager"]])
+[2020-07-16:11:03:18.223] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::setLive(false)
+[2020-07-16:11:03:18.223] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::setFocused(true)
+[2020-07-16:11:03:18.232] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setRequestedState(requestedState=running)
+[2020-07-16:11:03:18.233] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::resume()
+[2020-07-16:11:03:18.233] qtmir.applications: Application["com.ubuntu.terminal_terminal"]::setInternalState(state=Running)
+[2020-07-16:11:03:18.239] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setRequestedState(requestedState=suspended)
+[2020-07-16:11:03:18.239] toplevelwindowmodel: move after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1),(index=1,appId=com.ubuntu.filemanager_filemanager,surface=0x6e925f0,id=6)
+[2020-07-16:11:03:18.239] toplevelwindowmodel: setFocusedWindow(Window[0x82fd840, id=1, MirSurface[0x7f801a0,"phablet@ubuntu-phablet: ~"]])
+[2020-07-16:11:03:18.240] qtmir.sessions: TaskController::onSessionStopping - sessionName=
+[2020-07-16:11:03:18.240] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::setInternalState(state=Stopped)
+[2020-07-16:11:03:18.285] toplevelwindowmodel: removeAt after (index=0,appId=com.ubuntu.terminal_terminal,surface=0x7f801a0,id=1) apps left 1
+[2020-07-16:11:03:18.289] qtmir.surfaces: MirSurface[0x7f801a0,"com.ubuntu.terminal_terminal"]::updateExposure(true)
+[2020-07-16:11:03:18.307] qtmir.surfaces: MirSurface[0x6e925f0,"com.ubuntu.filemanager_filemanager"]::unregisterView(119290464) after=0 live=false
+[2020-07-16:11:03:18.312] qtmir.applications: Application["com.ubuntu.filemanager_filemanager"]::~Application()
+[2020-07-16:11:03:18.313] qtmir.surfaces: MirSurface[0x6e925f0,"-"]::~MirSurface() viewCount=0
+[2020-07-16:11:03:18.705] ApplicationManager::onProcessFailed - upstart reports failure of application "com.ubuntu.filemanager_filemanager" that AppManager is not managing
+[2020-07-16:11:03:18.717] ApplicationManager::onProcessStopped reports stop of appId= "com.ubuntu.filemanager_filemanager" which AppMan is not managing, ignoring the event
+[2020-07-16:11:03:22.713] qml: updateLightState: onBatteryIconNameChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 29
+[2020-07-16:11:03:22.727] qml: updateLightState: onBatteryLevelChanged, indicatorState: INDICATOR_OFF, supportsMultiColorLed: true, hasMessages: false, icon: battery-good-charging-symbolic, displayStatus: 1, deviceState: charging, batteryLevel: 33
