@@ -38,6 +38,10 @@ struct wl_shm *shm;
 struct wl_drm *drm;
 struct wl_buffer *buffer;
 struct wl_callback *frame_callback;
+EGLDisplay egl_display;
+EGLConfig egl_conf;
+EGLSurface egl_surface;
+EGLContext egl_context;
 int pool_fd = -1;
 void *shm_data;
 
