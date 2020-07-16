@@ -290,8 +290,7 @@ create_buffer()
 
     assert(shm != NULL);
     pool = wl_shm_create_pool(shm, fd, size);
-    assert(pool != NULL);
-    wl_display_roundtrip(display);  //  Check for errors
+    assert(pool != NULL);  //  wl_display_roundtrip(display);  //  Check for errors
 
     //  TODO
     //  [4046596.866]  -> wl_shm_pool@9.resize(12288)
@@ -311,8 +310,7 @@ create_buffer()
         0,       //  <arg name="offset2" type="int"/>
         0        //  <arg name="stride2" type="int"/>
     );
-    assert(buff != NULL);
-    wl_display_roundtrip(display);  //  Check for errors
+    assert(buff != NULL);  //  wl_display_roundtrip(display);  //  Check for errors
 
 #ifdef NOTUSED
     buff = wl_shm_pool_create_buffer(pool, 0,
@@ -353,16 +351,19 @@ create_window()
 
     //  wl_surface@17.attach(wl_buffer@25, 0, 0)
     wl_surface_attach(surface, buffer, 0, 0);
-    wl_display_roundtrip(display);  //  Check for errors
+    //  wl_display_roundtrip(display);  //  Check for errors
 
     //  wl_surface@17.damage(0, 0, 2147483647, 2147483647)
     wl_surface_damage(surface, 0, 0, WIDTH, HEIGHT);
-    wl_display_roundtrip(display);  //  Check for errors
+    //  wl_display_roundtrip(display);  //  Check for errors
 
     //  wl_surface@17.commit()
     wl_surface_commit(surface);
-    wl_display_roundtrip(display);  //  Check for errors
+    //  wl_display_roundtrip(display);  //  Check for errors
 }
+
+////////////////////////////////////////////////////////////////////
+//  Shared Memory
 
 static void
 shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
@@ -389,6 +390,9 @@ shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
 struct wl_shm_listener shm_listener = {
     shm_format
 };
+
+////////////////////////////////////////////////////////////////////
+//  Global Registry
 
 static void
 global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
@@ -483,14 +487,14 @@ void xdg_surface_configure_handler
 ) {
     puts("Configure XDG surface...");
     zxdg_surface_v6_ack_configure(xdg_surface, serial);
-    wl_display_roundtrip(display);  //  Check for errors
+    //  wl_display_roundtrip(display);  //  Check for errors
 
     //  Create the Prime Buffer only when XDG Surface has been configured
     create_window();
-    wl_display_roundtrip(display);  //  Check for errors
+    //  wl_display_roundtrip(display);  //  Check for errors
 
     redraw(NULL, NULL, 0);
-    wl_display_roundtrip(display);  //  Check for errors
+    //  wl_display_roundtrip(display);  //  Check for errors
 }
 
 const struct zxdg_surface_v6_listener xdg_surface_listener = {
