@@ -38,7 +38,8 @@ struct wl_shm *shm;
 struct wl_drm *drm;
 struct wl_buffer *buffer;
 struct wl_callback *frame_callback;
-struct zxdg_shell_v6 *shell;      //  Previously: struct wl_shell *shell;
+struct wl_shell *shell;
+struct zxdg_shell_v6 *zshell;
 struct zxdg_surface_v6 *zsurface;  //  Previously: struct wl_shell_surface *shell_surface;
 struct zxdg_toplevel_v6 *toplevel;
 
@@ -536,18 +537,16 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
     else if (strcmp(interface, "zxdg_shell_v6") == 0)
     {
         //  wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@19)
-        shell = wl_registry_bind(registry, id,
+        zshell = wl_registry_bind(registry, id,
                                  &zxdg_shell_v6_interface, 
                                  1);
     }
-#ifdef NOTUSED
     else if (strcmp(interface, "wl_shell") == 0)
     {
         shell = wl_registry_bind(registry, id,
                                  &wl_shell_interface, 
                                  1);
     }
-#endif  //  NOTUSED
     else if (strcmp(interface, "wl_shm") == 0)
     {
         //  wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@12)
@@ -774,46 +773,35 @@ create_opaque_region()
     wl_surface_set_opaque_region(surface, region);
 }
 
-static void
-create_egl_window()
-{
+static void create_egl_window() {
     puts("Creating window...");
+    assert(surface != NULL);
     egl_window = wl_egl_window_create(surface,
                                       480, 360);
-    if (egl_window == EGL_NO_SURFACE)
-    {
+    if (egl_window == EGL_NO_SURFACE) {
         fprintf(stderr, "Can't create egl window\n");
         exit(1);
-    }
-    else
-    {
+    } else {
         fprintf(stderr, "Created egl window\n");
     }
 
-    egl_surface =
-        eglCreateWindowSurface(egl_display,
-                               egl_conf,
+    egl_surface = eglCreateWindowSurface(egl_display, egl_conf,
                                egl_window, NULL);
+    assert(egl_surface != NULL);
 
     if (eglMakeCurrent(egl_display, egl_surface,
-                       egl_surface, egl_context))
-    {
+                       egl_surface, egl_context)) {
         fprintf(stderr, "Made current\n");
-    }
-    else
-    {
+    } else {
         fprintf(stderr, "Made current failed\n");
     }
 
     // Render the display
     render_display();
 
-    if (eglSwapBuffers(egl_display, egl_surface))
-    {
+    if (eglSwapBuffers(egl_display, egl_surface)) {
         fprintf(stderr, "Swapped buffers\n");
-    }
-    else
-    {
+    } else {
         fprintf(stderr, "Swapped buffers failed\n");
     }
 }
@@ -845,16 +833,28 @@ int main(int argc, char **argv) {
     assert(shell != NULL);
     assert(drm != NULL);
 
-    //  Authenticate the display before creating buffers
-    init_egl();
-
-    ////  TODO
-    create_egl_window();
-
-#ifdef SHARED_MEMORY
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
+    ////  TODO
+    shell_surface = wl_shell_get_shell_surface(shell, surface);
+    assert(shell_surface != NULL);
+
+    wl_shell_surface_set_toplevel(shell_surface);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    wl_shell_surface_add_listener(shell_surface,
+                                  &shell_surface_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
+    
+    //  Authenticate the display before creating buffers
+    init_egl();
+    wl_display_roundtrip(display);  //  Check for errors
+
+    create_egl_window();
+    wl_display_roundtrip(display);  //  Check for errors
+
+#ifdef SHARED_MEMORY
     ////  TODO
     //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
     zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
@@ -891,21 +891,6 @@ int main(int argc, char **argv) {
     wl_surface_commit(surface);
     wl_display_roundtrip(display);  //  Check for errors
 #endif  //  SHARED_MEMORY
-
-#ifdef NOTUSED
-    shell_surface = wl_shell_get_shell_surface(shell, surface);
-    assert(shell_surface != NULL);
-
-    wl_shell_surface_set_toplevel(shell_surface);
-
-    wl_shell_surface_add_listener(shell_surface,
-                                  &shell_surface_listener, NULL);
-
-    frame_callback = wl_surface_frame(surface);
-    assert(frame_callback != NULL);
-
-    wl_callback_add_listener(frame_callback, &frame_listener, NULL);
-#endif  //  NOTUSED
 
     puts("Dispatching display...");
     while (wl_display_dispatch(display) != -1)
