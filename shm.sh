@@ -21,6 +21,7 @@ gcc \
     -lwayland-egl \
     -L/usr/lib/aarch64-linux-gnu/mesa-egl \
     -lEGL \
+    /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 \
     -Wl,-Map=shm.map
 
 # Make system folders writeable
