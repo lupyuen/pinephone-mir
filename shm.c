@@ -412,8 +412,49 @@ void drm_device(void *data,
             struct wl_drm *wl_drm,
             const char *name) {
     printf("DRM device: %s\n", name);
-    //  wl_drm@18.device("/dev/dri/card1")
+
+    //  Call this request with the magic received from drmGetMagic().
+    //  It will be passed on to the drmAuthMagic() or DRIAuthConnection() call.  
+    //  This authentication must be completed before create_buffer could be used.
+    //  wl_drm@18.authenticate(4)
+    //  TODO: wl_drm_authenticate(wl_drm, ???)
 }
+
+#ifdef NOTUSED  //  From https://cgit.freedesktop.org/mesa/mesa/tree/src/egl/drivers/dri2/platform_wayland.c
+static void
+drm_handle_device(void *data, struct wl_drm *drm, const char *device)
+{
+   struct dri2_egl_display *dri2_dpy = data;
+   drm_magic_t magic;
+
+   dri2_dpy->device_name = strdup(device);
+   if (!dri2_dpy->device_name)
+      return;
+
+   dri2_dpy->fd = loader_open_device(dri2_dpy->device_name);
+   if (dri2_dpy->fd == -1) {
+      _eglLog(_EGL_WARNING, "wayland-egl: could not open %s (%s)",
+              dri2_dpy->device_name, strerror(errno));
+      free(dri2_dpy->device_name);
+      dri2_dpy->device_name = NULL;
+      return;
+   }
+
+   if (drmGetNodeTypeFromFd(dri2_dpy->fd) == DRM_NODE_RENDER) {
+      dri2_dpy->authenticated = true;
+   } else {
+      if (drmGetMagic(dri2_dpy->fd, &magic)) {
+         close(dri2_dpy->fd);
+         dri2_dpy->fd = -1;
+         free(dri2_dpy->device_name);
+         dri2_dpy->device_name = NULL;
+         _eglLog(_EGL_WARNING, "wayland-egl: drmGetMagic failed");
+         return;
+      }
+      wl_drm_authenticate(dri2_dpy->wl_drm, magic);
+   }
+}
+#endif  //  NOTUSED
 
 /**
  * format - (none)
@@ -512,7 +553,7 @@ global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
         drm = wl_registry_bind(registry, id,
                                &wl_drm_interface, 
                                2);
-        wl_drm_add_listener(drm, &drm_listener, NULL);
+        //  wl_drm_add_listener(drm, &drm_listener, NULL);
     }
 }
 
@@ -634,6 +675,74 @@ const struct wl_display_listener display_listener = {
 };
 
 ////////////////////////////////////////////////////////////////////
+//  EGL
+
+static void
+init_egl()
+{
+    puts("Init EGL...");
+    EGLint major, minor, count, n, size;
+    EGLConfig *configs;
+    int i;
+    EGLint config_attribs[] = {
+        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+        EGL_RED_SIZE, 8,
+        EGL_GREEN_SIZE, 8,
+        EGL_BLUE_SIZE, 8,
+        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+        EGL_NONE};
+
+    static const EGLint context_attribs[] = {
+        EGL_CONTEXT_CLIENT_VERSION, 2,
+        EGL_NONE};
+
+    egl_display = eglGetDisplay((EGLNativeDisplayType)display);
+    if (egl_display == EGL_NO_DISPLAY)
+    {
+        fprintf(stderr, "Can't create egl display\n");
+        exit(1);
+    }
+    else
+    {
+        fprintf(stderr, "Created egl display\n");
+    }
+
+    if (eglInitialize(egl_display, &major, &minor) != EGL_TRUE)
+    {
+        fprintf(stderr, "Can't initialise egl display\n");
+        exit(1);
+    }
+    printf("EGL major: %d, minor %d\n", major, minor);
+
+    eglGetConfigs(egl_display, NULL, 0, &count);
+    printf("EGL has %d configs\n", count);
+
+    configs = calloc(count, sizeof *configs);
+
+    eglChooseConfig(egl_display, config_attribs,
+                    configs, count, &n);
+
+    for (i = 0; i < n; i++)
+    {
+        eglGetConfigAttrib(egl_display,
+                           configs[i], EGL_BUFFER_SIZE, &size);
+        printf("Buffer size for config %d is %d\n", i, size);
+        eglGetConfigAttrib(egl_display,
+                           configs[i], EGL_RED_SIZE, &size);
+        printf("Red size for config %d is %d\n", i, size);
+
+        // just choose the first one
+        egl_conf = configs[i];
+        break;
+    }
+
+    egl_context =
+        eglCreateContext(egl_display,
+                         egl_conf,
+                         EGL_NO_CONTEXT, context_attribs);
+}
+
+////////////////////////////////////////////////////////////////////
 //  Main
 
 int main(int argc, char **argv) {
@@ -650,17 +759,18 @@ int main(int argc, char **argv) {
     display = wl_display_connect(NULL);
     assert(display != NULL);
 
-    //  wl_display_add_listener(display, &display_listener, NULL);
-
     struct wl_registry *registry = wl_display_get_registry(display);
     assert(registry != NULL);
     wl_registry_add_listener(registry, &registry_listener, NULL);
 
-    // wait for the "initial" set of globals to appear
+    //  Wait for the "initial" set of globals to appear
     wl_display_roundtrip(display);
     assert(compositor != NULL);
     assert(shell != NULL);
     assert(drm != NULL);
+
+    //  Authenticate the display before creating buffers
+    init_egl();
 
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
