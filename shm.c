@@ -451,7 +451,7 @@ void xdg_toplevel_configure_handler
     int32_t height,
     struct wl_array *states
 ) {
-    printf("configure: %dx%d\n", width, height);
+    printf("Configure toplevel: width=%d, height=%d...\n", width, height);
 }
 
 void xdg_toplevel_close_handler
@@ -459,7 +459,7 @@ void xdg_toplevel_close_handler
     void *data,
     struct zxdg_toplevel_v6 *xdg_toplevel
 ) {
-    printf("close\n");
+    puts("Closing toplevel...");
 }
 
 const struct zxdg_toplevel_v6_listener xdg_toplevel_listener = {
@@ -473,6 +473,7 @@ void xdg_surface_configure_handler
     struct zxdg_surface_v6 *xdg_surface,
     uint32_t serial
 ) {
+    puts("Configure XDG surface...");
     zxdg_surface_v6_ack_configure(xdg_surface, serial);
 }
 
