@@ -19,6 +19,7 @@
 #include "esutil.h"
 
 static void shm_format(void *data, struct wl_shm *wl_shm, uint32_t format);
+void Init ( ESContext *esContext );
 void Draw ( ESContext *esContext );
 
 struct wl_display *display = NULL;
@@ -57,9 +58,8 @@ void render_display()
 
     ////
     static ESContext esContext;
-    static UserData  userData;
     esInitContext ( &esContext );
-    esContext.userData = &userData;
+    Init(&esContext);
     Draw(&esContext);
     ////
 
