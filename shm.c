@@ -314,10 +314,8 @@ static struct wl_buffer *create_buffer(int fd) {
     int size = stride * HEIGHT;
     struct wl_buffer *buff;
 
-    ht = HEIGHT;
-
-    //  TODO
     assert(drm != NULL);
+    assert(fd >= 0);
     buff = wl_drm_create_prime_buffer(
         drm,
         fd,      //  <arg name="name" type="fd"/>
@@ -358,9 +356,9 @@ static struct wl_buffer *create_buffer(int fd) {
 #endif  //  NOTUSED
 
 /// Create Window
-static void create_window(int fd) {
-    puts("Creating window...");
-    //  Create a pool and buffer
+static void create_shm_window(int fd) {
+    puts("Creating shared memory window...");
+    //  Create a buffer
     buffer = create_buffer(fd);
     assert(buffer != NULL);
     assert(surface != NULL);
@@ -413,6 +411,21 @@ struct wl_shm_listener shm_listener = {
     shm_format
 };
 
+static void init_shm(void) {
+    puts("Init shared memory...");
+    pool_fd = create_pool();
+    assert(pool_fd >= 0);
+
+    create_shm_window(pool_fd);
+}
+
+#ifdef NOTUSED  //  From Wayland Log: logs/shm.log
+[2257120.075]  -> wl_surface@3.frame(new id wl_callback@13)
+[2257120.384]  -> wl_drm@14.create_prime_buffer(new id wl_buffer@15, fd 10, 480, 360, 875713112, 0, 1920, 0, 0, 0, 0)
+[2257120.560]  -> wl_surface@3.attach(wl_buffer@15, 0, 0)
+[2257120.613]  -> wl_surface@3.damage(0, 0, 2147483647, 2147483647)
+[2257120.708]  -> wl_surface@3.commit()
+#endif  //  NOTUSED
 
 ////////////////////////////////////////////////////////////////////
 //  Direct Rendering Manager
@@ -580,6 +593,46 @@ static const struct wl_registry_listener registry_listener = {
 };
 
 ////////////////////////////////////////////////////////////////////
+//  XDG
+
+static void init_xdg(void) {
+    //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
+    zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
+    assert(zsurface != NULL);  wl_display_roundtrip(display);  //  Check for errors
+
+    zxdg_surface_v6_add_listener(zsurface, &xdg_surface_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
+    toplevel = zxdg_surface_v6_get_toplevel(zsurface);
+    assert(toplevel != NULL);  wl_display_roundtrip(display);  //  Check for errors
+
+    zxdg_toplevel_v6_add_listener(toplevel, &xdg_toplevel_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
+    zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
+    zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  wl_surface@17.set_buffer_scale(1)
+    wl_surface_set_buffer_scale(surface, 1);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  wl_surface@17.set_buffer_transform(0)
+    wl_surface_set_buffer_transform(surface, 0);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  Signal that the surface is ready to be configured
+    //  wl_surface@17.commit()
+    wl_surface_commit(surface);
+    wl_display_roundtrip(display);  //  Check for errors
+}
+
+////////////////////////////////////////////////////////////////////
 //  XDG Top Level
 
 void xdg_toplevel_configure_handler
@@ -628,7 +681,7 @@ void xdg_surface_configure_handler
     assert(frame_callback != NULL);
 
     //  Create the Prime Buffer only when XDG Surface has been configured
-    create_window(pool_fd);
+    create_shm_window(pool_fd);
     //  wl_display_roundtrip(display);  //  Check for errors
 
     redraw(NULL, NULL, 0);
@@ -754,8 +807,7 @@ init_egl()
 }
 
 /// Render the GLES2 display
-void render_display()
-{
+static void render_display() {
     puts("Rendering display...");
     glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
@@ -763,9 +815,7 @@ void render_display()
     glFlush(); // Render now
 }
 
-static void
-create_opaque_region()
-{
+static void create_opaque_region() {
     puts("Creating opaque region...");
     region = wl_compositor_create_region(compositor);
     assert(region != NULL);
@@ -810,6 +860,33 @@ static void create_egl_window() {
 }
 
 ////////////////////////////////////////////////////////////////////
+//  Shell
+
+static void init_shell(void) {
+    puts("Init shell...");
+
+    //  Create the shell surface
+    shell_surface = wl_shell_get_shell_surface(shell, surface);
+    assert(shell_surface != NULL);
+
+    //  Set the shell surface as top level
+    wl_shell_surface_set_toplevel(shell_surface);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  Create the EGL region
+    create_opaque_region();
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  Authenticate the display before creating buffers
+    init_egl();
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  Create the EGL window
+    create_egl_window();
+    wl_display_roundtrip(display);  //  Check for errors
+}
+
+////////////////////////////////////////////////////////////////////
 //  Main
 
 int main(int argc, char **argv) {
@@ -840,64 +917,16 @@ int main(int argc, char **argv) {
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
+    //  Init the shell
+    init_shell();
+
+    //  Init shared memory
+    init_shm();
+
+#ifdef USE_XDG
     ////  TODO
-    //  Create the shell surface
-    shell_surface = wl_shell_get_shell_surface(shell, surface);
-    assert(shell_surface != NULL);
-
-    //  Set the shell surface as top level
-    wl_shell_surface_set_toplevel(shell_surface);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  Create the EGL region
-    create_opaque_region();
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  Authenticate the display before creating buffers
-    init_egl();
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  Create the EGL window
-    create_egl_window();
-    wl_display_roundtrip(display);  //  Check for errors
-
-#ifdef SHARED_MEMORY
-    ////  TODO
-    //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
-    zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
-    assert(zsurface != NULL);  wl_display_roundtrip(display);  //  Check for errors
-
-    zxdg_surface_v6_add_listener(zsurface, &xdg_surface_listener, NULL);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
-    toplevel = zxdg_surface_v6_get_toplevel(zsurface);
-    assert(toplevel != NULL);  wl_display_roundtrip(display);  //  Check for errors
-
-    zxdg_toplevel_v6_add_listener(toplevel, &xdg_toplevel_listener, NULL);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
-    zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
-    zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  wl_surface@17.set_buffer_scale(1)
-    wl_surface_set_buffer_scale(surface, 1);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  wl_surface@17.set_buffer_transform(0)
-    wl_surface_set_buffer_transform(surface, 0);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  Signal that the surface is ready to be configured
-    //  wl_surface@17.commit()
-    wl_surface_commit(surface);
-    wl_display_roundtrip(display);  //  Check for errors
-#endif  //  SHARED_MEMORY
+    init_xdg();
+#endif  //  USE_XDG
 
     puts("Dispatching display...");
     while (wl_display_dispatch(display) != -1)
