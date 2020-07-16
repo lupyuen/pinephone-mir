@@ -14,6 +14,8 @@ gcc \
     -g \
     -o egl2 \
     egl2.c \
+    texture.c \
+    esutil.c \
     -lwayland-client \
     -lwayland-server \
     -lwayland-egl \

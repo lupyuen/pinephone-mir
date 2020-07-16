@@ -16,9 +16,10 @@
 #include <wayland-egl.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
+#include "esutil.h"
 
-static void
-shm_format(void *data, struct wl_shm *wl_shm, uint32_t format);
+static void shm_format(void *data, struct wl_shm *wl_shm, uint32_t format);
+void Draw ( ESContext *esContext );
 
 struct wl_display *display = NULL;
 struct wl_compositor *compositor = NULL;
@@ -53,6 +54,14 @@ void render_display()
     puts("Rendering display...");
     glClearColor(1.0f, 0.0f, 1.0f, 1.0f); // Set background color to magenta and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+
+    ////
+    static ESContext esContext;
+    static UserData  userData;
+    esInitContext ( &esContext );
+    esContext.userData = &userData;
+    Draw(&esContext);
+    ////
 
     glFlush(); // Render now
 }
