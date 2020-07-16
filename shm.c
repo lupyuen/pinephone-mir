@@ -1,8 +1,5 @@
 //  Wayland App that uses Shared Memory to render graphics on PinePhone with Ubuntu Touch.
-//  Note: PinePhone display server crashes after the last line "wl_display_disconnect()"
-//  Error in /home/phablet/.cache/upstart/unity8.log:
-//    terminate called after throwing an instance of 'std::logic_error'
-//    what():  Buffer does not support GL rendering
+//  Note: This program fails with error "wl_drm@4: error 2: invalid name"
 //  To build and run on PinePhone, see shm.sh.
 //  For output log, see logs/shm.log
 //  Based on inspection of Ubuntu Touch File Manager Wayland Log (logs/filemanager-wayland.log)
