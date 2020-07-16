@@ -833,24 +833,28 @@ int main(int argc, char **argv) {
     assert(shell != NULL);
     assert(drm != NULL);
 
+    //  Create the surface
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
     ////  TODO
+    //  Create the shell surface
     shell_surface = wl_shell_get_shell_surface(shell, surface);
     assert(shell_surface != NULL);
 
+    //  Set the shell surface as top level
     wl_shell_surface_set_toplevel(shell_surface);
     wl_display_roundtrip(display);  //  Check for errors
 
-    wl_shell_surface_add_listener(shell_surface,
-                                  &shell_surface_listener, NULL);
+    //  Create the EGL region
+    create_opaque_region();
     wl_display_roundtrip(display);  //  Check for errors
-    
+
     //  Authenticate the display before creating buffers
     init_egl();
     wl_display_roundtrip(display);  //  Check for errors
 
+    //  Create the EGL window
     create_egl_window();
     wl_display_roundtrip(display);  //  Check for errors
 
