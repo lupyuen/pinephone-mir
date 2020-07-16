@@ -37,7 +37,7 @@ struct wl_shm *shm;
 struct wl_drm *drm;
 struct wl_buffer *buffer;
 struct wl_callback *frame_callback;
-
+int pool_fd = -1;
 void *shm_data;
 
 //  Note: If height or width are below 160, wl_drm will fail with error "invalid name"
@@ -249,7 +249,7 @@ static const struct wl_callback_listener frame_listener = {
 };
 
 /// Create a Shared Memory Pool
-static struct wl_shm_pool *create_pool() {
+static int create_pool() {
     puts("Creating pool...");
     int stride = WIDTH * 4; // 4 bytes per pixel
     int size = stride * HEIGHT;
@@ -291,11 +291,11 @@ static struct wl_shm_pool *create_pool() {
 
     //  TODO
     //  [4046596.866]  -> wl_shm_pool@9.resize(12288)
-    return pl;
+    return fd;
 }
 
 /// Created a Shared Memory Buffer
-static struct wl_buffer *create_buffer() {
+static struct wl_buffer *create_buffer(int fd) {
     puts("Creating buffer...");
     int stride = WIDTH * 4; // 4 bytes per pixel
     int size = stride * HEIGHT;
@@ -345,12 +345,11 @@ From File Manager Wayland Log:
     0, 0, 0, 0)
 #endif  //  NOTUSED
 
-static void
-create_window()
-{
+/// Create Window
+static void create_window(int fd) {
     puts("Creating window...");
     //  Create a pool and buffer
-    buffer = create_buffer();
+    buffer = create_buffer(fd);
     assert(buffer != NULL);
     assert(surface != NULL);
 
@@ -391,7 +390,8 @@ shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
     }
     ////  TODO
     if (format == 1) {
-        struct wl_shm_pool *pool = create_pool();
+        pool_fd = create_pool();
+        assert(pool_fd >= 0);
     }
     ////
     fprintf(stderr, "Possible shmem format %s\n", s);
@@ -508,7 +508,7 @@ void xdg_surface_configure_handler
     assert(frame_callback != NULL);
 
     //  Create the Prime Buffer only when XDG Surface has been configured
-    create_window();
+    create_window(pool_fd);
     //  wl_display_roundtrip(display);  //  Check for errors
 
     redraw(NULL, NULL, 0);
