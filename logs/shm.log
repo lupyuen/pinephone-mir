@@ -1,18 +1,4 @@
 
-GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
-Copyright (C) 2016 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
-and "show warranty" for details.
-This GDB was configured as "aarch64-linux-gnu".
-Type "show configuration" for configuration details.
-For bug reporting instructions, please see:
-<http://www.gnu.org/software/gdb/bugs/>.
-Find the GDB manual and other documentation resources online at:
-<http://www.gnu.org/software/gdb/documentation/>.
-For help, type "help".
-Type "apropos word" to search for commands related to "word"...
 Reading symbols from ./shm...done.
 Starting program: /usr/share/click/preinstalled/com.ubuntu.filemanager/0.7.5/shm 
 [Thread debugging using libthread_db enabled]
@@ -110,101 +96,78 @@ ANDROID_ASSETS=/system/app
 QTWEBKIT_DPR=1
 UBUNTU_APP_LAUNCH_XMIR_PATH=/usr/bin/libertine-xmir
 Connecting to display...
-[1710189.057]  -> wl_display@1.get_registry(new id wl_registry@2)
-[1710189.235]  -> wl_display@1.sync(new id wl_callback@3)
-[1710217.713] wl_display@1.delete_id(3)
-[1710217.855] wl_registry@2.global(1, "wl_drm", 2)
-[1710217.960]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
-[1710218.054] wl_registry@2.global(2, "qt_windowmanager", 1)
-[1710218.123] wl_registry@2.global(3, "wl_compositor", 4)
-[1710218.192]  -> wl_registry@2.bind(3, "wl_compositor", 3, new id [unknown]@5)
-[1710218.278] wl_registry@2.global(4, "wl_subcompositor", 1)
-[1710218.343] wl_registry@2.global(5, "wl_seat", 6)
-[1710218.407] wl_registry@2.global(6, "wl_output", 3)
-[1710218.472] wl_registry@2.global(7, "wl_data_device_manager", 3)
-[1710218.537] wl_registry@2.global(8, "wl_shell", 1)
-[1710218.807] wl_registry@2.global(9, "zxdg_shell_v6", 1)
-[1710218.875]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
-[1710218.961] wl_registry@2.global(10, "xdg_wm_base", 1)
-[1710219.021] wl_registry@2.global(11, "wl_shm", 1)
-[1710219.086]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
-[1710219.169] wl_callback@3.done(46)
-[1710219.201]  -> wl_compositor@5.create_surface(new id wl_surface@3)
-[1710219.232]  -> wl_display@1.sync(new id wl_callback@8)
-[1710220.125] wl_display@1.delete_id(8)
-[1710220.230] wl_shm@7.format(0)
+[787189.365]  -> wl_display@1.get_registry(new id wl_registry@2)
+[787190.422]  -> wl_display@1.sync(new id wl_callback@3)
+[787229.421] wl_display@1.delete_id(3)
+[787229.555] wl_registry@2.global(1, "wl_drm", 2)
+[787229.656]  -> wl_registry@2.bind(1, "wl_drm", 2, new id [unknown]@4)
+[787229.790] wl_registry@2.global(2, "qt_windowmanager", 1)
+[787229.890] wl_registry@2.global(3, "wl_compositor", 4)
+[787230.032]  -> wl_registry@2.bind(3, "wl_compositor", 3, new id [unknown]@5)
+[787230.164] wl_registry@2.global(4, "wl_subcompositor", 1)
+[787230.257] wl_registry@2.global(5, "wl_seat", 6)
+[787230.321] wl_registry@2.global(6, "wl_output", 3)
+[787230.418] wl_registry@2.global(7, "wl_data_device_manager", 3)
+[787230.496] wl_registry@2.global(8, "wl_shell", 1)
+[787230.570] wl_registry@2.global(9, "zxdg_shell_v6", 1)
+[787230.683]  -> wl_registry@2.bind(9, "zxdg_shell_v6", 1, new id [unknown]@6)
+[787230.795] wl_registry@2.global(10, "xdg_wm_base", 1)
+[787230.900] wl_registry@2.global(11, "wl_shm", 1)
+[787230.987]  -> wl_registry@2.bind(11, "wl_shm", 1, new id [unknown]@7)
+[787231.109] wl_callback@3.done(55)
+[787231.173]  -> wl_compositor@5.create_surface(new id wl_surface@3)
+[787231.271]  -> wl_display@1.sync(new id wl_callback@8)
+[787233.194] wl_display@1.delete_id(8)
+[787233.329] wl_shm@7.format(0)
 Possible shmem format ARGB8888
-[1710220.300] wl_shm@7.format(1)
+[787233.401] wl_shm@7.format(1)
 Possible shmem format XRGB8888
-[1710220.347] wl_callback@8.done(46)
-[1710220.397]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
-[1710220.467]  -> wl_display@1.sync(new id wl_callback@9)
-[1710220.985] wl_display@1.delete_id(9)
-[1710221.056] wl_callback@9.done(46)
-[1710221.099]  -> wl_display@1.sync(new id wl_callback@9)
-[1710221.509] wl_display@1.delete_id(9)
-[1710221.566] wl_callback@9.done(46)
-[1710221.595]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
-[1710221.768]  -> wl_display@1.sync(new id wl_callback@10)
-[1710222.846] wl_display@1.delete_id(10)
-[1710223.015] zxdg_surface_v6@8.configure(47)
+[787233.425] wl_callback@8.done(55)
+[787233.465]  -> zxdg_shell_v6@6.get_xdg_surface(new id zxdg_surface_v6@8, wl_surface@3)
+[787233.562]  -> wl_display@1.sync(new id wl_callback@9)
+[787233.786] wl_display@1.delete_id(9)
+[787233.869] wl_callback@9.done(55)
+[787233.918]  -> wl_display@1.sync(new id wl_callback@9)
+[787234.098] wl_display@1.delete_id(9)
+[787234.141] wl_callback@9.done(55)
+[787234.186]  -> zxdg_surface_v6@8.get_toplevel(new id zxdg_toplevel_v6@9)
+[787234.237]  -> wl_display@1.sync(new id wl_callback@10)
+[787234.504] wl_display@1.delete_id(10)
+[787234.549] zxdg_surface_v6@8.configure(56)
 Configure XDG surface...
-[1710223.109]  -> zxdg_surface_v6@8.ack_configure(47)
-[1710223.160] wl_callback@10.done(47)
-[1710223.216]  -> wl_display@1.sync(new id wl_callback@10)
-[1710226.822] wl_display@1.delete_id(10)
-[1710227.028] wl_callback@10.done(47)
-[1710227.093]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
-[1710227.159]  -> wl_display@1.sync(new id wl_callback@10)
-[1710227.594] wl_display@1.delete_id(10)
-[1710227.644] wl_callback@10.done(47)
-[1710227.686]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
-[1710227.729]  -> wl_display@1.sync(new id wl_callback@10)
-[1710227.883] wl_display@1.delete_id(10)
-[1710227.914] wl_callback@10.done(47)
-[1710227.939]  -> wl_surface@3.set_buffer_scale(1)
-[1710227.963]  -> wl_display@1.sync(new id wl_callback@10)
-[1710228.060] wl_display@1.delete_id(10)
-[1710228.092] wl_callback@10.done(47)
-[1710228.115]  -> wl_surface@3.set_buffer_transform(0)
-[1710228.137]  -> wl_display@1.sync(new id wl_callback@10)
-[1710228.646] wl_display@1.delete_id(10)
-[1710228.724] wl_callback@10.done(47)
-[1710228.756]  -> wl_surface@3.commit()
-[1710228.785]  -> wl_display@1.sync(new id wl_callback@10)
-[1710229.825] wl_display@1.delete_id(10)
-[1710229.934] wl_callback@10.done(47)
+[787234.625]  -> zxdg_surface_v6@8.ack_configure(56)
 Creating window...
 Creating buffer...
-[1710236.481]  -> wl_shm@7.create_pool(new id wl_shm_pool@10, fd 5, 4026240)
-[1710236.693]  -> wl_display@1.sync(new id wl_callback@11)
-[1710236.897] zxdg_toplevel_v6@9.configure(0, 0, array)
-Configure toplevel: width=0, height=0...
-[1710236.997] zxdg_surface_v6@8.configure(48)
-Configure XDG surface...
-[1710237.047]  -> zxdg_surface_v6@8.ack_configure(48)
-[1710237.153] wl_display@1.delete_id(11)
-[1710237.189] wl_callback@11.done(48)
-[1710237.230]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@11, fd 5, 720, 1398, 875713112, 0, 2880, 0, 0, 0, 0)
-[1710237.327]  -> wl_display@1.sync(new id wl_callback@12)
-[1710239.633] wl_display@1.error(wl_drm@4, 2, "invalid name")
+[787249.804]  -> wl_shm@7.create_pool(new id wl_shm_pool@11, fd 5, 4026240)
+[787254.037]  -> wl_drm@4.create_prime_buffer(new id wl_buffer@12, fd 6, 720, 1398, 875713112, 0, 2880, 0, 0, 0, 0)
+[787254.235]  -> wl_display@1.sync(new id wl_callback@13)
+[787254.299] wl_callback@10.done(56)
+[787259.599] wl_display@1.error(wl_drm@4, 2, "invalid name")
 wl_drm@4: error 2: invalid name
-[1710239.974]  -> wl_display@1.sync(new id wl_callback@13)
-[1710240.088]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[1710240.229]  -> wl_surface@3.damage(0, 0, 720, 1398)
-[1710240.393]  -> wl_surface@3.commit()
-[1710240.445]  -> wl_display@1.sync(new id wl_callback@14)
+[787259.897]  -> wl_surface@3.attach(wl_buffer@12, 0, 0)
+[787259.989]  -> wl_surface@3.damage(0, 0, 720, 1398)
+[787260.069]  -> wl_surface@3.commit()
 Redrawing...
-[1710255.376]  -> wl_surface@3.frame(new id wl_callback@15)
-[1710255.517]  -> wl_surface@3.attach(wl_buffer@11, 0, 0)
-[1710255.602]  -> wl_surface@3.damage(0, 0, 720, 1398)
+[787260.126]  -> wl_surface@3.frame(new id wl_callback@10)
+[787260.171]  -> wl_surface@3.attach(wl_buffer@12, 0, 0)
+[787260.226]  -> wl_surface@3.damage(0, 0, 720, 1398)
 Painting...
-[1710280.439]  -> wl_surface@3.commit()
-[1710280.557]  -> wl_display@1.sync(new id wl_callback@16)
+[787297.080]  -> wl_surface@3.commit()
+[787297.230]  -> wl_display@1.sync(new id wl_callback@14)
+[787297.343]  -> zxdg_toplevel_v6@9.set_title("com.ubuntu.filemanager")
+[787297.416]  -> wl_display@1.sync(new id wl_callback@15)
+[787297.511]  -> zxdg_toplevel_v6@9.set_app_id("filemanager.ubuntu.com.filemanager")
+[787297.583]  -> wl_display@1.sync(new id wl_callback@16)
+[787297.637]  -> wl_surface@3.set_buffer_scale(1)
+[787297.677]  -> wl_display@1.sync(new id wl_callback@17)
+[787297.729]  -> wl_surface@3.set_buffer_transform(0)
+[787297.758]  -> wl_display@1.sync(new id wl_callback@18)
+[787297.790]  -> wl_surface@3.commit()
+[787297.815]  -> wl_display@1.sync(new id wl_callback@19)
 Dispatching display...
 Disconnecting display...
 disconnected from display
-[Inferior 1 (process 22207) exited normally]
+[Inferior 1 (process 26025) exited normally]
 No stack.
 No stack.
 (gdb) quit

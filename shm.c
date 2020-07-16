@@ -489,6 +489,14 @@ void xdg_surface_configure_handler
     zxdg_surface_v6_ack_configure(xdg_surface, serial);
     //  wl_display_roundtrip(display);  //  Check for errors
 
+    if (frame_callback != NULL) {
+        wl_callback_destroy(frame_callback);
+    }
+
+    //  wl_surface@17.frame(new id wl_callback@24)
+    frame_callback = wl_surface_frame(surface);
+    assert(frame_callback != NULL);
+
     //  Create the Prime Buffer only when XDG Surface has been configured
     create_window();
     //  wl_display_roundtrip(display);  //  Check for errors
