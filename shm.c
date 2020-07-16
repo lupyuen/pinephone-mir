@@ -39,14 +39,17 @@ struct wl_drm *drm;
 struct wl_buffer *buffer;
 struct wl_callback *frame_callback;
 struct wl_shell *shell;
+struct wl_shell_surface *shell_surface;
+
 struct zxdg_shell_v6 *zshell;
-struct zxdg_surface_v6 *zsurface;  //  Previously: struct wl_shell_surface *shell_surface;
+struct zxdg_surface_v6 *zsurface;
 struct zxdg_toplevel_v6 *toplevel;
 
 EGLDisplay egl_display;
 EGLConfig egl_conf;
 EGLSurface egl_surface;
 EGLContext egl_context;
+
 int pool_fd = -1;
 void *shm_data;
 
