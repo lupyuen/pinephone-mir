@@ -248,15 +248,12 @@ static const struct wl_callback_listener frame_listener = {
     redraw
 };
 
-static struct wl_buffer *
-create_buffer()
-{
-    puts("Creating buffer...");
-    struct wl_shm_pool *pool;
+/// Create a Shared Memory Pool
+static struct wl_shm_pool *create_pool() {
+    puts("Creating pool...");
     int stride = WIDTH * 4; // 4 bytes per pixel
     int size = stride * HEIGHT;
     int fd;
-    struct wl_buffer *buff;
 
     ht = HEIGHT;
 
@@ -289,11 +286,22 @@ create_buffer()
 #endif  //  NOTUSED
 
     assert(shm != NULL);
-    pool = wl_shm_create_pool(shm, fd, size);
-    assert(pool != NULL);  //  wl_display_roundtrip(display);  //  Check for errors
+    struct wl_shm_pool *pl = wl_shm_create_pool(shm, fd, size);
+    assert(pl != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
     //  TODO
     //  [4046596.866]  -> wl_shm_pool@9.resize(12288)
+    return pl;
+}
+
+/// Created a Shared Memory Buffer
+static struct wl_buffer *create_buffer() {
+    puts("Creating buffer...");
+    int stride = WIDTH * 4; // 4 bytes per pixel
+    int size = stride * HEIGHT;
+    struct wl_buffer *buff;
+
+    ht = HEIGHT;
 
     //  TODO
     assert(drm != NULL);
@@ -356,7 +364,7 @@ create_window()
 
     //  wl_surface@17.commit()
     wl_surface_commit(surface);
-    //  wl_display_roundtrip(display);  //  Check for errors
+    wl_display_roundtrip(display);  //  Check for errors
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -381,6 +389,11 @@ shm_format(void *data, struct wl_shm *wl_shm, uint32_t format)
         s = "other format";
         break;
     }
+    ////  TODO
+    if (format == 1) {
+        struct wl_shm_pool *pool = create_pool();
+    }
+    ////
     fprintf(stderr, "Possible shmem format %s\n", s);
 }
 
