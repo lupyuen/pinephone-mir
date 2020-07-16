@@ -11,21 +11,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <unistd.h>
+#include <syscall.h>
+#include <sys/mman.h>
 #include <wayland-client.h>
 #include <wayland-client-protocol.h>
 #include <wayland-server-protocol.h>
 #include <wayland-egl.h>
-#include <sys/mman.h>
-#include <errno.h>
-#include <unistd.h>
-#include <syscall.h>
 #include "xdg-shell.h"
 #include "wayland-drm-client-protocol.h"
 
-#define _GNU_SOURCE  //  See feature_test_macros(7)
-#include <fcntl.h>   //  For fallocate()
-
 extern char **environ;
+int fallocate(int fd, int mode, off_t offset, off_t len);
 
 struct wl_display *display = NULL;
 struct wl_compositor *compositor = NULL;
