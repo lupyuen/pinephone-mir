@@ -17,6 +17,11 @@ export WAYLAND_DEBUG=1
 # Run File Manager
 # filemanager
 
+# Run shm app with strace
+./strace \
+   -s 1024 \
+   ./shm
+
 # Run egl2 app with strace
 # ./strace \
 #    -s 1024 \
@@ -40,12 +45,12 @@ export WAYLAND_DEBUG=1
 #     --args ./egl2
 
 # Debug shm app
-gdb \
-    --quiet \
-    -ex="r" \
-    -ex="bt" \
-    -ex="frame" \
-    --args ./shm
+# gdb \
+#     --quiet \
+#     -ex="r" \
+#     -ex="bt" \
+#     -ex="frame" \
+#     --args ./shm
 
 # Debug sdl app
 # export SDL_VIDEODRIVER=wayland
