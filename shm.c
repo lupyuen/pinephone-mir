@@ -593,46 +593,6 @@ static const struct wl_registry_listener registry_listener = {
 };
 
 ////////////////////////////////////////////////////////////////////
-//  XDG
-
-static void init_xdg(void) {
-    //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
-    zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
-    assert(zsurface != NULL);  wl_display_roundtrip(display);  //  Check for errors
-
-    zxdg_surface_v6_add_listener(zsurface, &xdg_surface_listener, NULL);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
-    toplevel = zxdg_surface_v6_get_toplevel(zsurface);
-    assert(toplevel != NULL);  wl_display_roundtrip(display);  //  Check for errors
-
-    zxdg_toplevel_v6_add_listener(toplevel, &xdg_toplevel_listener, NULL);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
-    zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
-    zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  wl_surface@17.set_buffer_scale(1)
-    wl_surface_set_buffer_scale(surface, 1);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  wl_surface@17.set_buffer_transform(0)
-    wl_surface_set_buffer_transform(surface, 0);
-    wl_display_roundtrip(display);  //  Check for errors
-
-    //  Signal that the surface is ready to be configured
-    //  wl_surface@17.commit()
-    wl_surface_commit(surface);
-    wl_display_roundtrip(display);  //  Check for errors
-}
-
-////////////////////////////////////////////////////////////////////
 //  XDG Top Level
 
 void xdg_toplevel_configure_handler
@@ -691,6 +651,47 @@ void xdg_surface_configure_handler
 const struct zxdg_surface_v6_listener xdg_surface_listener = {
     .configure = xdg_surface_configure_handler
 };
+
+////////////////////////////////////////////////////////////////////
+//  XDG Main
+
+static void init_xdg(void) {
+    //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
+    assert(zshell != NULL);
+    zsurface = zxdg_shell_v6_get_xdg_surface(zshell, surface);
+    assert(zsurface != NULL);  wl_display_roundtrip(display);  //  Check for errors
+
+    zxdg_surface_v6_add_listener(zsurface, &xdg_surface_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
+    toplevel = zxdg_surface_v6_get_toplevel(zsurface);
+    assert(toplevel != NULL);  wl_display_roundtrip(display);  //  Check for errors
+
+    zxdg_toplevel_v6_add_listener(toplevel, &xdg_toplevel_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
+    zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
+    zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  wl_surface@17.set_buffer_scale(1)
+    wl_surface_set_buffer_scale(surface, 1);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  wl_surface@17.set_buffer_transform(0)
+    wl_surface_set_buffer_transform(surface, 0);
+    wl_display_roundtrip(display);  //  Check for errors
+
+    //  Signal that the surface is ready to be configured
+    //  wl_surface@17.commit()
+    wl_surface_commit(surface);
+    wl_display_roundtrip(display);  //  Check for errors
+}
 
 ////////////////////////////////////////////////////////////////////
 //  Display
