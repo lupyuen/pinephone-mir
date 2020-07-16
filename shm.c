@@ -346,9 +346,6 @@ create_window()
     assert(buffer != NULL);
     assert(surface != NULL);
 
-    //  Wait for the surface to be configured
-    wl_display_roundtrip(display);
-
     //  wl_surface@17.attach(wl_buffer@25, 0, 0)
     wl_surface_attach(surface, buffer, 0, 0);
     //  wl_display_roundtrip(display);  //  Check for errors
