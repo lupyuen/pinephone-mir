@@ -289,6 +289,7 @@ create_buffer()
     assert(shm != NULL);
     pool = wl_shm_create_pool(shm, fd, size);
     assert(pool != NULL);
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  TODO
     //  [4046596.866]  -> wl_shm_pool@9.resize(12288)
@@ -308,14 +309,18 @@ create_buffer()
         0,       //  <arg name="offset2" type="int"/>
         0        //  <arg name="stride2" type="int"/>
     );
-    /* TODO
+    assert(buff != NULL);
+    wl_display_roundtrip(display);  //  Check for errors
+
+#ifdef NOTUSED
     buff = wl_shm_pool_create_buffer(pool, 0,
                                      WIDTH, HEIGHT,
                                      stride,
                                      WL_SHM_FORMAT_XRGB8888);
-    */
-    //wl_buffer_add_listener(buffer, &buffer_listener, buffer);
-    ////  TODO: wl_shm_pool_destroy(pool);
+    wl_buffer_add_listener(buffer, &buffer_listener, buffer);
+    wl_shm_pool_destroy(pool);
+#endif  //  NOTUSED
+
     return buff;
 }
 
@@ -551,36 +556,43 @@ int main(int argc, char **argv)
     assert(shell != NULL);
 
     surface = wl_compositor_create_surface(compositor);
-    assert(surface != NULL);
+    assert(surface != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
     ////  TODO
     //  zxdg_shell_v6@19.get_xdg_surface(new id zxdg_surface_v6@20, wl_surface@17)
     zsurface = zxdg_shell_v6_get_xdg_surface(shell, surface);
-    assert(zsurface != NULL);
+    assert(zsurface != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
     zxdg_surface_v6_add_listener(zsurface, &xdg_surface_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  zxdg_surface_v6@20.get_toplevel(new id zxdg_toplevel_v6@21)
     toplevel = zxdg_surface_v6_get_toplevel(zsurface);
-    assert(toplevel != NULL);
+    assert(toplevel != NULL);  wl_display_roundtrip(display);  //  Check for errors
 
     zxdg_toplevel_v6_add_listener(toplevel, &xdg_toplevel_listener, NULL);
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  zxdg_toplevel_v6@21.set_title("com.ubuntu.filemanager")
     zxdg_toplevel_v6_set_title(toplevel, "com.ubuntu.filemanager");
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  zxdg_toplevel_v6@21.set_app_id("filemanager.ubuntu.com.filemanager")
     zxdg_toplevel_v6_set_app_id(toplevel, "filemanager.ubuntu.com.filemanager");
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  wl_surface@17.set_buffer_scale(1)
     wl_surface_set_buffer_scale(surface, 1);
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  wl_surface@17.set_buffer_transform(0)
     wl_surface_set_buffer_transform(surface, 0);
+    wl_display_roundtrip(display);  //  Check for errors
 
     //  Signal that the surface is ready to be configured
     //  wl_surface@17.commit()
     wl_surface_commit(surface);
+    wl_display_roundtrip(display);  //  Check for errors
 
 #ifdef NOTUSED
     shell_surface = wl_shell_get_shell_surface(shell, surface);
@@ -598,7 +610,10 @@ int main(int argc, char **argv)
 #endif  //  NOTUSED
 
     create_window();
+    wl_display_roundtrip(display);  //  Check for errors
+
     redraw(NULL, NULL, 0);
+    wl_display_roundtrip(display);  //  Check for errors
 
     puts("Dispatching display...");
     while (wl_display_dispatch(display) != -1)
