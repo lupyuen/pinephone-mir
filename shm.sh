@@ -18,6 +18,9 @@ gcc \
     xdg-shell.c \
     wayland-drm-protocol.c \
     -lwayland-client \
+    -lwayland-egl \
+    -L/usr/lib/aarch64-linux-gnu/mesa-egl \
+    -lEGL \
     -Wl,-Map=shm.map
 
 # Make system folders writeable
