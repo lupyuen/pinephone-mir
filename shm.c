@@ -413,7 +413,6 @@ void drm_device(void *data,
             const char *name) {
     printf("DRM device: %s\n", name);
     //  wl_drm@18.device("/dev/dri/card1")
-    wl_drm_device(name);
 }
 
 /**
