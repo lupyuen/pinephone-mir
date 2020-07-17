@@ -60,6 +60,9 @@ void render_display()
     ////
     static ESContext esContext;
     esInitContext ( &esContext );
+    esContext.width = WIDTH;
+    esContext.height = HEIGHT;
+
     Init(&esContext);
     Draw(&esContext);
     ////
