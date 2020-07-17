@@ -111,6 +111,8 @@ int Init(ESContext *esContext)
 void Draw(ESContext *esContext)
 {
     assert(esContext != NULL);
+    printf("Draw width=%d, height=%d...\n", esContext->width, esContext->height);
+
     UserData *userData = esContext->userData;
     assert(userData != NULL);
 
