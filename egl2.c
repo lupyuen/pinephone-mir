@@ -1,6 +1,7 @@
 //  EGL Wayland App that renders a bitmap on PinePhone with Ubuntu Touch.
 //  To build and run on PinePhone, see egl2.sh.
 //  Bundled source files: texture.c, util.c, util.h
+//  Sample log: logs/egl2.log 
 //  Based on https://jan.newmarch.name/Wayland/EGL/
 //  and https://jan.newmarch.name/Wayland/WhenCanIDraw/
 #include <stdio.h>
