@@ -3,6 +3,7 @@
 //    texture image. The purpose of this example is to demonstrate
 //    the basics of 2D texturing
 //  Based on https://github.com/danginsburg/opengles-book-samples/blob/master/LinuxX11/Chapter_9/Simple_Texture2D/Simple_Texture2D.c
+#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <EGL/egl.h>
