@@ -39,8 +39,8 @@ struct wl_shm_listener shm_listener = {
     shm_format
 };
 
-int WIDTH = 16;
-int HEIGHT = 16;
+int WIDTH = 480;
+int HEIGHT = 360;
 
 EGLDisplay egl_display;
 EGLConfig egl_conf;
@@ -110,8 +110,8 @@ create_opaque_region()
     assert(region != NULL);
 
     wl_region_add(region, 0, 0,
-                  480,
-                  360);
+                  WIDTH,
+                  HEIGHT);
     wl_surface_set_opaque_region(surface, region);
 }
 
@@ -120,7 +120,7 @@ create_window()
 {
     puts("Creating window...");
     egl_window = wl_egl_window_create(surface,
-                                      480, 360);
+                                      WIDTH, HEIGHT);
     if (egl_window == EGL_NO_SURFACE)
     {
         fprintf(stderr, "Can't create egl window\n");
