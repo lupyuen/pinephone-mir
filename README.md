@@ -239,7 +239,7 @@ Thread 1 "filemanager.ubu" received signal SIGABRT, Aborted.
 (gdb) quit
 ```
 
-So SDL2 doesn't work on PinePhone with Ubuntu Touch yet.
+So SDL2 doesn't work on PinePhone with Ubuntu Touch yet. SDL2 seems to be a problem creating windows with Wayland XDG.
 
 ## How to run `strace` on the `gtk` app
 
