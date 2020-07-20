@@ -13,22 +13,24 @@
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 
-struct wl_display *display = NULL;
-struct wl_compositor *compositor = NULL;
-struct wl_surface *surface;
-struct wl_egl_window *egl_window;
-struct wl_region *region;
-struct wl_shell *shell;
-struct wl_shell_surface *shell_surface;
-
 /// Dimensions of the OpenGL region to be rendered
 int WIDTH  = 480;
 int HEIGHT = 360;
 
-EGLDisplay egl_display;
-EGLConfig egl_conf;
-EGLSurface egl_surface;
-EGLContext egl_context;
+/// Wayland Interfaces
+struct wl_display       *display;       //  Wayland Display
+struct wl_compositor    *compositor;    //  Wayland Compositor
+struct wl_surface       *surface;       //  Wayland Surface
+struct wl_egl_window    *egl_window;    //  Wayland EGL Window
+struct wl_region        *region;        //  Wayland Region
+struct wl_shell         *shell;         //  Wayland Shell
+struct wl_shell_surface *shell_surface; //  Wayland Shell Surface
+
+/// Wayland EGL Interfaces for OpenGL Rendering
+EGLDisplay egl_display;  //  EGL Display
+EGLConfig  egl_conf;     //  EGL Configuration
+EGLSurface egl_surface;  //  EGL Surface
+EGLContext egl_context;  //  EGL Context
 
 /// Render the OpenGL ES2 display
 void render_display() {
@@ -47,7 +49,7 @@ void render_display() {
     glFlush();
 }
 
-/// Callback for interfaces returned by Wayland Compositor
+/// Callback for interfaces returned by Wayland Service
 static void global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
     const char *interface, uint32_t version) {
     printf("Got interface %s id %d\n", interface, id);
@@ -70,7 +72,7 @@ static void global_registry_remover(void *data, struct wl_registry *registry, ui
     printf("Removed id %d\n", id);
 }
 
-/// Callbacks for interfaces returned by Wayland Compositor
+/// Callbacks for interfaces returned by Wayland Service
 static const struct wl_registry_listener registry_listener = {
     global_registry_handler,
     global_registry_remover
