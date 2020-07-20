@@ -33,7 +33,7 @@ EGLSurface egl_surface;  //  EGL Surface
 EGLContext egl_context;  //  EGL Context
 
 /// Render the OpenGL ES2 display
-void render_display() {
+static void render_display() {
     puts("Rendering display...");
 
     //  Fill the rectangular region with yellow

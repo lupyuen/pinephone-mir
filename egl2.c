@@ -39,8 +39,11 @@ EGLConfig  egl_conf;     //  EGL Configuration
 EGLSurface egl_surface;  //  EGL Surface
 EGLContext egl_context;  //  EGL Context
 
+////////////////////////////////////////////////////////////////////
+//  OpenGL ES2
+
 /// Render the OpenGL ES2 display
-void render_display() {
+static void render_display() {
     puts("Rendering display...");
 
     //  Create the texture context
@@ -55,6 +58,45 @@ void render_display() {
 
     //  Render now
     glFlush();
+}
+
+////////////////////////////////////////////////////////////////////
+//  Wayland Registry
+
+static void global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
+    const char *interface, uint32_t version);
+static void global_registry_remover(void *data, struct wl_registry *registry, uint32_t id);
+
+/// Callbacks for interfaces returned by Wayland Service
+static const struct wl_registry_listener registry_listener = {
+    global_registry_handler,
+    global_registry_remover
+};
+
+/// Connect to Wayland Service and fetch the interfaces for Wayland Compositor and Wayland Shell
+static void get_server_references(void) {
+    puts("Getting server references...");
+    display = wl_display_connect(NULL);
+    if (display == NULL) {
+        fprintf(stderr, "Can't connect to display\n");
+        exit(1);
+    }
+    puts("Connected to display");
+
+    //  Get the Wayland Registry
+    struct wl_registry *registry = wl_display_get_registry(display);
+    assert(registry != NULL);
+
+    //  Add Registry Callbacks to handle interfaces returned by Wayland Service
+    wl_registry_add_listener(registry, &registry_listener, NULL);
+
+    //  Wait for Registry Callbacks to fetch Wayland Interfaces
+    wl_display_dispatch(display);
+    wl_display_roundtrip(display);
+
+    //  We should have received interfaces for Wayland Compositor and Wayland Shell
+    assert(compositor != NULL);
+    assert(shell != NULL);
 }
 
 /// Callback for interfaces returned by Wayland Service
@@ -77,14 +119,11 @@ static void global_registry_handler(void *data, struct wl_registry *registry, ui
 
 /// Callback for removed interfaces
 static void global_registry_remover(void *data, struct wl_registry *registry, uint32_t id) {
-    printf("Removed id %d\n", id);
+    printf("Removed interface id %d\n", id);
 }
 
-/// Callbacks for interfaces returned by Wayland Service
-static const struct wl_registry_listener registry_listener = {
-    global_registry_handler,
-    global_registry_remover
-};
+////////////////////////////////////////////////////////////////////
+//  Wayland EGL
 
 /// Create an opaque region for OpenGL rendering
 static void create_opaque_region() {
@@ -181,32 +220,6 @@ static void init_egl() {
         eglCreateContext(egl_display,
                          egl_conf,
                          EGL_NO_CONTEXT, context_attribs);
-}
-
-/// Connect to Wayland Service and fetch the interfaces for Wayland Compositor and Wayland Shell
-static void get_server_references(void) {
-    puts("Getting server references...");
-    display = wl_display_connect(NULL);
-    if (display == NULL) {
-        fprintf(stderr, "Can't connect to display\n");
-        exit(1);
-    }
-    puts("Connected to display");
-
-    //  Get the Wayland Registry
-    struct wl_registry *registry = wl_display_get_registry(display);
-    assert(registry != NULL);
-
-    //  Add Registry Callbacks to handle interfaces returned by Wayland Service
-    wl_registry_add_listener(registry, &registry_listener, NULL);
-
-    //  Wait for Registry Callbacks to fetch Wayland Interfaces
-    wl_display_dispatch(display);
-    wl_display_roundtrip(display);
-
-    //  We should have received interfaces for Wayland Compositor and Wayland Shell
-    assert(compositor != NULL);
-    assert(shell != NULL);
 }
 
 ////////////////////////////////////////////////////////////////////
