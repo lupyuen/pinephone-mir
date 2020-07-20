@@ -17,30 +17,36 @@
 #include "util.h"
 
 /// Exported from texture.c
-void Init ( ESContext *esContext );
-void Draw ( ESContext *esContext );
+void Init(ESContext *esContext);
+void Draw(ESContext *esContext);
+
+/// Local Functions
+static void get_server_references(void);
+static void create_opaque_region(void);
+static void create_window(void);
+static void init_egl(void);
 
 /// Dimensions of the OpenGL region to be rendered
-int WIDTH  = 480;
-int HEIGHT = 360;
+static int WIDTH  = 480;
+static int HEIGHT = 360;
 
 /// Wayland Interfaces
-struct wl_display       *display;       //  Wayland Display
-struct wl_compositor    *compositor;    //  Wayland Compositor
-struct wl_surface       *surface;       //  Wayland Surface
-struct wl_egl_window    *egl_window;    //  Wayland EGL Window
-struct wl_region        *region;        //  Wayland Region
-struct wl_shell         *shell;         //  Wayland Shell
-struct wl_shell_surface *shell_surface; //  Wayland Shell Surface
+static struct wl_display       *display;       //  Wayland Display
+static struct wl_compositor    *compositor;    //  Wayland Compositor
+static struct wl_surface       *surface;       //  Wayland Surface
+static struct wl_egl_window    *egl_window;    //  Wayland EGL Window
+static struct wl_region        *region;        //  Wayland Region
+static struct wl_shell         *shell;         //  Wayland Shell
+static struct wl_shell_surface *shell_surface; //  Wayland Shell Surface
 
 /// Wayland EGL Interfaces for OpenGL Rendering
-EGLDisplay egl_display;  //  EGL Display
-EGLConfig  egl_conf;     //  EGL Configuration
-EGLSurface egl_surface;  //  EGL Surface
-EGLContext egl_context;  //  EGL Context
+static EGLDisplay egl_display;  //  EGL Display
+static EGLConfig  egl_conf;     //  EGL Configuration
+static EGLSurface egl_surface;  //  EGL Surface
+static EGLContext egl_context;  //  EGL Context
 
 ////////////////////////////////////////////////////////////////////
-//  OpenGL ES2
+//  Render OpenGL
 
 /// Render the OpenGL ES2 display
 static void render_display() {
@@ -58,6 +64,46 @@ static void render_display() {
 
     //  Render now
     glFlush();
+}
+
+
+////////////////////////////////////////////////////////////////////
+//  Main
+
+/// Connect to Wayland Compositor and render OpenGL graphics
+int main(int argc, char **argv) {
+    //  Get interfaces for Wayland Compositor and Wayland Shell
+    get_server_references();
+    assert(compositor != NULL);  //  Failed to get Wayland Compositor
+    assert(shell != NULL);       //  Failed to get Wayland Shell
+
+    //  Create a Wayland Surface for rendering
+    surface = wl_compositor_create_surface(compositor);
+    assert(surface != NULL);  //  Failed to create Wayland Surface
+
+    //  Get the Wayland Shell Surface for rendering
+    shell_surface = wl_shell_get_shell_surface(shell, surface);
+    assert(shell_surface != NULL);
+
+    //  Set the Shell Surface as top level
+    wl_shell_surface_set_toplevel(shell_surface);
+
+    //  Create an opaque region for rendering
+    create_opaque_region();
+
+    //  Init Wayland EGL
+    init_egl();
+
+    //  Create the OpenGL Window and render OpenGL graphics
+    create_window();
+
+    //  Handle all Wayland Events in the Event Loop
+    while (wl_display_dispatch(display) != -1) {}
+
+    //  Disconnect from the Wayland Display
+    wl_display_disconnect(display);
+    puts("Disconnected from display");
+    return 0;
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -126,7 +172,7 @@ static void global_registry_remover(void *data, struct wl_registry *registry, ui
 //  Wayland EGL
 
 /// Create an opaque region for OpenGL rendering
-static void create_opaque_region() {
+static void create_opaque_region(void) {
     puts("Creating opaque region...");
     region = wl_compositor_create_region(compositor);
     assert(region != NULL);  //  Failed to create EGL Region
@@ -136,7 +182,7 @@ static void create_opaque_region() {
 }
 
 /// Create the OpenGL window and render it
-static void create_window() {
+static void create_window(void) {
     //  Create an OpenGL Window
     egl_window = wl_egl_window_create(surface, WIDTH, HEIGHT);
     assert(egl_window != EGL_NO_SURFACE);  //  Failed to create OpenGL Window
@@ -160,7 +206,7 @@ static void create_window() {
 }
 
 /// Init the EGL Interface
-static void init_egl() {
+static void init_egl(void) {
     puts("Init EGL...");
 
     //  Attributes for our EGL Display
@@ -211,42 +257,4 @@ static void init_egl() {
     egl_context = eglCreateContext(egl_display, egl_conf,
         EGL_NO_CONTEXT, context_attribs);
     assert(egl_context != NULL);  //  Failed to create EGL Context
-}
-
-////////////////////////////////////////////////////////////////////
-//  Main
-
-int main(int argc, char **argv)
-{
-    get_server_references();
-
-    surface = wl_compositor_create_surface(compositor);
-    if (surface == NULL)
-    {
-        fprintf(stderr, "Can't create surface\n");
-        exit(1);
-    }
-    else
-    {
-        fprintf(stderr, "Created surface\n");
-    }
-
-    shell_surface = wl_shell_get_shell_surface(shell, surface);
-    assert(shell_surface != NULL);
-
-    wl_shell_surface_set_toplevel(shell_surface);
-
-    create_opaque_region();
-    init_egl();
-    create_window();
-
-    while (wl_display_dispatch(display) != -1)
-    {
-        ;
-    }
-
-    wl_display_disconnect(display);
-    printf("disconnected from display\n");
-
-    exit(0);
 }
