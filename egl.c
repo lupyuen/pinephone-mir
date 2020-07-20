@@ -12,11 +12,6 @@
 #include <wayland-egl.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
-#include "util.h"
-
-/// Exported from texture.c
-void Init(ESContext *esContext);
-void Draw(ESContext *esContext);
 
 /// Local Functions
 static void get_server_references(void);
