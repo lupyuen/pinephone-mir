@@ -1,47 +1,11 @@
-/* Simple EGL Wayland App that draws a yellow square on PinePhone with Ubuntu Touch
-To build and run on PinePhone via SSH:
-
-# Make system folders writeable
-sudo mount -o remount,rw /
-
-# Install GLES2 library
-sudo apt install libgles2-mesa-dev
-
-# Make a copy of the camera app
-cp /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app $HOME
-
-# Build the Wayland app
-gcc \
-    -o egl \
-    egl.c \
-    -lwayland-client \
-    -lwayland-server \
-    -lwayland-egl \
-    -L/usr/lib/aarch64-linux-gnu/mesa-egl \
-    -lEGL \
-    /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 \
-    -Wl,-Map=egl.map
-
-# Replace the camera app
-sudo cp egl /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
-ls -l /usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/camera-app
-
-# Monitor the log
-echo >/home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
-tail -f /home/phablet/.cache/upstart/application-click-com.ubuntu.camera_camera_3.1.3.log
-
-Tap the Camera icon on PinePhone to launch the app.
-
-Press Ctrl-C to stop the log.
-
-To kill the app:
-pkill camera-app
-
-Based on https://jan.newmarch.name/Wayland/EGL/
-*/
+//  Simple EGL Wayland App that draws a yellow rectangle on PinePhone with Ubuntu Touch
+//  To build and run on PinePhone, see egl.sh.
+//  Sample log: logs/egl.log 
+//  Based on https://jan.newmarch.name/Wayland/EGL/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include <wayland-client.h>
 #include <wayland-server.h>
 #include <wayland-client-protocol.h>
@@ -57,94 +21,93 @@ struct wl_region *region;
 struct wl_shell *shell;
 struct wl_shell_surface *shell_surface;
 
+/// Dimensions of the OpenGL region to be rendered
+int WIDTH  = 480;
+int HEIGHT = 360;
+
 EGLDisplay egl_display;
 EGLConfig egl_conf;
 EGLSurface egl_surface;
 EGLContext egl_context;
 
-static void
-global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
-                        const char *interface, uint32_t version)
-{
-    printf("Got a registry event for %s id %d\n", interface, id);
-    if (strcmp(interface, "wl_compositor") == 0)
-    {
-        compositor = wl_registry_bind(registry,
-                                      id,
-                                      &wl_compositor_interface,
-                                      1);
-    }
-    else if (strcmp(interface, "wl_shell") == 0)
-    {
+/// Render the OpenGL ES2 display
+void render_display() {
+    puts("Rendering display...");
+
+    //  Fill the rectangular region with yellow
+    glClearColor(
+        1.0,  //  Red
+        1.0,  //  Green
+        0.0,  //  Blue
+        1.0   //  Alpha
+    );
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Render now
+    glFlush();
+}
+
+/// Callback for interfaces returned by Wayland Compositor
+static void global_registry_handler(void *data, struct wl_registry *registry, uint32_t id,
+    const char *interface, uint32_t version) {
+    printf("Got interface %s id %d\n", interface, id);
+
+    if (strcmp(interface, "wl_compositor") == 0) {
+        //  Bind to Wayland Compositor Interface
+        compositor = wl_registry_bind(registry, id,
+            &wl_compositor_interface,   //  Interface Type
+            1);                         //  Interface Version
+    } else if (strcmp(interface, "wl_shell") == 0){
+        //  Bind to Wayland Shell Interface
         shell = wl_registry_bind(registry, id,
-                                 &wl_shell_interface, 1);
+            &wl_shell_interface,        //  Interface Type
+            1);                         //  Interface Version
     }
 }
 
-static void
-global_registry_remover(void *data, struct wl_registry *registry, uint32_t id)
-{
-    printf("Got a registry losing event for %d\n", id);
+/// Callback for removed interfaces
+static void global_registry_remover(void *data, struct wl_registry *registry, uint32_t id) {
+    printf("Removed id %d\n", id);
 }
 
+/// Callbacks for interfaces returned by Wayland Compositor
 static const struct wl_registry_listener registry_listener = {
     global_registry_handler,
-    global_registry_remover};
+    global_registry_remover
+};
 
-static void
-create_opaque_region()
-{
+/// Create an opaque region for OpenGL rendering
+static void create_opaque_region() {
+    puts("Creating opaque region...");
     region = wl_compositor_create_region(compositor);
-    wl_region_add(region, 0, 0,
-                  480,
-                  360);
+    assert(region != NULL);
+
+    wl_region_add(region, 0, 0, WIDTH, HEIGHT);
     wl_surface_set_opaque_region(surface, region);
 }
 
-static void
-create_window()
-{
+/// Create the OpenGL window and render it
+static void create_window() {
+    //  Create an OpenGL Window
+    egl_window = wl_egl_window_create(surface, WIDTH, HEIGHT);
+    assert(egl_window != EGL_NO_SURFACE);
 
-    egl_window = wl_egl_window_create(surface,
-                                      480, 360);
-    if (egl_window == EGL_NO_SURFACE)
-    {
-        fprintf(stderr, "Can't create egl window\n");
-        exit(1);
-    }
-    else
-    {
-        fprintf(stderr, "Created egl window\n");
-    }
+    //  Create an OpenGL Window Surface for rendering
+    egl_surface = eglCreateWindowSurface(egl_display, egl_conf,
+        egl_window, NULL);
+    assert(egl_surface != NULL);
 
-    egl_surface =
-        eglCreateWindowSurface(egl_display,
-                               egl_conf,
-                               egl_window, NULL);
+    //  Set the current rendering surface
+    EGLBoolean madeCurrent = eglMakeCurrent(egl_display, egl_surface,
+        egl_surface, egl_context);
+    assert(madeCurrent);
 
-    if (eglMakeCurrent(egl_display, egl_surface,
-                       egl_surface, egl_context))
-    {
-        fprintf(stderr, "Made current\n");
-    }
-    else
-    {
-        fprintf(stderr, "Made current failed\n");
-    }
+    //  Render the display
+    render_display();
 
-    // Draw a yellow square
-    glClearColor(1.0, 1.0, 0.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glFlush();
-
-    if (eglSwapBuffers(egl_display, egl_surface))
-    {
-        fprintf(stderr, "Swapped buffers\n");
-    }
-    else
-    {
-        fprintf(stderr, "Swapped buffers failed\n");
-    }
+    //  Swap the display buffers to make the display visible
+    EGLBoolean swappedBuffers = eglSwapBuffers(egl_display, egl_surface);
+    assert(swappedBuffers);
 }
 
 static void
