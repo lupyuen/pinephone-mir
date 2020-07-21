@@ -1,6 +1,10 @@
 # pinephone-mir
 Experiments with Wayland and Mir display server on PinePhone with Ubuntu Touch
 
+Read the article...
+
+[_"Wayland and LVGL on PinePhone with Ubuntu Touch"_](https://lupyuen.github.io/pinetime-rust-mynewt/articles/wayland)
+
 ## Build and Install SDL2 with Wayland Support
 
 The `apt install` version of SDL2 doesn't support Wayland, so we need to build SDL2 ourselves.
