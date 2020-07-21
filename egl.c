@@ -103,10 +103,15 @@ int main(int argc, char **argv) {
 /// Create an opaque region for OpenGL rendering
 static void create_opaque_region(void) {
     puts("Creating opaque region...");
+
+    //  Create a Wayland Region
     region = wl_compositor_create_region(compositor);
     assert(region != NULL);  //  Failed to create EGL Region
 
+    //  Set the dimensions of the Wayland Region
     wl_region_add(region, 0, 0, WIDTH, HEIGHT);
+
+    //  Add the Region to the Wayland Surface
     wl_surface_set_opaque_region(surface, region);
 }
 
