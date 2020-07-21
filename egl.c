@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
     //  Create the EGL Context for rendering OpenGL graphics
     init_egl();
 
-    //  Create the OpenGL Window and render OpenGL graphics
+    //  Create the EGL Window and render OpenGL graphics
     create_window();
 
     //  Handle all Wayland Events in the Event Loop
