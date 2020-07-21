@@ -17,13 +17,13 @@ gcc \
     shader.c \
     texture.c \
     util.c \
+    -Wl,-Map=egl2.map \
+    -L/usr/lib/aarch64-linux-gnu/mesa-egl \
     -lwayland-client \
     -lwayland-server \
     -lwayland-egl \
-    -L/usr/lib/aarch64-linux-gnu/mesa-egl \
     -lEGL \
-    /usr/lib/aarch64-linux-gnu/mesa-egl/libGLESv2.so.2 \
-    -Wl,-Map=egl2.map
+    -lGLESv2
 
 # Make system folders writeable
 sudo mount -o remount,rw /

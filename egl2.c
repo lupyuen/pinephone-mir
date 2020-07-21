@@ -16,10 +16,6 @@
 #include <GLES2/gl2.h>
 #include "util.h"
 
-/// Exported from texture.c
-void Init(ESContext *esContext);
-void Draw(ESContext *esContext);
-
 /// Local Functions
 static void get_server_references(void);
 static void create_opaque_region(void);
@@ -47,6 +43,10 @@ static EGLContext egl_context;  //  EGL Context
 
 ////////////////////////////////////////////////////////////////////
 //  Render OpenGL
+
+/// Exported by texture.c
+void Init(ESContext *esContext);
+void Draw(ESContext *esContext);
 
 /// Render the OpenGL ES2 display
 static void render_display() {
