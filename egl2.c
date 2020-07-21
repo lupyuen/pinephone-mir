@@ -76,21 +76,21 @@ int main(int argc, char **argv) {
     assert(compositor != NULL);  //  Failed to get Wayland Compositor
     assert(shell != NULL);       //  Failed to get Wayland Shell
 
-    //  Create a Wayland Surface for rendering
+    //  Create a Wayland Surface for rendering our app
     surface = wl_compositor_create_surface(compositor);
     assert(surface != NULL);  //  Failed to create Wayland Surface
 
-    //  Get the Wayland Shell Surface for rendering
+    //  Get the Wayland Shell Surface for rendering our app window
     shell_surface = wl_shell_get_shell_surface(shell, surface);
     assert(shell_surface != NULL);
 
     //  Set the Shell Surface as top level
     wl_shell_surface_set_toplevel(shell_surface);
 
-    //  Create the Wayland Region for OpenGL rendering
+    //  Create the Wayland Region for rendering OpenGL graphics
     create_opaque_region();
 
-    //  Create the EGL Context for OpenGL rendering
+    //  Create the EGL Context for rendering OpenGL graphics
     init_egl();
 
     //  Create the OpenGL Window and render OpenGL graphics
@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
 ////////////////////////////////////////////////////////////////////
 //  Wayland EGL
 
-/// Create the Wayland Region for OpenGL rendering
+//  Create the Wayland Region for rendering OpenGL graphics
 static void create_opaque_region(void) {
     puts("Creating opaque region...");
 
@@ -123,7 +123,7 @@ static void create_opaque_region(void) {
     wl_surface_set_opaque_region(surface, region);
 }
 
-/// Create the EGL Context
+//  Create the EGL Context for rendering OpenGL graphics
 static void init_egl(void) {
     puts("Init EGL...");
 
@@ -177,7 +177,7 @@ static void init_egl(void) {
     assert(egl_context != NULL);  //  Failed to create EGL Context
 }
 
-/// Create the OpenGL window and render it
+//  Create the EGL Window and render OpenGL graphics
 static void create_window(void) {
     //  Create an EGL Window from a Wayland Surface 
     egl_window = wl_egl_window_create(surface, WIDTH, HEIGHT);
