@@ -87,10 +87,10 @@ int main(int argc, char **argv) {
     //  Set the Shell Surface as top level
     wl_shell_surface_set_toplevel(shell_surface);
 
-    //  Create an opaque region for rendering
+    //  Create the Wayland Region for OpenGL rendering
     create_opaque_region();
 
-    //  Init Wayland EGL
+    //  Create the EGL Context for OpenGL rendering
     init_egl();
 
     //  Create the OpenGL Window and render OpenGL graphics
@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
 ////////////////////////////////////////////////////////////////////
 //  Wayland EGL
 
-/// Create an opaque region for OpenGL rendering
+/// Create the Wayland Region for OpenGL rendering
 static void create_opaque_region(void) {
     puts("Creating opaque region...");
 
@@ -123,7 +123,7 @@ static void create_opaque_region(void) {
     wl_surface_set_opaque_region(surface, region);
 }
 
-/// Init the EGL Interface
+/// Create the EGL Context
 static void init_egl(void) {
     puts("Init EGL...");
 
