@@ -66,7 +66,6 @@ static void render_display() {
     glFlush();
 }
 
-
 ////////////////////////////////////////////////////////////////////
 //  Main
 
@@ -104,6 +103,97 @@ int main(int argc, char **argv) {
     wl_display_disconnect(display);
     puts("Disconnected from display");
     return 0;
+}
+
+////////////////////////////////////////////////////////////////////
+//  Wayland EGL
+
+/// Create an opaque region for OpenGL rendering
+static void create_opaque_region(void) {
+    puts("Creating opaque region...");
+    region = wl_compositor_create_region(compositor);
+    assert(region != NULL);  //  Failed to create EGL Region
+
+    wl_region_add(region, 0, 0, WIDTH, HEIGHT);
+    wl_surface_set_opaque_region(surface, region);
+}
+
+/// Init the EGL Interface
+static void init_egl(void) {
+    puts("Init EGL...");
+
+    //  Attributes for our EGL Display
+    EGLint config_attribs[] = {
+        EGL_SURFACE_TYPE,    EGL_WINDOW_BIT,
+        EGL_RED_SIZE,        8,
+        EGL_GREEN_SIZE,      8,
+        EGL_BLUE_SIZE,       8,
+        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+        EGL_NONE
+    };
+    static const EGLint context_attribs[] = {
+        EGL_CONTEXT_CLIENT_VERSION, 2,
+        EGL_NONE
+    };
+
+    //  Get the EGL Display
+    egl_display = eglGetDisplay((EGLNativeDisplayType) display);
+    assert(egl_display != EGL_NO_DISPLAY);  //  Failed to get EGL Display
+
+    //  Init the EGL Display
+    EGLint major, minor;
+    EGLBoolean egl_init = eglInitialize(egl_display, &major, &minor);
+    assert(egl_init);  //  Failed to init EGL Display
+    printf("EGL major: %d, minor %d\n", major, minor);
+
+    //  Get the EGL Configurations
+    EGLint count, n;
+    eglGetConfigs(egl_display, NULL, 0, &count);
+    printf("EGL has %d configs\n", count);
+    EGLConfig *configs = calloc(count, sizeof *configs);
+    eglChooseConfig(egl_display, config_attribs,
+        configs, count, &n);
+
+    //  Choose the first EGL Configuration
+    for (int i = 0; i < n; i++) {
+        EGLint size;
+        eglGetConfigAttrib(egl_display, configs[i], EGL_BUFFER_SIZE, &size);
+        printf("Buffer size for config %d is %d\n", i, size);
+        eglGetConfigAttrib(egl_display, configs[i], EGL_RED_SIZE, &size);
+        printf("Red size for config %d is %d\n", i, size);
+        egl_conf = configs[i];
+        break;
+    }
+    assert(egl_conf != NULL);  //  Failed to get EGL Configuration
+
+    //  Create the EGL Context based on the EGL Display and Configuration
+    egl_context = eglCreateContext(egl_display, egl_conf,
+        EGL_NO_CONTEXT, context_attribs);
+    assert(egl_context != NULL);  //  Failed to create EGL Context
+}
+
+/// Create the OpenGL window and render it
+static void create_window(void) {
+    //  Create an OpenGL Window
+    egl_window = wl_egl_window_create(surface, WIDTH, HEIGHT);
+    assert(egl_window != EGL_NO_SURFACE);  //  Failed to create OpenGL Window
+
+    //  Create an OpenGL Window Surface for rendering
+    egl_surface = eglCreateWindowSurface(egl_display, egl_conf,
+        egl_window, NULL);
+    assert(egl_surface != NULL);  //  Failed to create OpenGL Window Surface
+
+    //  Set the current rendering surface
+    EGLBoolean madeCurrent = eglMakeCurrent(egl_display, egl_surface,
+        egl_surface, egl_context);
+    assert(madeCurrent);  //  Failed to set rendering surface
+
+    //  Render the display
+    render_display();
+
+    //  Swap the display buffers to make the display visible
+    EGLBoolean swappedBuffers = eglSwapBuffers(egl_display, egl_surface);
+    assert(swappedBuffers);  //  Failed to swap display buffers
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -166,95 +256,4 @@ static void global_registry_handler(void *data, struct wl_registry *registry, ui
 /// Callback for removed interfaces
 static void global_registry_remover(void *data, struct wl_registry *registry, uint32_t id) {
     printf("Removed interface id %d\n", id);
-}
-
-////////////////////////////////////////////////////////////////////
-//  Wayland EGL
-
-/// Create an opaque region for OpenGL rendering
-static void create_opaque_region(void) {
-    puts("Creating opaque region...");
-    region = wl_compositor_create_region(compositor);
-    assert(region != NULL);  //  Failed to create EGL Region
-
-    wl_region_add(region, 0, 0, WIDTH, HEIGHT);
-    wl_surface_set_opaque_region(surface, region);
-}
-
-/// Create the OpenGL window and render it
-static void create_window(void) {
-    //  Create an OpenGL Window
-    egl_window = wl_egl_window_create(surface, WIDTH, HEIGHT);
-    assert(egl_window != EGL_NO_SURFACE);  //  Failed to create OpenGL Window
-
-    //  Create an OpenGL Window Surface for rendering
-    egl_surface = eglCreateWindowSurface(egl_display, egl_conf,
-        egl_window, NULL);
-    assert(egl_surface != NULL);  //  Failed to create OpenGL Window Surface
-
-    //  Set the current rendering surface
-    EGLBoolean madeCurrent = eglMakeCurrent(egl_display, egl_surface,
-        egl_surface, egl_context);
-    assert(madeCurrent);  //  Failed to set rendering surface
-
-    //  Render the display
-    render_display();
-
-    //  Swap the display buffers to make the display visible
-    EGLBoolean swappedBuffers = eglSwapBuffers(egl_display, egl_surface);
-    assert(swappedBuffers);  //  Failed to swap display buffers
-}
-
-/// Init the EGL Interface
-static void init_egl(void) {
-    puts("Init EGL...");
-
-    //  Attributes for our EGL Display
-    EGLint config_attribs[] = {
-        EGL_SURFACE_TYPE,    EGL_WINDOW_BIT,
-        EGL_RED_SIZE,        8,
-        EGL_GREEN_SIZE,      8,
-        EGL_BLUE_SIZE,       8,
-        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-        EGL_NONE
-    };
-    static const EGLint context_attribs[] = {
-        EGL_CONTEXT_CLIENT_VERSION, 2,
-        EGL_NONE
-    };
-
-    //  Get the EGL Display
-    egl_display = eglGetDisplay((EGLNativeDisplayType) display);
-    assert(egl_display != EGL_NO_DISPLAY);  //  Failed to get EGL Display
-
-    //  Init the EGL Display
-    EGLint major, minor;
-    EGLBoolean egl_init = eglInitialize(egl_display, &major, &minor);
-    assert(egl_init);  //  Failed to init EGL Display
-    printf("EGL major: %d, minor %d\n", major, minor);
-
-    //  Get the EGL Configurations
-    EGLint count, n;
-    eglGetConfigs(egl_display, NULL, 0, &count);
-    printf("EGL has %d configs\n", count);
-    EGLConfig *configs = calloc(count, sizeof *configs);
-    eglChooseConfig(egl_display, config_attribs,
-        configs, count, &n);
-
-    //  Choose the first EGL Configuration
-    for (int i = 0; i < n; i++) {
-        EGLint size;
-        eglGetConfigAttrib(egl_display, configs[i], EGL_BUFFER_SIZE, &size);
-        printf("Buffer size for config %d is %d\n", i, size);
-        eglGetConfigAttrib(egl_display, configs[i], EGL_RED_SIZE, &size);
-        printf("Red size for config %d is %d\n", i, size);
-        egl_conf = configs[i];
-        break;
-    }
-    assert(egl_conf != NULL);  //  Failed to get EGL Configuration
-
-    //  Create the EGL Context based on the EGL Display and Configuration
-    egl_context = eglCreateContext(egl_display, egl_conf,
-        EGL_NO_CONTEXT, context_attribs);
-    assert(egl_context != NULL);  //  Failed to create EGL Context
 }
