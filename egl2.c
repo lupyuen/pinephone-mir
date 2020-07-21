@@ -218,6 +218,8 @@ static const struct wl_registry_listener registry_listener = {
 /// Connect to Wayland Service and fetch the interfaces for Wayland Compositor and Wayland Shell
 static void get_server_references(void) {
     puts("Getting server references...");
+
+    //  Connect to the Wayland Service
     display = wl_display_connect(NULL);
     if (display == NULL) {
         fprintf(stderr, "Failed to connect to display\n");
