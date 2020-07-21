@@ -174,7 +174,7 @@ static void init_egl(void) {
 
 /// Create the OpenGL window and render it
 static void create_window(void) {
-    //  Create an OpenGL Window
+    //  Create an EGL Window from a Wayland Surface 
     egl_window = wl_egl_window_create(surface, WIDTH, HEIGHT);
     assert(egl_window != EGL_NO_SURFACE);  //  Failed to create OpenGL Window
 
