@@ -65,6 +65,7 @@ static void render_display() {
 int main(int argc, char **argv) {
     //  Get interfaces for Wayland Compositor and Wayland Shell
     get_server_references();
+    assert(display != NULL);     //  Failed to get Wayland Display
     assert(compositor != NULL);  //  Failed to get Wayland Compositor
     assert(shell != NULL);       //  Failed to get Wayland Shell
 
