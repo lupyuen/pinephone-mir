@@ -3,7 +3,6 @@
 //  Bundled source files: shader.c, texture.c, util.c, util.h
 //  Sample log: logs/egl2.log 
 //  Based on https://jan.newmarch.name/Wayland/EGL/
-//  and https://jan.newmarch.name/Wayland/WhenCanIDraw/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
